@@ -53,7 +53,7 @@ mkdir -p ~/.local/repos && \
 mkdir -p ~/.local/pkgs && \
 mkdir -p ~/.local/scripts && \
 mkdir -p ~/.local/zip && \
-# mkdir -p ~/.ssh // enable if you want
+mkdir -p ~/.ssh
 
 echo ""
 echo "##################################################"
@@ -131,9 +131,20 @@ curl -OL https://github.com/cli/cli/releases/download/v0.11.1/gh_0.11.1_linux_am
 sudo apt install ./gh_*_linux_amd64.deb
 
 
-echo -e "\n# path added by my personal installer" >> ~/.profile
+echo -e "\n# first path added by my personal installer" >> ~/.profile
 echo "[ -d $HOME/.local/bin ] && PATH=\"$HOME/.local/bin:\$PATH\"" >> ~/.profile
 
+echo -e "\n# second path added by my personal installer" >> ~/.profile
+echo "[ -d $HOME/.local/repos/fzf/bin ] && PATH=\"$HOME/.local/repos/fzf/bin:\$PATH\"" >> ~/.profile
+
+# at the end of this script you need to source all the config files or just open a new terminal
+# ⚙️source ~/.bashrc	# bash
+# ⚙️source ~/.zshrc		# zsh
+# ⚙️source ~/.profile	# gets run before bash and zsh
+
+# ========= DONE everything should work in bash shell now ==============================================
+
+# =========== ZSH SECTION ============================================================================
 # change default shell to zsh
 # ⚙️ chsh -s $(which zsh)
 
@@ -141,23 +152,11 @@ echo "[ -d $HOME/.local/bin ] && PATH=\"$HOME/.local/bin:\$PATH\"" >> ~/.profile
 # echo "Installing Oh-my-zsh"
 # ⚙️ sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-# TROUBLESHOOT (if fzf is not working try restarting shell)
-# ⚙️source ~/.bashrc	# bash
-# ⚙️source ~/.zshrc		# zsh
+# ===================== TROUBLESHOOT SECTION =============================
 
-
-# install rust then cargo then exa: (exa binary already donwloaded and unziped in ~/.local/bin/exa)
-# rust install:
-# ⚙️ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh # try without
-
-# cargo install
-# ⚙️ sudo apt install cargo
-
-# ⚙️ cargo build --release
-# or 
-# ⚙️ cargo build --release exa
-
-# cmake install
-# ⚙️ sudo apt install cmake # try without	
-
-# sudo apt install libgit2-dev # try without
+# if fzf hotkeys(ctrl+t) dont work, add this to .bashrc or .zshrc:
+# ```
+# [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# ```
+# or cd into ~/.local/repos/fzf/ and execute ./install manually which should source the .fzf.bash path:
+# ⚙️ cd ~/.local/repos/fzf && ./install
