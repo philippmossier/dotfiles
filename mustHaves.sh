@@ -48,11 +48,11 @@ echo "##################################################"
 echo "############# creating dir tree ##################"
 echo "##################################################"
 echo ""
-mkdir -p ~/.bin/ch/bin && \
-mkdir -p ~/.bin/ch/repos && \
-mkdir -p ~/.bin/ch/pkgs && \
-mkdir -p ~/.bin/ch/scripts && \
-mkdir -p ~/.bin/ch/zip && \
+mkdir -p ~/.local/bin && \
+mkdir -p ~/.local/repos && \
+mkdir -p ~/.local/pkgs && \
+mkdir -p ~/.local/scripts && \
+mkdir -p ~/.local/zip && \
 # mkdir -p ~/.ssh // enable if you want
 
 echo ""
@@ -60,14 +60,14 @@ echo "##################################################"
 echo "################ export path #####################"
 echo "##################################################"
 echo ""
-export PATH=$PATH:$HOME/.bin/ch/bin
+export PATH=$PATH:$HOME/.local/bin
 
 echo ""
 echo "##################################################"
 echo "####### tmuxinator completion script #############"
 echo "##################################################"
 echo ""
-wget https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh -O ~/.bin/ch/scripts/tmuxinator.zsh
+wget https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh -O ~/.local/scripts/tmuxinator.zsh
 
 echo ""
 echo "##################################################"
@@ -93,10 +93,10 @@ echo "##################################################"
 echo "#################### exa #########################"
 echo "##################################################"
 echo ""
-pushd ~/.bin/ch/zip && \
+pushd ~/.local/zip && \
 curl -OL https://github.com/ogham/exa/releases/download/v0.9.0/exa-linux-x86_64-0.9.0.zip && \
 unzip exa-linux-x86_64-0.9.0.zip && \
-mv exa-linux-x86_64 ~/.bin/ch/bin/exa && \
+mv exa-linux-x86_64 ~/.local/bin/exa && \
 popd
 
 echo ""
@@ -104,8 +104,8 @@ echo "##################################################"
 echo "#################### fzf #########################"
 echo "##################################################"
 echo ""
-pushd ~/.bin/ch/repos
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.bin/ch/repos/fzf && \
+pushd ~/.local/repos
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.local/repos/fzf && \
 pushd fzf
 ./install --key-bindings --completion --no-update-rc
 popd
@@ -116,7 +116,7 @@ echo "##################################################"
 echo "#################### bat #########################"
 echo "##################################################"
 echo ""
-pushd ~/.bin/ch/pkgs
+pushd ~/.local/pkgs
 wget https://github.com/sharkdp/bat/releases/download/v0.15.4/bat_0.15.4_amd64.deb && \
 sudo dpkg -i bat_0.15.4_amd64.deb && \
 popd
@@ -126,7 +126,7 @@ echo "##################################################"
 echo "################# github cli #####################"
 echo "##################################################"
 echo ""
-pushd ~/.bin/ch/pkgs && \
+pushd ~/.local/pkgs && \
 curl -OL https://github.com/cli/cli/releases/download/v0.11.1/gh_0.11.1_linux_amd64.deb && \
 sudo apt install ./gh_*_linux_amd64.deb
 
@@ -142,7 +142,7 @@ sudo apt install ./gh_*_linux_amd64.deb
 # ⚙️source ~/.zshrc		# zsh
 
 
-# install rust then cargo then exa: (exa binary already donwloaded and unziped in ~/.bin/ch/bin/exa)
+# install rust then cargo then exa: (exa binary already donwloaded and unziped in ~/.local/bin/exa)
 # rust install:
 # ⚙️ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh # try without
 
