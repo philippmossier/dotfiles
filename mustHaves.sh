@@ -130,6 +130,10 @@ pushd ~/.local/pkgs && \
 curl -OL https://github.com/cli/cli/releases/download/v0.11.1/gh_0.11.1_linux_amd64.deb && \
 sudo apt install ./gh_*_linux_amd64.deb
 
+
+echo -e "\n# path added by my personal installer" >> ~/.profile
+echo "[ -d $HOME/.local/bin ] && PATH=\"$HOME/.local/bin:\$PATH\"" >> ~/.profile
+
 # change default shell to zsh
 # ⚙️ chsh -s $(which zsh)
 
