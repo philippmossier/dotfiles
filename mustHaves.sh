@@ -2,13 +2,6 @@
 
 echo ""
 echo "##################################################"
-echo "################## apt repos #####################"
-echo "##################################################"
-echo ""
-sudo add-apt-repository -y ppa:vincent-c/ponysay
-
-echo ""
-echo "##################################################"
 echo "################## apt update ####################"
 echo "##################################################"
 echo ""
@@ -20,8 +13,7 @@ echo "################## apt install ###################"
 echo "##################################################"
 echo ""
 sudo apt -y install \
-neofetch ponysay zsh zip unzip fd-find \
-libncurses5-dev libncursesw5-dev
+neofetch zsh zip unzip fd-find
 
 echo ""
 echo "##################################################"
