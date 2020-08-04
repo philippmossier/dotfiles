@@ -1,4 +1,56 @@
-# apt update && apt upgrade before run mustHaves.sh
+# =========== FRESH UBUNTU INSTALL/REINSTALL UBTUNTU on WSL2 SECTION ======================================
+Uninstall ubuntu on wsl2:
+go to windows powershell and type:
+⚙️ wsl -l --verbose
+⚙️ wslconfig /unregister ubuntu
+⚙️ wsl -l --verbose
+
+reinstall ubuntu on wsl2:
+go to microsoft store and launch app
+check release on ununtu terminal:
+⚙️ lsb_release -a
+after appstore launch, creating username and password update apt:
+⚙️ sudo apt update -y && sudo apt upgrade -y
+restart ubuntu console
+
+check running distro and wsl version on windows powershell:
+⚙️ wsl -l --verbose
+
+DONE! Now we can run our ubuntu-fresh-install-shell-script
+
+# =========== SHELL SCRIPT README STARTS HERE =======================================================
+Get sure you did apt update and apt upgrade
+First clone the shell script from github repo (maybe `sudo apt install git` needed)
+cd into your homedirectory and run the shellscript from there
+⚙️ cd ~
+⚙️ git clone https://github.com/philippmossier/mustHaves.git
+⚙️ chmod u=rwx ./mustHaves/mustHaves.sh
+execute shellscript with:
+⚙️ ./mustHaves/mustHaves.sh
+DONE! NOW JUST RESTART THE SHELL 
+# at the end of this script you need to source all the config files or just open a new terminal
+# ⚙️source ~/.bashrc	# bash
+# ⚙️source ~/.zshrc		# zsh
+# ⚙️source ~/.profile	# gets run before bash and zsh
+
+
+
+# =========== ZSH SECTION ============================================================================
+# change default shell to zsh
+# ⚙️ chsh -s $(which zsh)
+
+# install oh-my-zsh
+# echo "Installing Oh-my-zsh"
+# ⚙️ sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# ===================== TROUBLESHOOT SECTION =============================
+
+# if fzf hotkeys(ctrl+t) dont work, add this to .bashrc or .zshrc:
+# ```
+# [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# ```
+# or cd into ~/.local/repos/fzf/ and execute ./install manually which should source the .fzf.bash path:
+# ⚙️ cd ~/.local/repos/fzf && ./install``
 
 # original shell script from bernhard:
 
