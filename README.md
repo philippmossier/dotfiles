@@ -1,4 +1,4 @@
-# =========== FRESH UBUNTU INSTALL/REINSTALL UBTUNTU on WSL2 SECTION ======================================
+# FRESH UBUNTU INSTALL/REINSTALL on WSL2
 Uninstall ubuntu on wsl2:
 go to windows powershell and type:
 ⚙️ wsl -l --verbose
@@ -18,7 +18,7 @@ check running distro and wsl version on windows powershell:
 
 DONE! Now we can run our ubuntu-fresh-install-shell-script
 
-# =========== SHELL SCRIPT README STARTS HERE =======================================================
+# SHELL SCRIPT README STARTS HERE 
 Get sure you did apt update and apt upgrade
 First clone the shell script from github repo (maybe `sudo apt install git` needed)
 cd into your homedirectory and run the shellscript from there
@@ -28,31 +28,30 @@ cd into your homedirectory and run the shellscript from there
 execute shellscript with:
 ⚙️ ./mustHaves/mustHaves.sh
 DONE! NOW JUST RESTART THE SHELL 
-# at the end of this script you need to source all the config files or just open a new terminal
-# ⚙️source ~/.bashrc	# bash
-# ⚙️source ~/.zshrc		# zsh
-# ⚙️source ~/.profile	# gets run before bash and zsh
+### at the end of this script you need to source all the config files or just open a new terminal
+⚙️source ~/.bashrc	# bash
+⚙️source ~/.zshrc		# zsh
+⚙️source ~/.profile	# gets run before bash and zsh
 
 
 
-# =========== ZSH SECTION ============================================================================
-# change default shell to zsh
-# ⚙️ chsh -s $(which zsh)
+# ZSH SECTION 
+change default shell to zsh
+⚙️ chsh -s $(which zsh)
 
-# install oh-my-zsh
-# echo "Installing Oh-my-zsh"
-# ⚙️ sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+install oh-my-zsh
+⚙️ sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-# ===================== TROUBLESHOOT SECTION =============================
+# TROUBLESHOOT SECTION 
 
-# if fzf hotkeys(ctrl+t) dont work, add this to .bashrc or .zshrc:
-# ```
-# [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-# ```
-# or cd into ~/.local/repos/fzf/ and execute ./install manually which should source the .fzf.bash path:
-# ⚙️ cd ~/.local/repos/fzf && ./install``
+if fzf hotkeys(ctrl+t) dont work, add this to .bashrc or .zshrc:
+```
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+```
+or cd into ~/.local/repos/fzf/ and execute ./install manually which should source the .fzf.bash path:
+⚙️ cd ~/.local/repos/fzf && ./install``
 
-# original shell script from bernhard:
+## original shell script from bernhard:
 
 ```
 #!/bin/bash
