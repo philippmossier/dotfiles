@@ -1,8 +1,10 @@
 # FRESH UBUNTU INSTALL/REINSTALL on WSL2
-Uninstall ubuntu on wsl2:
-go to windows powershell and type:
-⚙️ wsl -l --verbose
-⚙️ wslconfig /unregister ubuntu
+- Uninstall ubuntu on wsl2:
+- go to windows powershell and type:
+```
+wsl -l --verbose
+```
+- wslconfig /unregister ubuntu
 ⚙️ wsl -l --verbose
 
 reinstall ubuntu on wsl2:
