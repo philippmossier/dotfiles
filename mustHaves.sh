@@ -96,7 +96,7 @@ echo ""
 pushd ~/.bin/ch/zip && \
 curl -OL https://github.com/ogham/exa/releases/download/v0.9.0/exa-linux-x86_64-0.9.0.zip && \
 unzip exa-linux-x86_64-0.9.0.zip && \
-cp exa-linux-x86_64 ~/.bin/ch/bin/exa && \
+mv exa-linux-x86_64 ~/.bin/ch/bin/exa && \
 popd
 
 echo ""
@@ -131,8 +131,29 @@ curl -OL https://github.com/cli/cli/releases/download/v0.11.1/gh_0.11.1_linux_am
 sudo apt install ./gh_*_linux_amd64.deb
 
 # change default shell to zsh
-# chsh -s $(which zsh)
+# ⚙️ chsh -s $(which zsh)
 
 # install oh-my-zsh
 # echo "Installing Oh-my-zsh"
-# sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# ⚙️ sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# TROUBLESHOOT (if fzf is not working try restarting shell)
+# ⚙️source ~/.bashrc	# bash
+# ⚙️source ~/.zshrc		# zsh
+
+
+# install rust then cargo then exa: (exa binary already donwloaded and unziped in ~/.bin/ch/bin/exa)
+# rust install:
+# ⚙️ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh # try without
+
+# cargo install
+# ⚙️ sudo apt install cargo
+
+# ⚙️ cargo build --release
+# or 
+# ⚙️ cargo build --release exa
+
+# cmake install
+# ⚙️ sudo apt install cmake # try without	
+
+# sudo apt install libgit2-dev # try without
