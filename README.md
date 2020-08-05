@@ -42,11 +42,11 @@ chmod u=rwx ./mustHaves/mustHaves.sh
 
 ### instead of restart the shell you can manually load the config sources for the shell
 ```
-source ~/.bashrc      # bash
-source ~/.fzf.bash   # fzf
-source ~/.profile     # gets run before bash and zsh
+source ~/.bashrc        # bash
+source ~/.fzf.bash      # fzf
+source ~/.profile       # gets run before bash and zsh
 
-source ~/.zshrc       # zsh
+source ~/.zshrc         # zsh
 ```
 
 # ZSH SECTION 
