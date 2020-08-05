@@ -137,26 +137,45 @@ echo "[ -d $HOME/.local/bin ] && PATH=\"$HOME/.local/bin:\$PATH\"" >> ~/.profile
 echo -e "\n# second path added by my personal installer" >> ~/.profile
 echo "[ -d $HOME/.local/repos/fzf/bin ] && PATH=\"$HOME/.local/repos/fzf/bin:\$PATH\"" >> ~/.profile
 
-# at the end of this script you need to source all the config files or just open a new terminal
-# ⚙️source ~/.bashrc	# bash
-# ⚙️source ~/.zshrc		# zsh
-# ⚙️source ~/.profile	# gets run before bash and zsh
+cat << "PHIL"         
+	 
+                                    /@
+                     __        __   /\/
+                    /==\      /  \_/\/   
+                  /======\    \/\__ \__
+                /==/\  /\==\    /\_|__ \
+             /==/    ||    \=\ / / / /_/
+           /=/    /\ || /\   \=\/ /     
+        /===/   /   \||/   \   \===\
+      /===/   /_________________ \===\
+   /====/   / |                /  \====\
+ /====/   /   |  _________    /  \   \===\    THE LEGEND OF 
+ /==/   /     | /   /  \ / / /  __________\_____      ______       ___
+|===| /       |/   /____/ / /   \   _____ |\   /      \   _ \      \  \
+ \==\             /\   / / /     | |  /= \| | |        | | \ \     / _ \
+ \===\__    \    /  \ / / /   /  | | /===/  | |        | |  \ \   / / \ \
+   \==\ \    \\ /____/   /_\ //  | |_____/| | |        | |   | | / /___\ \
+   \===\ \   \\\\\\\/   /////// /|  _____ | | |        | |   | | |  ___  |
+     \==\/     \\\\/ / //////   \| |/==/ \| | |        | |   | | | /   \ |
+     \==\     _ \\/ / /////    _ | |==/     | |        | |  / /  | |   | |
+       \==\  / \ / / ///      /|\| |_____/| | |_____/| | |_/ /   | |   | |
+       \==\ /   / / /________/ |/_________|/_________|/_____/   /___\ /___\
+         \==\  /               | /==/
+         \=\  /________________|/=/    OCARINA OF TIME
+           \==\     _____     /==/ 
+          / \===\   \   /   /===/
+         / / /\===\  \_/  /===/
+        / / /   \====\ /====/
+       / / /      \===|===/
+       |/_/         \===/
+                      =
+PHIL
 
-# ========= DONE everything should work in bash shell now ==============================================
+echo ""
+echo "##################################################"
+echo "#################### DONE ########################"
+echo "########### RESTART BASH AND ENJOY ###############"
+echo "##################################################"
+echo ""
 
-# =========== ZSH SECTION ============================================================================
-# change default shell to zsh
-# ⚙️ chsh -s $(which zsh)
 
-# install oh-my-zsh
-# echo "Installing Oh-my-zsh"
-# ⚙️ sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-# ===================== TROUBLESHOOT SECTION =============================
-
-# if fzf hotkeys(ctrl+t) dont work, add this to .bashrc or .zshrc:
-# ```
-# [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-# ```
-# or cd into ~/.local/repos/fzf/ and execute ./install manually which should source the .fzf.bash path:
-# ⚙️ cd ~/.local/repos/fzf && ./install
