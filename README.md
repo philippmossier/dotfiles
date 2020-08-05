@@ -2,62 +2,62 @@
 - Uninstall ubuntu on wsl2:
 - go to windows powershell and type:
 ```
-⚙️ wsl -l --verbose
+wsl -l --verbose
 ```
 - wslconfig /unregister ubuntu
 ```
-⚙️ wsl -l --verbose
+wsl -l --verbose
 ```
 
 - reinstall ubuntu on wsl2:
 - go to microsoft store and launch app
 - check release on ununtu terminal:
 ```
-⚙️ lsb_release -a
+lsb_release -a
 ```
 - after appstore launch, creating username and password update apt:
 ```
-⚙️ sudo apt update -y && sudo apt upgrade -y
+sudo apt update -y && sudo apt upgrade -y
 ```
 - restart ubuntu console
 
 - check running distro and wsl version on windows powershell:
 ```
-⚙️ wsl -l --verbose
+wsl -l --verbose
 ```
 
 - DONE! Now we can run our ubuntu-fresh-install-shell-script
 
-# SHELL SCRIPT README STARTS HERE 
+# ⚙️ SHELL SCRIPT README STARTS HERE ⚙️
 - Get sure you did apt update and apt upgrade
 - First clone the shell script from github repo (maybe `sudo apt install git` needed)
 - cd into your homedirectory and run the shellscript from there
 ```
-⚙️ cd ~
-⚙️ git clone https://github.com/philippmossier/mustHaves.git
-⚙️ chmod u=rwx ./mustHaves/mustHaves.sh
-⚙️ ./mustHaves/mustHaves.sh
+cd ~
+git clone https://github.com/philippmossier/mustHaves.git
+chmod u=rwx ./mustHaves/mustHaves.sh
+./mustHaves/mustHaves.sh
 ```
-- DONE! NOW JUST RESTART THE SHELL
+- DONE! NOW JUST RESTART SHELL (in bash everything should work after restart)
 
-### at the end of this script you need to source all the config files or just open a new terminal
+### instead of restart the shell you can manually load the config sources for the shell
 ```
-⚙️source ~/.bashrc   # bash
-⚙️source ~/.zshrc    # zsh
-⚙️source ~/.profile  # gets run before bash and zsh
+source ~/.bashrc      # bash
+source ~/.fzf.bash   # fzf
+source ~/.profile     # gets run before bash and zsh
+
+source ~/.zshrc       # zsh
 ```
-
-
 
 # ZSH SECTION 
 - change default shell to zsh
 ```
-⚙️ chsh -s $(which zsh)
+chsh -s $(which zsh)
 ```
 
 - install oh-my-zsh
 ```
-⚙️ sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
 # TROUBLESHOOT SECTION 
@@ -68,7 +68,7 @@
 ```
 - or cd into ~/.local/repos/fzf/ and execute ./install manually which should source the .fzf.bash path:
 ```
-⚙️ cd ~/.local/repos/fzf && ./install
+cd ~/.local/repos/fzf && ./install
 ```
 
 ## original shell script from bernhard:
