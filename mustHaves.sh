@@ -89,8 +89,11 @@ echo "############ diff-so-fancy & tldr ################"
 echo "##################################################"
 echo ""
 npm i -g diff-so-fancy tldr
-touch ~/.local/npmGlobalInstalls/installedPkgs.txt
-echo "diff-so-fancy \ tldr" > installedPkgs.txt
+touch ~/.local/npmGlobalInstalls/installedPkgs.txt && cd ~/.local/npmGlobalInstalls/
+echo "# These packages are global installed (uninstall them with sudo npm uninstall -g packagename):\n" > ./installedPkgs.txt
+echo "tldr" >> ./installedPkgs.txt
+echo "diff-so-fancy" >> ./installedPkgs.txt
+
 # exa (ls replacement)r diff-so-fancy txt
 echo ""
 echo "##################################################"
@@ -158,7 +161,6 @@ echo ""
 pushd ~/.local/zip
 curl -OL http://mama.indstate.edu/users/ice/tree/src/tree-1.8.0.tgz && \
 tar xf tree-1.8.0.tgz -C ~/.local/makeInstalls
-
 pushd ~/.local/makeInstalls/tree-1.8.0
 make
 make install
