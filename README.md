@@ -71,6 +71,10 @@ sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools
 cd ~/.local/repos/fzf && ./install
 ```
 
+- if you have problems with powerline font visit:
+https://github.com/powerline/fonts
+Maybe go to terminal>preferences and look for your installed fonts and change to a powerline font
+
 ## original shell script from bernhard:
 
 ```
