@@ -13,7 +13,7 @@ echo "################## apt install ###################"
 echo "##################################################"
 echo ""
 sudo apt -y install \
-neofetch zsh zip unzip fd-find
+neofetch zsh zip unzip fd-find ripgrep
 
 echo ""
 echo "##################################################"
@@ -164,6 +164,8 @@ tar xf tree-1.8.0.tgz -C ~/.local/makeInstalls
 pushd ~/.local/makeInstalls/tree-1.8.0
 make
 make install
+
+echo "$(neofetch)"
 
 cat << "PHIL"         
 	 
