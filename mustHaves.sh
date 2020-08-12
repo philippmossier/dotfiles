@@ -53,8 +53,7 @@ mkdir -p ~/.local/repos && \
 mkdir -p ~/.local/pkgs && \
 mkdir -p ~/.local/scripts && \
 mkdir -p ~/.local/zip && \ 
-mkdir -p ~/.local/npmInstalls && \
-mkdir -p ~/.zsh/themes
+mkdir -p ~/.zsh/themes && \
 mkdir -p ~/.ssh
 
 echo ""
@@ -138,6 +137,15 @@ echo "[ -d $HOME/.local/bin ] && PATH=\"$HOME/.local/bin:\$PATH\"" >> ~/.profile
 
 echo -e "\n# second path added by my personal installer" >> ~/.profile
 echo "[ -d $HOME/.local/repos/fzf/bin ] && PATH=\"$HOME/.local/repos/fzf/bin:\$PATH\"" >> ~/.profile
+
+
+echo ""
+echo "##################################################"
+echo "################# zsh theme #####################"
+echo "##################################################"
+echo ""
+pushd ~/.zsh/themes && \
+git clone https://github.com/agnoster/agnoster-zsh-theme.git
 
 cat << "PHIL"         
 	 
