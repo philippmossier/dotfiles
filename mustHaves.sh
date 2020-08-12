@@ -52,7 +52,9 @@ mkdir -p ~/.local/bin && \
 mkdir -p ~/.local/repos && \
 mkdir -p ~/.local/pkgs && \
 mkdir -p ~/.local/scripts && \
-mkdir -p ~/.local/zip && \
+mkdir -p ~/.local/zip && \ 
+mkdir -p ~/.local/npmInstalls && \
+mkdir -p ~/.zsh/themes
 mkdir -p ~/.ssh
 
 echo ""
