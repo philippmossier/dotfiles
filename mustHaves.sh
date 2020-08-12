@@ -10,6 +10,7 @@ sudo apt -y update
 echo ""
 echo "##################################################"
 echo "################## apt install ###################"
+echo "##### neofetch zsh zip unzip fd-find ripgrep #####"
 echo "##################################################"
 echo ""
 sudo apt -y install \
@@ -155,7 +156,7 @@ git clone https://github.com/agnoster/agnoster-zsh-theme.git
 
 echo ""
 echo "##################################################"
-echo "################# tree #####################"
+echo "#################### tree ########################"
 echo "##################################################"
 echo ""
 pushd ~/.local/zip
