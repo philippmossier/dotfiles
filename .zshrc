@@ -30,15 +30,18 @@ zshThemes=~/.zsh/themes
 source $zshThemes/agnoster-zsh-theme/agnoster.zsh-theme
 setopt promptsubst
 
-# hitory settings
-HISTSIZE=1000
-SAVEHIST=1000
-HISTFILE=~/.zsh_history 
-setopt histignorealldups sharehistory
+# zsh-autossugestions:
+# load zsh-autosuggestion (git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions)
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+# autosuggest text color: default fg=8
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#393939"
 
-# Use modern completion system
-autoload -Uz compinit
-compinit
+# thefuck
+eval $(thefuck --alias)
+
+# # maybe these 2lines are not needed without oh-my-zsh
+# autoload -Uz compinit
+# compinit
 
 # autocomplete style
 zstyle ':completion:*' auto-description 'specify: %d'
@@ -58,13 +61,14 @@ zstyle ':completion:*' verbose true
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
+# hitory settings
+HISTSIZE=1000
+SAVEHIST=1000
+HISTFILE=~/.zsh_history 
+setopt histignorealldups sharehistory
+
 # load exa and other binaries in .local/bin folder
 [ -d /home/phil/.local/bin ] && PATH="/home/phil/.local/bin:$PATH"
-
-# Load diff-so-fancy (settings are in ~/.gitconfig)
-# installed diff-so-fancy with npm i, so the path points to the whole repository 
-# (the lib folder needs to be in the same directory as the diff-so-fancy binary)
-# dont needed if global installed PATH="/home/phil/.local/npmInstalls/diff-so-fancy/node_modules/diff-so-fancy/:$PATH"  
 
 # nvm lazy loading:
 # Defer initialization of nvm until nvm, node or a node-dependent command is
@@ -167,7 +171,7 @@ fzf_kill() {
         return
     fi
     local pids=$(
-      ps -f -u $USER | sed 1d | fzf --multi | tr -s [:blank:] | cut -d' ' -f"$pid_col"
+      ps -f -u $USER | sed 1d | fzf --multi --reverse | tr -s [:blank:] | cut -d' ' -f"$pid_col"
       )
     if [[ -n $pids ]]; then
         echo "$pids" | xargs kill -9 "$@"
@@ -233,7 +237,7 @@ fzf_git_log_pickaxe() {
 #     (umask 077; ssh-agent >| "$env")
 #     . "$env" >| /dev/null ; }
 # agent_load_env
-# # agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2= agent not running#
+# # agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2= agent not running
 # agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
 # if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
 #     agent_start
