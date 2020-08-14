@@ -156,6 +156,13 @@ git clone https://github.com/agnoster/agnoster-zsh-theme.git
 
 echo ""
 echo "##################################################"
+echo "############# zsh-autosuggestions ################"
+echo "##################################################"
+echo ""
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions)
+
+echo ""
+echo "##################################################"
 echo "#################### tree ########################"
 echo "##################################################"
 echo ""
