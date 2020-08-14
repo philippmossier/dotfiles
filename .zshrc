@@ -94,16 +94,16 @@ fi
 source "/home/phil/.local/repos/fzf/shell/key-bindings.zsh"
 
 # FZF pro settings:
-FZF_DEFAULT_COMMAND='fdfind --type f --color=never'
-FZF_DEFAULT_OPTS='
+export FZF_DEFAULT_COMMAND='fdfind --type f --color=never'
+export FZF_DEFAULT_OPTS='
   --height 95% --multi --reverse
   --bind ctrl-f:page-down,ctrl-b:page-up
 '
-FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :500 {}'"
-FZF_CTRL_R_OPTS='+s --tac'
-FZF_ALT_C_COMMAND='fdfind --type d . --color=never'
-FZF_ALT_C_OPTS="--preview 'tree -C {} | head -100'"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :500 {}'"
+export FZF_CTRL_R_OPTS='+s --tac'
+export FZF_ALT_C_COMMAND='fdfind --type d . --color=never'
+export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -100'"
 
 # usefull-link: https://bluz71.github.io/2018/11/26/fuzzy-finding-in-bash-with-fzf.html
 # bat preview and how to change bat themes, other bat themes are: "1337", "Dracula", "ansi-dark", "DarkNeon", "DarkNeon", "Nord", "OneHalfDark"
@@ -226,22 +226,22 @@ fzf_git_log_pickaxe() {
  }
 # ===================================================================================
 
-# SSH FIX for always asking for passphrase in windows 
-env=~/.ssh/agent.env
-agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
-agent_start () {
-    (umask 077; ssh-agent >| "$env")
-    . "$env" >| /dev/null ; }
-agent_load_env
-# agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2= agent not running
-agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
-if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
-    agent_start
-    ssh-add
-elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
-    ssh-add
-fi
-unset env
+# # SSH FIX for always asking for passphrase in windows 
+# env=~/.ssh/agent.env
+# agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
+# agent_start () {
+#     (umask 077; ssh-agent >| "$env")
+#     . "$env" >| /dev/null ; }
+# agent_load_env
+# # agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2= agent not running#
+# agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
+# if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
+#     agent_start
+#     ssh-add
+# elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
+#     ssh-add
+# fi
+# unset env
 
 
 ## ======= OUTCOMMENTED SETTINGS:
