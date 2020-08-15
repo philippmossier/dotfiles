@@ -2,10 +2,10 @@
 
 echo ""
 echo "##################################################"
-echo "################## apt update ####################"
+echo "############# apt update & upgrade ###############"
 echo "##################################################"
 echo ""
-sudo apt -y update
+sudo apt -y update && sudo apt upgrade -y
 
 echo ""
 echo "##################################################"
@@ -159,7 +159,7 @@ echo "##################################################"
 echo "############# zsh-autosuggestions ################"
 echo "##################################################"
 echo ""
-git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions)
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
 
 echo ""
 echo "##################################################"
