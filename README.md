@@ -15,8 +15,8 @@ chsh -s $(which zsh)
 - Install fonts for the shell themes (powerline-fonts or nerdfonts https://www.nerdfonts.com/)
   Just doubleclick the fonts you wish and install it. 
   There are 2 sections where fonts need to be selected depend on your OS
-  1.WSL2-Ubuntu_20.04: Windows-terminal settings.json + vscode settings.json 
-  2.Ubuntu_20.04/PopOS20.04: open terminal and go to preferences + vscode settings.json
+  - 1.WSL2-Ubuntu_20.04: Windows-terminal settings.json + vscode settings.json 
+  - 2.Ubuntu_20.04/PopOS20.04: open terminal and go to preferences + vscode settings.json
 - restart your shell DONE !! (i used zsh as shell, but it should work with bash too)
 
 
