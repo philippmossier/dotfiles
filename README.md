@@ -4,7 +4,6 @@
 ```
 cd ~
 git clone https://github.com/philippmossier/dotfiles.git
-chmod u=rwx ./dotfiles/installScript.sh
 ./dotfiles/installScript.sh
 ```
 - copy and paste the dotfiles and config files into your homedirectory
