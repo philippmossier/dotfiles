@@ -1,3 +1,34 @@
+# ⚙️ SHELL SCRIPT README STARTS HERE ⚙️
+- First clone the shell script from github repo (maybe `sudo apt install git` needed)
+- cd into your homedirectory and run the shellscript from there
+```
+cd ~
+git clone https://github.com/philippmossier/dotfiles.git
+chmod u=rwx ./dotfiles/installScript.sh
+./dotfiles/installScript.sh
+```
+- copy and paste the dotfiles and config files into your homedirectory
+- change default shell to zsh
+```
+chsh -s $(which zsh)
+```
+- Install fonts for the shell themes (powerline-fonts or nerdfonts https://www.nerdfonts.com/)
+  Just doubleclick the fonts you wish and install it. 
+  There are 2 sections where fonts need to be selected:
+  WSL2-Ubuntu_20.04: Windows-terminal settings.json + vscode settings.json 
+  Ubuntu_20.04/PopOS20.04: open terminal and go to preferences + vscode settings.json
+- restart your shell DONE !! (i used zsh as shell, but it should work with bash too)
+
+
+### WSL2 NOTES after running the installScript: 
+- Its the best to install Docker Desktop on Windows which uses WSL2 under the hood 
+  (if you have Windows 10 Pro, the virtual machine runs even faster with docker.
+  You find the checkbox under docker settings: "Use the WSL 2 based engine" checkbox )
+
+- Vscode needs to be installed also under windows (just use the WSL2 vscode-extension)
+
+- For remembering SSH pass phrases you maybe need the fix at the end of .zshrc file.
+
 # FRESH UBUNTU INSTALL/REINSTALL on WSL2
 - Uninstall ubuntu on wsl2:
 - go to windows powershell and type:
@@ -27,38 +58,6 @@ wsl -l --verbose
 ```
 
 - DONE! Now we can run our ubuntu-fresh-install-shell-script
-
-# ⚙️ SHELL SCRIPT README STARTS HERE ⚙️
-- Get sure you did apt update and apt upgrade
-- First clone the shell script from github repo (maybe `sudo apt install git` needed)
-- cd into your homedirectory and run the shellscript from there
-```
-cd ~
-git clone https://github.com/philippmossier/mustHaves.git
-chmod u=rwx ./mustHaves/mustHaves.sh
-./mustHaves/mustHaves.sh
-```
-- DONE! NOW JUST RESTART SHELL (in bash everything should work after restart)
-
-### instead of restart the shell you can manually load the config sources for the shell
-```
-source ~/.bashrc        # bash
-source ~/.fzf.bash      # fzf
-source ~/.profile       # gets run before bash and zsh
-
-source ~/.zshrc         # zsh
-```
-
-# ZSH SECTION 
-- change default shell to zsh
-```
-chsh -s $(which zsh)
-```
-
-- install oh-my-zsh
-```
-sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-```
 
 # TROUBLESHOOT SECTION 
 
