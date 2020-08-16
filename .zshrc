@@ -22,19 +22,74 @@ PrimaryEDITOR=code
 SecondaryEDITOR=vim
 OS='Linux'
 USER=`whoami`
-
-# settings to load zsh theme for prompt
 DEFAULT_USER=`whoami`
-zshThemes=~/.zsh/themes
-#source $zshThemes/agnoster/agnoster.zsh-theme
-source $zshThemes/agnoster-zsh-theme/agnoster.zsh-theme
+
+# ----------THEMES----------
+# settings to load zsh theme for prompt
+
+# theme 1:
+source ~/.zsh/themes/agnoster-zsh-theme/agnoster.zsh-theme
+# source ~/.zsh/themes/dracula/dracula.zsh-theme
 setopt promptsubst
+
+# # theme 2:
+# fpath+=~/.zsh/themes/pure
+# autoload -U promptinit; promptinit
+# prompt pure
+
+# # theme 3: (binary lives in /usr/local/bin)
+# eval "$(starship init zsh)"
+
+# # theme 4 spaceship: (git clone https://github.com/denysdovhan/spaceship-prompt.git)
+# SPACESHIP_PROMPT_ADD_NEWLINE=false
+# SPACESHIP_PROMPT_SEPARATE_LINE=false
+# SPACESHIP_CHAR_SYMBOL=❯
+# SPACESHIP_CHAR_SUFFIX=" "
+# SPACESHIP_HG_SHOW=false
+# SPACESHIP_PACKAGE_SHOW=false
+# SPACESHIP_NODE_SHOW=false
+# SPACESHIP_RUBY_SHOW=false
+# SPACESHIP_ELM_SHOW=false
+# SPACESHIP_ELIXIR_SHOW=false
+# SPACESHIP_XCODE_SHOW_LOCAL=false
+# SPACESHIP_SWIFT_SHOW_LOCAL=false
+# SPACESHIP_GOLANG_SHOW=false
+# SPACESHIP_PHP_SHOW=false
+# SPACESHIP_RUST_SHOW=false
+# SPACESHIP_JULIA_SHOW=false
+# SPACESHIP_DOCKER_SHOW=false
+# SPACESHIP_DOCKER_CONTEXT_SHOW=false
+# SPACESHIP_AWS_SHOW=false
+# SPACESHIP_CONDA_SHOW=false
+# SPACESHIP_VENV_SHOW=false
+# SPACESHIP_PYENV_SHOW=false
+# SPACESHIP_DOTNET_SHOW=false
+# SPACESHIP_EMBER_SHOW=false
+# SPACESHIP_KUBECONTEXT_SHOW=false
+# SPACESHIP_TERRAFORM_SHOW=false
+# SPACESHIP_TERRAFORM_SHOW=false
+# SPACESHIP_JOBS_SHOW=false
+# SPACESHIP_VI_MODE_SHOW=false
+# source ~/.zsh/themes/spaceship-prompt/spaceship.zsh-theme
+# # let this comment out if it works without
+# # autoload -U promptinit; promptinit
+# # prompt spaceship
+
+# ----------THEMES END -----------
 
 # zsh-autossugestions:
 # load zsh-autosuggestion (git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions)
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 # autosuggest text color: default fg=8
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#393939"
+
+# zsh-syntax-highlighting:
+# load zsh-autosuggestion (git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting)
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# change highlight colors in ~/.zsh/zsh-syntax-highlighting/highlighters/main/main-highlighter.zsh
+# : ${ZSH_HIGHLIGHT_STYLES[path]:=}
+# : ${ZSH_HIGHLIGHT_STYLES[unknown-token]:=fg=#A32E2E,bold}
+
 
 # thefuck
 eval $(thefuck --alias)
@@ -255,3 +310,4 @@ fzf_git_log_pickaxe() {
 
 ## Use emacs keybindings even if our EDITOR is set to vi
 # bindkey -e
+# source ~/.zsh/spaceship-prompt/spaceship.zsh-theme
