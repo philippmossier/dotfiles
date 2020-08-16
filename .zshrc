@@ -83,13 +83,12 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 # autosuggest text color: default fg=8
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#393939"
 
-# zsh-syntax-highlighting:
+# zsh-syntax-highlighting: (ATTENTION: maybe this slows down the shell a bit)
 # load zsh-autosuggestion (git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting)
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # change highlight colors in ~/.zsh/zsh-syntax-highlighting/highlighters/main/main-highlighter.zsh
 # : ${ZSH_HIGHLIGHT_STYLES[path]:=}
 # : ${ZSH_HIGHLIGHT_STYLES[unknown-token]:=fg=#A32E2E,bold}
-
 
 # thefuck
 eval $(thefuck --alias)
@@ -129,7 +128,7 @@ setopt histignorealldups sharehistory
 # Defer initialization of nvm until nvm, node or a node-dependent command is
 # run. Ensure this block is only run once if .bashrc gets sourced multiple times
 # by checking whether __init_nvm is a function.
-# git is used as a node_command because "git diff" uses diff-so-fancy npm package under the hood
+# git is used as a node command because git diff uses diff-so-fancy npm package under the hood
 if [ -s "$HOME/.nvm/nvm.sh" ] && [ ! "$(type -f __init_nvm)" = function ]; then
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
@@ -142,6 +141,9 @@ if [ -s "$HOME/.nvm/nvm.sh" ] && [ ! "$(type -f __init_nvm)" = function ]; then
   }
   for i in "${__node_commands[@]}"; do alias $i='__init_nvm && '$i; done
 fi
+# # normal nvm loading (slow at start of a new terminal)
+# export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 # ================== FZF SECTION ================================================
 # Load fzf
@@ -152,7 +154,7 @@ fi
 [[ $- == *i* ]] && source "/home/phil/.local/repos/fzf/shell/completion.zsh" 2> /dev/null
 # Key bindings for fzf (ctrl+t, ctrl+r, alt+c)
 source "/home/phil/.local/repos/fzf/shell/key-bindings.zsh"
-
+export BAT_PAGER="less -RF"
 # FZF pro settings:
 export FZF_DEFAULT_COMMAND='fdfind --type f --color=never'
 export FZF_DEFAULT_OPTS='
