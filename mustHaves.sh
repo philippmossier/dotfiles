@@ -178,7 +178,7 @@ curl -OL http://mama.indstate.edu/users/ice/tree/src/tree-1.8.0.tgz && \
 tar xf tree-1.8.0.tgz -C ~/.local/makeInstalls
 pushd ~/.local/makeInstalls/tree-1.8.0
 make
-make install
+sudo make install
 
 echo "$(neofetch)"
 
