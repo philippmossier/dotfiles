@@ -124,7 +124,7 @@ setopt histignorealldups sharehistory
 # load exa and other binaries in .local/bin folder
 [ -d /home/phil/.local/bin ] && PATH="/home/phil/.local/bin:$PATH"
 
-# nvm lazy loading:(fast shell loading but doesnt work wirh nvm hook)
+# nvm lazy loading:(fast shell loading but doesnt work with nvm hook)
 # Defer initialization of nvm until nvm, node or a node-dependent command is
 # run. Ensure this block is only run once if .bashrc gets sourced multiple times
 # by checking whether __init_nvm is a function.
@@ -141,30 +141,11 @@ if [ -s "$HOME/.nvm/nvm.sh" ] && [ ! "$(type -f __init_nvm)" = function ]; then
   for i in "${__node_commands[@]}"; do alias $i='__init_nvm && '$i; done
 fi
 
-# # normal nvm loading (slow at start of a new terminal but works with nvm hook below)
+# #normal nvm loading (slow at start of a new terminal but works with sourced nvm hook below)
 # export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-# # place this nvm hook after nvm initialization!
-# autoload -U add-zsh-hook
-# load-nvmrc() {
-#   local node_version="$(nvm version)"
-#   local nvmrc_path="$(nvm_find_nvmrc)"
-
-#   if [ -n "$nvmrc_path" ]; then
-#     local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
-
-#     if [ "$nvmrc_node_version" = "N/A" ]; then
-#       nvm install
-#     elif [ "$nvmrc_node_version" != "$node_version" ]; then
-#       nvm use
-#     fi
-#   elif [ "$node_version" != "$(nvm version default)" ]; then
-#     echo "Reverting to nvm default version"
-#     nvm use default
-#   fi
-# }
-# add-zsh-hook chpwd load-nvmrc
-# load-nvmrc
+# # place this nvm-version-hook after nvm initialization! (https://github.com/creationix/nvm#zsh)
+# source ~/.nvmhook.sh
 
 # ================== FZF SECTION ================================================
 # Load fzf
