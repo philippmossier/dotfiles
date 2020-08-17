@@ -34,6 +34,10 @@ setopt histignorealldups sharehistory
 # ----------------------------- load local binaries --------------------
 [ -d /home/phil/.local/bin ] && PATH="/home/phil/.local/bin:$PATH"
 
+# ----------------------------- diff-so-fancy --------------------
+if [[ ! "$PATH" == */home/phil/.local/repos/diff-so-fancy* ]]; then
+    export PATH="${PATH:+${PATH}:}/home/phil/.local/repos/diff-so-fancy"
+fi
 
 # ------------ ---------------- load agnoster theme --------------------
 source ~/.zsh/themes/agnoster-zsh-theme/agnoster.zsh-theme
