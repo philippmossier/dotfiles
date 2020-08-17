@@ -29,7 +29,7 @@ SAVEHIST=1000
 HISTFILE=~/.zsh_history 
 setopt histignorealldups sharehistory
 
-# ================== Local binaries, zsh-theme, zsh-autosuggest, zsh-autocomplete =================
+# ======= Local binaries, zsh-theme, zsh-autosuggest, zsh-autocomplete, diff-so-fancy ============
 
 # ----------------------------- load local binaries --------------------
 [ -d /home/phil/.local/bin ] && PATH="/home/phil/.local/bin:$PATH"
