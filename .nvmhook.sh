@@ -1,15 +1,24 @@
-# zsh hook to set node version with nvm when changing directories
-# searches for next .nvmrc file and sets node version
+# Taken from here:
+#    https://github.com/creationix/nvm#zsh
+
+# place this after nvm initialization!
 autoload -U add-zsh-hook
 load-nvmrc() {
-    local nvmrc=$(nvm_find_nvmrc)
-    if [[ -f $nvmrc && -r $nvmrc ]]; then
-        local dirVersion=$(cat $nvmrc);
-        local curentVersion=$(nvm current);
-        if [[ $dirVersion != $curentVersion ]]; then
-            nvm use &>/dev/null
-        fi
+  local node_version="$(nvm version)"
+  local nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$node_version" ]; then
+      nvm use
     fi
+  elif [ "$node_version" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
 }
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
