@@ -86,16 +86,21 @@ nvm install node
 
 echo ""
 echo "##################################################"
-echo "############ diff-so-fancy & tldr ################"
+echo "################### tldr #########################"
 echo "##################################################"
 echo ""
-npm i -g diff-so-fancy tldr
+npm i -g tldr
 touch ~/.local/npmGlobalInstalls/installedPkgs.txt && cd ~/.local/npmGlobalInstalls/
 echo "# These packages are global installed (uninstall them with sudo npm uninstall -g packagename):\n" > ./installedPkgs.txt
 echo "tldr" >> ./installedPkgs.txt
-echo "diff-so-fancy" >> ./installedPkgs.txt
 
-# exa (ls replacement)r diff-so-fancy txt
+echo ""
+echo "##################################################"
+echo "############### diff-so-fancy ####################"
+echo "##################################################"
+echo ""
+git clone https://github.com/so-fancy/diff-so-fancy.git ~/.local/repos/diff-so-fancy
+
 echo ""
 echo "##################################################"
 echo "#################### exa #########################"
