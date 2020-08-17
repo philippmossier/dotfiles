@@ -14,7 +14,7 @@ echo "##### neofetch zsh zip unzip fd-find ripgrep #####"
 echo "##################################################"
 echo ""
 sudo apt -y install \
-neofetch zsh zip unzip fd-find ripgrep
+jq neofetch zsh zip unzip fd-find ripgrep
 
 echo ""
 echo "##################################################"
