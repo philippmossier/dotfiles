@@ -13,6 +13,9 @@ alias lsa='exa --all --long --header --git'
 alias cat='bat'
 alias killdocker='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
 eval $(thefuck --alias fuck)
+alias bbbs='bitbucket_build_status'
+alias rurl='open_current_repository_url'
+alias chid='clubhouse_issues_in_development'
 
 # ================================= variables used in functions ===================================
 
@@ -219,6 +222,24 @@ fi
 # # place this nvm-version-hook after nvm initialization! (https://github.com/creationix/nvm#zsh)
 # source ~/.nvmhook.sh
 
+# ========================================= new experiments =============================================
+_3S_CREDENTIALS=''
+CH_API_TOKEN=''
+
+function bitbucket_build_status() {
+   commitId=$(git log --format="%H" -n 1)
+   echo $commitId
+   curl -u $_3S_CREDENTIALS https://git.3-s.at/rest/build-status/1.0/commits/$commitId | jq ".values | map ({state: .state, name: .name})"
+}
+
+function open_current_repository_url() {
+    url=$(\cat package.json | jq ".repository" | tr --delete \")
+    xdg-open $url
+}
+
+function clubhouse_issues_in_development() {
+    curl -X GET -H "Content-Type: application/json" -d '{ "page_size": 25, "query": "owner:philippmossier state:\"In Development\" sort:changed" }' -L "https://api.clubhouse.io/api/v3/search/stories?token=$CH_API_TOKEN" | jq ".data | map({story: .name, ch: .id, type: .story_type})"
+}
 
 # =================================================================================================
 # ================================= OUTCOMMENTED SETTINGS:=========================================
