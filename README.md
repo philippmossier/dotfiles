@@ -1,14 +1,12 @@
 # ⚙️ SHELL SCRIPT README STARTS HERE ⚙️
-- First clone the shell script from github repo (maybe `sudo apt install git` needed)
-- cd into your homedirectory and run the shellscript from there
+- clone this repo (maybe `sudo apt install git` needed)
+- run the installScript
+- change bash shell to zshell
+- done (only fonts need to be installed manually)
 ```
 cd ~
 git clone https://github.com/philippmossier/dotfiles.git
 ./dotfiles/installScript.sh
-```
-- copy and paste the dotfiles and config files into your homedirectory
-- change default shell to zsh
-```
 chsh -s $(which zsh)
 ```
 - Install fonts for the shell themes (powerline-fonts or nerdfonts https://www.nerdfonts.com/)
