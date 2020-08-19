@@ -5,6 +5,7 @@ echo "##################################################"
 echo "############# creating dir tree ##################"
 echo "##################################################"
 echo ""
+cd ~
 mkdir -p ~/.local/bin && \
 mkdir -p ~/.local/repos && \
 mkdir -p ~/.local/pkgs && \
@@ -21,7 +22,6 @@ echo "##################################################"
 echo "######## add symlinks to homedirectory ###########"
 echo "##################################################"
 echo ""
-cd ~
 ln -s dotfiles/zshrc 			.zshrc
 ln -s dotfiles/gitconfig       		.gitconfig
 ln -s dotfiles/nvmhook.sh 		.nvmhook.sh
