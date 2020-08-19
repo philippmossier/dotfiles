@@ -2,6 +2,34 @@
 
 echo ""
 echo "##################################################"
+echo "############# creating dir tree ##################"
+echo "##################################################"
+echo ""
+mkdir -p ~/.local/bin && \
+mkdir -p ~/.local/repos && \
+mkdir -p ~/.local/pkgs && \
+mkdir -p ~/.local/scripts && \
+mkdir -p ~/.local/zip && \ 
+mkdir -p ~/.zsh/themes && \
+mkdir -p ~/.local/makeInstalls && \
+mkdir -p ~/.local/npmGlobalInstalls && \
+mkdir -p ~/.ssh
+mkdir -p ~/.config/bat
+
+echo ""
+echo "##################################################"
+echo "######## add symlinks to homedirectory ###########"
+echo "##################################################"
+echo ""
+cd ~
+ln -s dotfiles/zshrc 			.zshrc
+ln -s dotfiles/gitconfig       		.gitconfig
+ln -s dotfiles/nvmhook.sh 		.nvmhook.sh
+ln -s dotfiles/vimrc    		.vimrc
+ln -s dotfiles/config/bat/config       	.config/bat/config
+
+echo ""
+echo "##################################################"
 echo "############# apt update & upgrade ###############"
 echo "##################################################"
 echo ""
@@ -43,21 +71,6 @@ echo "################# tmuxinator #####################"
 echo "##################################################"
 echo ""
 sudo gem install tmuxinator
-
-echo ""
-echo "##################################################"
-echo "############# creating dir tree ##################"
-echo "##################################################"
-echo ""
-mkdir -p ~/.local/bin && \
-mkdir -p ~/.local/repos && \
-mkdir -p ~/.local/pkgs && \
-mkdir -p ~/.local/scripts && \
-mkdir -p ~/.local/zip && \ 
-mkdir -p ~/.zsh/themes && \
-mkdir -p ~/.local/makeInstalls && \
-mkdir -p ~/.local/npmGlobalInstalls && \
-mkdir -p ~/.ssh
 
 echo ""
 echo "##################################################"
@@ -143,14 +156,6 @@ pushd ~/.local/pkgs && \
 curl -OL https://github.com/cli/cli/releases/download/v0.11.1/gh_0.11.1_linux_amd64.deb && \
 sudo apt install ./gh_*_linux_amd64.deb
 
-
-echo -e "\n# first path added by my personal installer" >> ~/.profile
-echo "[ -d $HOME/.local/bin ] && PATH=\"$HOME/.local/bin:\$PATH\"" >> ~/.profile
-
-echo -e "\n# second path added by my personal installer" >> ~/.profile
-echo "[ -d $HOME/.local/repos/fzf/bin ] && PATH=\"$HOME/.local/repos/fzf/bin:\$PATH\"" >> ~/.profile
-
-
 echo ""
 echo "##################################################"
 echo "################# zsh theme #####################"
@@ -222,4 +227,4 @@ cat << "PHIL"
 PHIL
 
 echo ""
-echo ">>-----> Done! Restart bash and enjoy! <-----<<"
+echo ">>-----> Done! Change to zshell and enjoy! <-----<<"
