@@ -231,36 +231,38 @@ fzf_git_log_pickaxe() {
      fi
  }
 
-# # ================================= NVM SECTION =================================================
+# # ========================== NVM normal loading with nvmhook ===================================
 
-#normal nvm loading (slow at start of a new terminal but works with nvm hook below)
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-# place this nvm-version-hook after nvm initialization! (https://github.com/creationix/nvm#zsh)
-source ~/.nvmhook.sh
+# #normal nvm loading (slow at start of a new terminal but works with nvm hook below)
+# export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+# # place this nvm-version-hook after nvm initialization! (https://github.com/creationix/nvm#zsh)
+# source ~/.nvmhook.sh
+
+# # ================================= NVM lazy loading ============================================
+
+# nvm lazy loading:(fast shell loading but doesnt work wirh nvm hook)
+# Defer initialization of nvm until nvm, node or a node-dependent command is
+# run. Ensure this block is only run once if .bashrc gets sourced multiple times
+# by checking whether __init_nvm is a function.
+if [ -s "$HOME/.nvm/nvm.sh" ] && [ ! "$(type -f __init_nvm)" = function ]; then
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+  declare -a __node_commands=('nvm' 'node' 'npm' 'yarn' 'gulp' 'grunt' 'webpack' 'git')
+  function __init_nvm() {
+    for i in "${__node_commands[@]}"; do unalias $i; done
+    . "$NVM_DIR"/nvm.sh
+    unset __node_commands
+    unset -f __init_nvm
+  }
+  for i in "${__node_commands[@]}"; do alias $i='__init_nvm && '$i; done
+fi
 
 # =================================================================================================
 # ================================= OUTCOMMENTED SETTINGS:=========================================
 # =================================================================================================
 
-# # ================================= NVM lazy loading ============================================
 
-# # nvm lazy loading:(fast shell loading but doesnt work wirh nvm hook)
-# # Defer initialization of nvm until nvm, node or a node-dependent command is
-# # run. Ensure this block is only run once if .bashrc gets sourced multiple times
-# # by checking whether __init_nvm is a function.
-# if [ -s "$HOME/.nvm/nvm.sh" ] && [ ! "$(type -f __init_nvm)" = function ]; then
-#   export NVM_DIR="$HOME/.nvm"
-#   [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
-#   declare -a __node_commands=('nvm' 'node' 'npm' 'yarn' 'gulp' 'grunt' 'webpack' 'git')
-#   function __init_nvm() {
-#     for i in "${__node_commands[@]}"; do unalias $i; done
-#     . "$NVM_DIR"/nvm.sh
-#     unset __node_commands
-#     unset -f __init_nvm
-#   }
-#   for i in "${__node_commands[@]}"; do alias $i='__init_nvm && '$i; done
-# fi
 
 # =================================== Prompt fallback =============================================
 
