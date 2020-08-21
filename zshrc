@@ -28,8 +28,8 @@ DEFAULT_USER=`whoami`
 
 # ================================= shell history settings ========================================
 
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=10000
+SAVEHIST=10000
 HISTFILE=~/.zsh_history 
 setopt histignorealldups sharehistory
 
@@ -353,7 +353,16 @@ source ~/.nvmhook.sh
 # *.md=38;5;224:*.markdown=38;5;224:*README=38;5;224:*.ico=38;5;140:\
 # *.iso=38;5;205"
 
-# new experiments:
+# # ===='bat' configuration.====
+#     export BAT_CONFIG_PATH="$HOME/dotfiles/bat.conf"
+
+# # ==== LESS PAGER CONFIG ====
+# export LESS='--mouse -Q -R -X -F -s -i -g'
+# export LESS_TERMCAP_md=$(printf "\e[00;34m")
+# export LESS_TERMCAP_us=$(printf "\e[01;32m")
+# export PAGER=less
+
+# =============================== new experiments: ==================================
 
 _3S_CREDENTIALS=''
 CH_API_TOKEN=''
