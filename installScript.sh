@@ -16,6 +16,7 @@ mkdir -p ~/.local/makeInstalls && \
 mkdir -p ~/.local/npmGlobalInstalls && \
 mkdir -p ~/.ssh
 mkdir -p ~/.config/bat
+touch ~/.config/bat/config
 mkdir -p ~/.vim/colors
 mkdir -p ~/.vim/repos
 
