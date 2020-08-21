@@ -158,6 +158,17 @@ sudo apt install ./gh_*_linux_amd64.deb
 
 echo ""
 echo "##################################################"
+echo "################# vim theme #####################"
+echo "##################################################"
+echo ""
+cd ~
+mkdir -p ~/.vim/colors
+mkdir -p ~/.vim/repos
+git clone https://github.com/morhetz/gruvbox.git ~/.vim/repos/
+cp ~/.vim/repos/gruvbox/colors/gruvbox.vim ~/.vim/colors/
+
+echo ""
+echo "##################################################"
 echo "################# zsh theme #####################"
 echo "##################################################"
 echo ""
