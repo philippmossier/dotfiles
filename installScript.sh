@@ -165,7 +165,7 @@ echo "##################################################"
 echo ""
 cd ~
 git clone https://github.com/morhetz/gruvbox.git ~/.vim/repos/
-cp ~/.vim/repos/gruvbox/colors/gruvbox.vim ~/.vim/colors/
+cp -r ~/.vim/repos/gruvbox/colors/gruvbox.vim ~/.vim/colors/
 
 echo ""
 echo "##################################################"
