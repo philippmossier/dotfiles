@@ -45,6 +45,7 @@ fi
 
 # ------------ ---------------- bat config --------------------
 export BAT_CONFIG_PATH="$HOME/dotfiles/bat.conf"
+export BAT_PAGER="less --mouse -RF"
 
 # ------------ ---------------- load agnoster theme --------------------
 source ~/.zsh/themes/agnoster-zsh-theme/agnoster.zsh-theme
@@ -93,7 +94,6 @@ if [[ ! "$PATH" == */home/phil/.local/repos/fzf/bin* ]]; then
 fi
 [[ $- == *i* ]] && source "/home/phil/.local/repos/fzf/shell/completion.zsh" 2> /dev/null
 source "/home/phil/.local/repos/fzf/shell/key-bindings.zsh"
-export BAT_PAGER="less -RF"
 export FZF_DEFAULT_COMMAND='fdfind --type f --color=never'
 export FZF_DEFAULT_OPTS='
     --height 95% --multi --reverse --margin=0,1
