@@ -26,6 +26,66 @@ chsh -s $(which zsh)
 
 - For remembering SSH pass phrases you maybe need the fix at the end of .zshrc file.
 
+# important wsl2 commands:
+https://docs.microsoft.com/en-us/windows/wsl/wsl-config
+
+wsl --export Ubuntu D:\WSL2\wsl2-ubuntu-images\ubuntu.tar
+wsl --export Ubuntu D:\WSL2\wsl2-ubuntu-images\ubuntu-empty.tar
+
+wsl --import ubuntu-main C:\Users\mossi\AppData\Local\Packages\ubuntu-main D:\WSL2\wsl2-ubuntu-images\ubuntu.tar
+wsl --import ubuntu-empty C:\Users\mossi\AppData\Local\Packages\ubuntu-empty D:\WSL2\wsl2-ubuntu-images\ubuntu-empty.tar
+wsl --import ubuntu-test C:\Users\mossi\AppData\Local\Packages\ubuntu-test D:\WSL2\wsl2-ubuntu-images\ubuntu-empty.tar
+
+wsl -l -v
+wsl -d <DistributionName>
+wsl -t <DistributionName>  
+wsl --setdefault ubuntu-main
+wsl --unregister <DistributionName>
+  
+# windows-terminal seittings.json:
+            {
+                "guid": "{your id}",
+                "hidden": false,
+                "name": "ubuntu-main",
+                "source": "Windows.Terminal.Wsl",
+                // "commandline": "wsl.exe ~", // uses default ubuntu disto,
+                "startingDirectory": "//wsl$/ubuntu-main/home/phil",
+                "colorScheme": "OneDark",
+                "fontFace": "Cascadia Code PL", //  // "Cascadia Code PL" , "DejaVu Sans Mono for Powerline", "Inconsolata for Powerline", "Source Code Pro for Powerline"
+                "useAcrylic": false,
+                "fontSize": 12
+                // "fontWeight": "medium"
+                // "acrylicOpacity": 0.1,
+                // "backgroundImage": "C:/Users/mossi/Desktop/focalFossa1.jpg",
+                // "backgroundImageOpacity": 0.1,
+            },
+            {
+                "guid": "{your id}",
+                "hidden": false,
+                "name": "ubuntu-empty",
+                "source": "Windows.Terminal.Wsl",
+                "colorScheme": "OneDark",
+                "fontFace": "Cascadia Code PL",
+                "useAcrylic": false,
+                "fontSize": 12,
+                "startingDirectory": "//wsl$/ubuntu-main/home/phil"
+            },
+            {
+                "guid": "{your id}",
+                "hidden": false,
+                "name": "ubuntu-test",
+                "source": "Windows.Terminal.Wsl",              
+                "colorScheme": "OneDark",
+                "fontFace": "Cascadia Code PL",
+                "useAcrylic": false,
+                "fontSize": 12,
+                "startingDirectory": "//wsl$/ubuntu-main/home/phil"
+            }
+
+# WSL2 environment variable to set user instead of always root
+Computer\HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Lxss\
+Change DefaultUid to Decimal: 1000
+for all installed ubuntu copies
 # FRESH UBUNTU INSTALL/REINSTALL on WSL2
 - Uninstall ubuntu on wsl2:
 - go to windows powershell and type:
