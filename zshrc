@@ -33,7 +33,7 @@ SAVEHIST=10000
 HISTFILE=~/.zsh_history 
 setopt histignorealldups sharehistory
 
-# ================== Local binaries, zsh-theme, zsh-autosuggest, zsh-autocomplete =================
+# ====== Local binaries, zsh-theme, zsh-autosuggest, zsh-autocomplete, bat-config =================
 
 # ----------------------------- load local binaries --------------------
 [ -d /home/phil/.local/bin ] && PATH="/home/phil/.local/bin:$PATH"
@@ -42,6 +42,9 @@ setopt histignorealldups sharehistory
 if [[ ! "$PATH" == */home/phil/.local/repos/diff-so-fancy* ]]; then
     export PATH="${PATH:+${PATH}:}/home/phil/.local/repos/diff-so-fancy"
 fi
+
+# ------------ ---------------- bat config --------------------
+export BAT_CONFIG_PATH="$HOME/dotfiles/bat.conf"
 
 # ------------ ---------------- load agnoster theme --------------------
 source ~/.zsh/themes/agnoster-zsh-theme/agnoster.zsh-theme

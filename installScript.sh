@@ -15,8 +15,6 @@ mkdir -p ~/.zsh/themes && \
 mkdir -p ~/.local/makeInstalls && \
 mkdir -p ~/.local/npmGlobalInstalls && \
 mkdir -p ~/.ssh
-mkdir -p ~/.config/bat
-touch ~/.config/bat/config
 mkdir -p ~/.vim/colors
 mkdir -p ~/.vim/repos
 
@@ -29,7 +27,6 @@ ln -s dotfiles/zshrc 			.zshrc
 ln -s dotfiles/gitconfig       		.gitconfig
 ln -s dotfiles/nvmhook.sh 		.nvmhook.sh
 ln -s dotfiles/vimrc    		.vimrc
-ln -s dotfiles/config/bat/config       	.config/bat/config
 
 echo ""
 echo "##################################################"
