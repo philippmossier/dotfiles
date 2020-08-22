@@ -83,6 +83,7 @@ https://docs.microsoft.com/en-us/windows/wsl/wsl-config
             }
 
 # WSL2 environment variable to set user instead of always root
+link: https://superuser.com/questions/1506304/setting-default-user-in-linux-wsl-in-sideloaded-distro
 Change windows registry in:
 - Computer\HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Lxss\
 - Change DefaultUid to Decimal: 1000
