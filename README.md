@@ -1,7 +1,9 @@
 # Whats in there?
-> *Fast and powerfull developer-environment.*
-  *Every step is well documented and nothing happens in the background.*
-  *No framework is used, everything is installed the old fashion way with binaries etc.*
+Fast and powerfull developer-environment.
+
+Every step is well documented and nothing happens in the background.
+
+No framework is used, everything is installed the old fashion way with binaries etc.
 
 Tested with *WSL2 Ubuntu 20.04*, *Ubuntu/POP-OS 20.04*.
 <br/><br/>
