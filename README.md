@@ -1,19 +1,24 @@
-# ⚙️ SHELL SCRIPT README STARTS HERE ⚙️
-- clone this repo (maybe `sudo apt install git` needed)
-- run the installScript
-- change bash shell to zshell
-- done (only fonts need to be installed manually)
+# Description:
+- This repo includes a script which can be used after a fresh OS install (WSL2 with Ubtuntu or Ubuntu Native).
+- Some fundamental packages get installed for a better command line experience and standard developer tools.
+- All dotfiles get automaticly symlinked into your homdedirectory (no need for manual configuration, just clone the repo and pull or update the repo to get the same experience     on all your platfomrs/devices).
+- For further customization only update the repo itself and push the changes into your private repository.
+
+
+## ⚙️ HOW TO INSTALL ⚙️
 ```
 cd ~
 git clone https://github.com/philippmossier/dotfiles.git
 ./dotfiles/installScript.sh
 chsh -s $(which zsh)
 ```
-- Install fonts for the shell themes (powerline-fonts or nerdfonts https://www.nerdfonts.com/)
-  Just doubleclick the fonts you wish and install it. 
-  There are 2 sections where fonts need to be selected depend on your OS
-  - 1.WSL2-Ubuntu_20.04: Windows-terminal settings.json + vscode settings.json 
-  - 2.Ubuntu_20.04/PopOS20.04: open terminal and go to preferences + vscode settings.json
+- Done ! (only fonts need to be installed manually)
+
+## How to install FOnts
+- Use powerline-fonts or nerdfonts https://www.nerdfonts.com/
+- There are 2 sections where fonts need to be selected depending on your OS
+> 1.WSL2-Ubuntu_20.04: Windows-terminal settings.json + vscode settings.json 
+> 2.Ubuntu_20.04/PopOS20.04: open terminal and go to preferences + vscode settings.json
 - restart your shell DONE !! (i used zsh as shell, but it should work with bash too)
 
 
