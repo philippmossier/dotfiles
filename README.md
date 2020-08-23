@@ -16,8 +16,10 @@ chsh -s $(which zsh)
 
 ## How to install FOnts
 - Use powerline-fonts or nerdfonts https://www.nerdfonts.com/
+i personally used `FiraCode Nerd Font Mono`
 - There are 2 sections where fonts need to be selected depending on your OS
 > 1.WSL2-Ubuntu_20.04: Windows-terminal settings.json + vscode settings.json 
+
 > 2.Ubuntu_20.04/PopOS20.04: open terminal and go to preferences + vscode settings.json
 - restart your shell DONE !! (i used zsh as shell, but it should work with bash too)
 
