@@ -6,7 +6,7 @@ No framework or plugin manager used! Everything is installed the old fashion way
 
 ### 💻 How to install:
 
-```bash shell
+```bash
 git clone https://github.com/philippmossier/dotfiles.git
 ./dotfiles/installScript.sh
 chsh -s $(which zsh)
@@ -117,6 +117,7 @@ https://docs.microsoft.com/en-us/windows/wsl/reference
 
 
 **🐛 WSL2 always ROOT user Bug when using multiple WSL2 distros:**
+
 Needed to solve this wierd bug where i always was logged into root at start of a new wsl-session
 and had no access to my backups (exported .tar files)
 I needed to modify the windows registry to use standard user in all my disto copies.
