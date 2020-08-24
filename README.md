@@ -1,18 +1,18 @@
 ## 🚀 Fast and powerfull developer-environment.
 
-Every step is well documented and nothing happens in the background.
-No framework is used, everything is installed the old fashion way with binaries etc.
-Tested with WSL2 Ubuntu 20.04, Ubuntu/POP-OS 20.04.
+No framework or plugin manager used! Everything is installed the old fashion way, depending mainly on sourced binaries. Every step is well documented and nothing happens in the background.
+
+🧪 *Tested on the newest stable versions (20.04) of Ubuntu , Pop-OS and WSL2*
 
 ### 💻 How to install:
-```
-cd ~
+
+```bash shell
 git clone https://github.com/philippmossier/dotfiles.git
 ./dotfiles/installScript.sh
 chsh -s $(which zsh)
 ```
 
----
+*******************************************************************************
 
 🕮 *What gets installed?*
 - cli-tools for a better command-line experience.
@@ -30,7 +30,7 @@ At the start of the shell-script a directory tree gets created so nothing gets i
 The zshell dont uses any frameworks or plugin managers, everything in the .zshrc sources `binaries` or writes executables into the `PATH` variable.
 Every installed package lives in the .local folder except of "tldr" because its a global npm package but "tldr" has a readme in the .local folder for uninstall.
 
----
+*******************************************************************************
 
 ⚙️ **How to modify your environment after install:**
 
@@ -56,44 +56,38 @@ Use powerline-fonts or nerdfonts https://www.nerdfonts.com/ i personally used `F
 2. Vscode needs to be installed also under windows (just use the WSL2 vscode-extension)
 3. For remembering SSH pass phrases on WSL2 you need the fix at the end of .zshrc file otherwise the ssh agent does not start automaticly.
 
-⚙️ **JSON SETTINGS SECTION:**
+⚙️ **Vscode & Windows-Terminal `settings.json`**
 
-The **windows-terminal `settings.json`** and **.vscode `settings.json`** are in the DOCS folder.
+The `windows-terminal/settings.json` and `.vscode/settings.json` are in the DOCS folder.
 
 🏝️ **Usefull WSL2 commands for powershell:**
 
 *List installed WSL distros and show version:*
-
 ```
 wsl -l -v
 ```
 
 *Set defaul distro (used when you execute `wsl.exe` on the command-line)*
-
 ```
 wsl --setdefault <DistributionName>
 ```
 
 *Run distro:*
-
 ```
 wsl -d <DistributionName>
 ```
 
 *Stop distro:*
-
 ```
 wsl -t <DistributionName>
 ```
 
 *Delete distro:*
-
 ```
 wsl --unregister <DistributionName>
 ```
 
 *--export \<Distro> \<FileName>*
-
 ```
 wsl --export Ubuntu D:\WSL2\wsl2-ubuntu-images\ubuntu.tar
 ```
@@ -103,7 +97,6 @@ wsl --export Ubuntu D:\WSL2\wsl2-ubuntu-images\ubuntu-empty.tar
 ```
 
 *--import \<Distro> \<InstallLocation> \<FileName>*
-
 ```
 wsl --import ubuntu-main C:\Users\username\AppData\Local\Packages\ubuntu-main D:\WSL2\wsl2-ubuntu-images\ubuntu.tar
 ```
@@ -116,8 +109,10 @@ wsl --import ubuntu-empty C:\Users\username\AppData\Local\Packages\ubuntu-empty 
 wsl --import ubuntu-test C:\Users\username\AppData\Local\Packages\ubuntu-test D:\WSL2\wsl2-ubuntu-images\ubuntu-empty.tar
 ```
 
-*Usefull links:*
+Usefull links:
+
 https://docs.microsoft.com/en-us/windows/wsl/wsl-config
+
 https://docs.microsoft.com/en-us/windows/wsl/reference
 
 
@@ -133,4 +128,5 @@ Change `DefaultUid` to Decimal: `1000`
 Do that for all your installed distro copies.
 
 Usefull link:
+
 https://superuser.com/questions/1506304/setting-default-user-in-linux-wsl-in-sideloaded-distro
