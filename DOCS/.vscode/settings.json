@@ -1,0 +1,95 @@
+{
+    // eslint:
+    "eslint.validate": [
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact"
+    ],
+    "[javascriptreact]": {
+      "editor.formatOnSave": false,
+      "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true // change to false if wanted
+      }
+    },
+    "[javascript]": {
+      "editor.formatOnSave": false,
+      "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+      }
+    },
+    "[typescript]": {
+      "editor.formatOnSave": false,
+      "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+      }
+    },
+    "[typescriptreact]": {
+      "editor.formatOnSave": false,
+      "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+      }
+    },
+    "editor.formatOnSave": false, // change to true if other languages as (js,jsx,ts,tsx) are used
+  
+    // vs-code editor settings:
+    "window.titleBarStyle": "custom",
+    "workbench.colorTheme": "Community Material Theme Palenight High Contrast",
+    "workbench.iconTheme": "material-icon-theme",
+    "editor.minimap.enabled": false,
+    "window.zoomLevel": 0, // dont go below 0 or terminal can look blurry
+    "editor.mouseWheelZoom": true,
+    "window.menuBarVisibility": "default",
+    "workbench.statusBar.visible": true,
+    "workbench.activityBar.visible": true,
+    "editor.selectionClipboard": false, // disables mousewheelclick copy paste
+  
+    // console zsh + powerline integration and integrated terminal customizations
+    "terminal.integrated.shell.linux": "/bin/zsh",
+  "terminal.integrated.fontFamily": "FiraCode Nerd Font Mono", // FiraCode NF , Cascadia Code PL , DejaVu Sans Mono for Powerline, Inconsolata for Powerline, Source Code Pro for Powerline
+    "terminal.integrated.fontSize": 15, // integrated TERMINAL font size
+      "terminal.integrated.cursorStyle": "line",
+    "terminal.integrated.cursorBlinking": true,
+  
+    // emmet:
+    "emmet.triggerExpansionOnTab": true,
+  
+    // gitlens disable inline contributor info
+    "gitlens.currentLine.enabled": false,
+  
+    // Settings Sync:
+    "sync.gist": "idInPrivateNotionHomepage",
+    "sync.autoDownload": false,
+    "sync.autoUpload": false,
+    "sync.forceDownload": false,
+    "sync.forceUpload": false,
+    "sync.quietSync": false,
+    "sync.removeExtensions": true,
+    "sync.syncExtensions": true,
+  
+    // ---------------- disabled settings ----------------------------
+    // "editor.tabSize": 2,
+    // "editor.insertSpaces": true,
+    // "editor.detectIndentation": false,
+  
+    // better comments:
+    // "better-comments.multilineComments": true,
+  
+    // you can create a .vscode file in your repository to use repository specifized workbench colors:
+    // "workbench.colorCustomizations": {
+    //   "activityBar.activeBackground": "#1a202c",
+    //   "activityBar.background": "#1a202c",
+    //   "activityBar.foreground": "#e7e7e7",
+    //   "activityBar.inactiveForeground": "#e7e7e799",
+    //   "activityBarBadge.foreground": "#e7e7e7",
+    //   "statusBar.background": "#1a202c",
+    //   "statusBar.border": "#1a202c",
+    //   "statusBar.foreground": "#e7e7e7",
+    //   "statusBarItem.hoverBackground": "#1a202c",
+    //   "titleBar.activeBackground": "#1a202c",
+    //   "titleBar.activeForeground": "#e7e7e7",
+    //   "titleBar.border": "#1a202c",
+    //   "titleBar.inactiveBackground": "#1a202c",
+    //   "titleBar.inactiveForeground": "#e7e7e799"
+    // },
+  }
