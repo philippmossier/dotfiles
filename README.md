@@ -1,9 +1,10 @@
-# Description:
-- This repo includes a script which can be used after a fresh OS install (WSL2 with Ubtuntu or Ubuntu Native).
-- Some fundamental packages get installed for a better command line experience and standard developer tools.
-- All dotfiles get automaticly symlinked into your homdedirectory (no need for manual configuration, just clone the repo and pull or update the repo to get the same experience     on all your platfomrs/devices).
-- For further customization only update the repo itself and push the changes into your private repository.
+# Whats in there?
+> *Fast and powerfull developer-environment.*
+  *Every step is well documented and nothing happens in the background.*
+  *No framework is used, everything is installed the old fashion way with binaries etc.*
 
+Tested with *WSL2 Ubuntu 20.04*, *Ubuntu/POP-OS 20.04*.
+<br/><br/>
 
 ## ⚙️ HOW TO INSTALL ⚙️
 ```
@@ -12,53 +13,169 @@ git clone https://github.com/philippmossier/dotfiles.git
 ./dotfiles/installScript.sh
 chsh -s $(which zsh)
 ```
-- Done ! (only fonts need to be installed manually)
+<br/><br/>
 
-## How to install FOnts
-- Use powerline-fonts or nerdfonts https://www.nerdfonts.com/
-i personally used `FiraCode Nerd Font Mono`
-- There are 2 sections where fonts need to be selected depending on your OS
-> 1.WSL2-Ubuntu_20.04: Windows-terminal settings.json + vscode settings.json 
+**What gets installed?**
+> - cli-tools for a better command-line experience.
+> - standard packages for developers (nvm, fzf ...).
 
-> 2.Ubuntu_20.04/PopOS20.04: open terminal and go to preferences + vscode settings.json
-- restart your shell DONE !! (i used zsh as shell, but it should work with bash too)
+**How the shell gets configurated?**
+> All dotfiles get automaticly symlinked into your homedirectory with the right file endings (you dont have to copy them manually into your home-folder (the repository representates your homedirectory dotfiles)
 
+**Where all the installed packages get saved?**
 
-### WSL2 NOTES after running the installScript: 
-- Its the best to install Docker Desktop on Windows which uses WSL2 under the hood 
-  (if you have Windows 10 Pro, the virtual machine runs even faster with docker.
-  You find the checkbox under docker settings: "Use the WSL 2 based engine" checkbox )
+Awareness about what happens in the background and how the CLI works, was one of my main motivation points to write a shell interface the old fashion way. No hidden things happen like it does in oh-my-zsh or other shell frameworks.
 
-- Vscode needs to be installed also under windows (just use the WSL2 vscode-extension)
+At the start of the shell-script a directory tree gets created so nothing gets installed without documentation (so its easy to uninstall or update all your packages)
 
-- For remembering SSH pass phrases you maybe need the fix at the end of .zshrc file.
+The zshell dont uses any frameworks or plugin managers, everything in the .zshrc sources `binaries` or writes executables into the `PATH` variable.
+Every installed package lives in the .local folder except of "tldr" because its a global npm package but "tldr" has a readme in the .local folder for uninstall.
 
-# important wsl2 commands:
+**How to modify your environment after install:**
+> For further customization only update the repo itself. With symlinks it doesnt matter if you modify your ~/.zshrc or ~/dotfiles/.zshrc because they are linked together anyway.
+Best practice is to push all your changes into a private repository as your main source of truth, so you can sync it arround all your devices.
+
+**How to install powerline Fonts**
+
+Use powerline-fonts or nerdfonts https://www.nerdfonts.com/ i personally used `FiraCode Nerd Font Mono`
+
+*There are 2 sections where fonts need to be selected depending on your OS*
+| WSL2 Ubuntu | Ubuntu or Pop-OS |
+| ----------- | ----------- |
+| Windows Terminal > Settings > settings.json | Terminal > Preferences > Fonts |
+| vscode > settings.json | vscode > settings.json |
+
+## Steps for WSL2 after running the installScript.sh: 
+1. Its the best to install Docker Desktop on Windows which uses WSL2 under the hood 
+  **if you have Windows 10 Pro, the virtual machine runs even faster with docker.
+  You find the checkbox under docker settings: `"Use the WSL 2 based engine"`**
+2. Vscode needs to be installed also under windows (just use the WSL2 vscode-extension)
+3. For remembering SSH pass phrases on WSL2 you need the fix at the end of .zshrc file otherwise the ssh agent does not start automaticly.
+
+## Usefull WSL2 commands for powershell:
+
+**List installed WSL distros and show version:**
+
+```
+wsl -l -v
+```
+
+**Set defaul distro (used when you execute `wsl.exe` on the command-line)**
+
+```
+wsl --setdefault <DistributionName>
+```
+
+**Run distro:**
+
+```
+wsl -d <DistributionName>
+```
+
+**Stop distro:**
+
+```
+wsl -t <DistributionName>
+```
+
+**Delete distro:**
+
+```
+wsl --unregister <DistributionName>
+```
+
+**--export \<Distro> \<FileName>**
+
+```
+wsl --export Ubuntu D:\WSL2\wsl2-ubuntu-images\ubuntu.tar
+```
+
+```
+wsl --export Ubuntu D:\WSL2\wsl2-ubuntu-images\ubuntu-empty.tar
+```
+
+**--import \<Distro> \<InstallLocation> \<FileName>**
+
+```
+wsl --import ubuntu-main C:\Users\mossi\AppData\Local\Packages\ubuntu-main D:\WSL2\wsl2-ubuntu-images\ubuntu.tar
+```
+
+```
+wsl --import ubuntu-empty C:\Users\mossi\AppData\Local\Packages\ubuntu-empty D:\WSL2\wsl2-ubuntu-images\ubuntu-empty.tar
+```
+
+```
+wsl --import ubuntu-test C:\Users\mossi\AppData\Local\Packages\ubuntu-test D:\WSL2\wsl2-ubuntu-images\ubuntu-empty.tar
+```
+
+**Usefull links:**
 https://docs.microsoft.com/en-us/windows/wsl/wsl-config
+https://docs.microsoft.com/en-us/windows/wsl/reference
 
-- wsl --export Ubuntu D:\WSL2\wsl2-ubuntu-images\ubuntu.tar
-- wsl --export Ubuntu D:\WSL2\wsl2-ubuntu-images\ubuntu-empty.tar
 
-- wsl --import ubuntu-main C:\Users\mossi\AppData\Local\Packages\ubuntu-main D:\WSL2\wsl2-ubuntu-images\ubuntu.tar
-- wsl --import ubuntu-empty C:\Users\mossi\AppData\Local\Packages\ubuntu-empty D:\WSL2\wsl2-ubuntu-images\ubuntu-empty.tar
-- wsl --import ubuntu-test C:\Users\mossi\AppData\Local\Packages\ubuntu-test D:\WSL2\wsl2-ubuntu-images\ubuntu-empty.tar
+### WSL2 always ROOT user Bug when using multiple WSL2 distros.
+Needed to solve this wierd bug where i always was logged into root at start of a new wsl-session
+and had no access to my backups (exported .tar files)
+I needed to modify the windows registry to use standard user in all my disto copies.
 
-- wsl -l -v
-- wsl -d <DistributionName>
-- wsl -t <DistributionName>  
-- wsl --setdefault ubuntu-main
-- wsl --unregister <DistributionName>
-  
+
+**Registry Key must be changed in:**
+`Computer\HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Lxss\{your_Distro_ID}`
+
+Change `DefaultUid` to Decimal: `1000`
+
+Do that for all your installed distro copies.
+
+Usefull link:
+https://superuser.com/questions/1506304/setting-default-user-in-linux-wsl-in-sideloaded-distro
+
+## JSON SETTINGS SECTION:
+
 # windows-terminal seittings.json:
+```
+// This file was initially generated by Windows Terminal 1.1.2233.0
+// It should still be usable in newer versions, but newer versions might have additional
+// settings, help text, or changes that you will not see unless you clear this file
+// and let us generate a new one for you.
+
+// To view the default settings, hold "alt" while clicking on the "Settings" button.
+// For documentation on these settings, see: https://aka.ms/terminal-documentation
+{
+    "$schema": "https://aka.ms/terminal-profiles-schema",
+
+    "defaultProfile": "{f9c241d1-a787-5c2c-93f8-1fafa3cf501a}",
+
+    // You can add more global application settings here.
+    // To learn more about global settings, visit https://aka.ms/terminal-global-settings
+
+    // If enabled, selections are automatically copied to your clipboard.
+    "copyOnSelect": false,
+
+    // If enabled, formatted data is also copied to your clipboard
+    "copyFormatting": false,
+
+    // A profile specifies a command to execute paired with information about how it should look and feel.
+    // Each one of them will appear in the 'New Tab' dropdown,
+    //   and can be invoked from the commandline with `wt.exe -p xxx`
+    // To learn more about profiles, visit https://aka.ms/terminal-profile-settings
+    "profiles":
+    {
+        "defaults":
+        {
+            // Put settings here that you want to apply to all profiles.
+        },
+        "list":
+        [
             {
-                "guid": "{your id}",
+                "guid": "{f9c241d1-a787-5c2c-93f8-1fafa3cf501a}",
                 "hidden": false,
                 "name": "ubuntu-main",
                 "source": "Windows.Terminal.Wsl",
                 // "commandline": "wsl.exe ~", // uses default ubuntu disto,
                 "startingDirectory": "//wsl$/ubuntu-main/home/phil",
+
                 "colorScheme": "OneDark",
-                "fontFace": "Cascadia Code PL", //  // "Cascadia Code PL" , "DejaVu Sans Mono for Powerline", "Inconsolata for Powerline", "Source Code Pro for Powerline"
+                "fontFace": "FiraCode Nerd Font Mono", // FiraCode Nerd Font Mono // FiraCode NF // "Cascadia Code PL" , "DejaVu Sans Mono for Powerline", "Inconsolata for Powerline", "Source Code Pro for Powerline"
                 "useAcrylic": false,
                 "fontSize": 12
                 // "fontWeight": "medium"
@@ -67,81 +184,385 @@ https://docs.microsoft.com/en-us/windows/wsl/wsl-config
                 // "backgroundImageOpacity": 0.1,
             },
             {
-                "guid": "{your id}",
+                // Make changes here to the powershell.exe profile.
+                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+                "name": "Windows PowerShell",
+                "commandline": "powershell.exe",
+                "hidden": false
+            },
+            {
+                // Make changes here to the cmd.exe profile.
+                "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+                "name": "Command Prompt",
+                "commandline": "cmd.exe",
+                "hidden": false
+            },
+            {
+                "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
+                "hidden": false,
+                "name": "Ubuntu",
+                "source": "Windows.Terminal.Wsl"
+            },
+            {
+                "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
+                "hidden": false,
+                "name": "Azure Cloud Shell",
+                "source": "Windows.Terminal.Azure"
+            },
+            {
+                "guid": "{3b172dc0-c78c-5ec2-9be6-e06c09670078}",
                 "hidden": false,
                 "name": "ubuntu-empty",
                 "source": "Windows.Terminal.Wsl",
                 "colorScheme": "OneDark",
-                "fontFace": "Cascadia Code PL",
+                "fontFace": "FiraCode Nerd Font Mono", // FiraCode Nerd Font Mono // FiraCode NF // "Cascadia Code PL" , "DejaVu Sans Mono for Powerline", "Inconsolata for Powerline", "Source Code Pro for Powerline"
                 "useAcrylic": false,
                 "fontSize": 12,
                 "startingDirectory": "//wsl$/ubuntu-main/home/phil"
             },
             {
-                "guid": "{your id}",
+                "guid": "{eabe1964-306c-51bd-9969-691c73b896a2}",
                 "hidden": false,
                 "name": "ubuntu-test",
                 "source": "Windows.Terminal.Wsl",              
                 "colorScheme": "OneDark",
-                "fontFace": "Cascadia Code PL",
+                "fontFace": "FiraCode Nerd Font Mono", // FiraCode Nerd Font Mono // FiraCode NF // "Cascadia Code PL" , "DejaVu Sans Mono for Powerline", "Inconsolata for Powerline", "Source Code Pro for Powerline"
                 "useAcrylic": false,
                 "fontSize": 12,
                 "startingDirectory": "//wsl$/ubuntu-main/home/phil"
             }
+        ]
+    },
 
-# WSL2 environment variable to set user instead of always root
-link: https://superuser.com/questions/1506304/setting-default-user-in-linux-wsl-in-sideloaded-distro
-Change windows registry in:
-- Computer\HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Lxss\
-- Change DefaultUid to Decimal: 1000
-  for all installed ubuntu copies
-# FRESH UBUNTU INSTALL/REINSTALL on WSL2
-- Uninstall ubuntu on wsl2:
-- go to windows powershell and type:
+  // Add custom color schemes to this array.
+    // To learn more about color schemes, visit https://aka.ms/terminal-color-schemes
+    "schemes": [
+        {
+            // Color Scheme: VibrantInk
+            "background": "#000000",
+            "black": "#878787",
+            "blue": "#44B4CC",
+            "brightBlack": "#555555",
+            "brightBlue": "#0000FF",
+            "brightCyan": "#19D1D8",
+            "brightGreen": "#81EC0D",
+            "brightPurple": "#FF00FF",
+            "brightRed": "#FF0000",
+            "brightWhite": "#E5E5E5",
+            "brightYellow": "#FFD93D",
+            "cyan": "#19D1D8",
+            "foreground": "#FFFFFF",
+            "green": "#CCFF04",
+            "name": "VibrantInk",
+            "purple": "#9933CC",
+            "red": "#FF6600",
+            "white": "#F5F5F5",
+            "yellow": "#FFD93D"
+        },
+        {
+            // Color Scheme: VibrantTom
+            "background": "#16171D",
+            "black": "#878787",
+            "blue": "#44B4CC",
+            "brightBlack": "#E373C8",
+            "brightBlue": "#0000FF",
+            "brightCyan": "#19D1D8",
+            "brightGreen": "#81EC0D",
+            "brightPurple": "#FF00FF",
+            "brightRed": "#FF0000",
+            "brightWhite": "#E5E5E5",
+            "brightYellow": "#FFD93D",
+            "cyan": "#19D1D8",
+            "foreground": "#FFFFFF",
+            "green": "#CCFF04",
+            "name": "VibrantTom",
+            "purple": "#9933CC",
+            "red": "#FF6600",
+            "white": "#F5F5F5",
+            "yellow": "#FFD93D"
+        },
+        {
+            // Color Scheme: PowerShellTom
+            "background": "#012456",
+            "black": "#000000",
+            "blue": "#0000ff",
+            "brightBlack": "#AAAAAA",
+            "brightBlue": "#44B4CC",
+            "brightCyan": "#19D1D8",
+            "brightGreen": "#81EC0D",
+            "brightPurple": "#FF00FF",
+            "brightRed": "#FF0000",
+            "brightWhite": "#E5E5E5",
+            "brightYellow": "#FFD93D",
+            "cyan": "#19D1D8",
+            "foreground": "#FFFFFF",
+            "green": "#00ff00",
+            "name": "PowerShellTom",
+            "purple": "#9933CC",
+            "red": "#FF6600",
+            "white": "#F5F5F5",
+            "yellow": "#FFD93D"
+        },
+        {
+            // Color Scheme: Ubuntu
+            "background": "#2C001E",
+            "black": "#EEEEEC",
+            "blue": "#268BD2",
+            "brightBlack": "#002B36",
+            "brightBlue": "#839496",
+            "brightCyan": "#93A1A1",
+            "brightGreen": "#586E75",
+            "brightPurple": "#6C71C4",
+            "brightRed": "#CB4B16",
+            "brightWhite": "#FDF6E3",
+            "brightYellow": "#657B83",
+            "cyan": "#2AA198",
+            "foreground": "#EEEEEC",
+            "green": "#729FCF",
+            "name": "Ubuntu",
+            "purple": "#D33682",
+            "red": "#16C60C",
+            "white": "#EEE8D5",
+            "yellow": "#B58900"
+        },
+        {
+            // Color Scheme: UbuntuLegit
+            "background": "#2C001E",
+            "black": "#4E9A06",
+            "blue": "#3465A4",
+            "brightBlack": "#555753",
+            "brightBlue": "#729FCF",
+            "brightCyan": "#34E2E2",
+            "brightGreen": "#8AE234",
+            "brightPurple": "#AD7FA8",
+            "brightRed": "#EF2929",
+            "brightWhite": "#EEEEEE",
+            "brightYellow": "#FCE94F",
+            "cyan": "#06989A",
+            "foreground": "#EEEEEE",
+            "green": "#300A24",
+            "name": "UbuntuLegit",
+            "purple": "#75507B",
+            "red": "#CC0000",
+            "white": "#D3D7CF",
+            "yellow": "#C4A000"
+        },
+        {
+            // Color Scheme: Dracula
+            "background": "#282A36",
+            "black": "#21222C",
+            "blue": "#BD93F9",
+            "brightBlack": "#6272A4",
+            "brightBlue": "#D6ACFF",
+            "brightCyan": "#A4FFFF",
+            "brightGreen": "#69FF94",
+            "brightPurple": "#FF92DF",
+            "brightRed": "#FF6E6E",
+            "brightWhite": "#FFFFFF",
+            "brightYellow": "#FFFFA5",
+            "cyan": "#8BE9FD",
+            "foreground": "#F8F8F2",
+            "green": "#50FA7B",
+            "name": "Dracula",
+            "purple": "#FF79C6",
+            "red": "#FF5555",
+            "white": "#F8F8F2",
+            "yellow": "#F1FA8C"
+        },
+        {
+            // Color Scheme: VibrantInkTom Light
+            "background": "#EEEEEE",
+            "black": "#878787",
+            "blue": "#44B4CC",
+            "brightBlack": "#595e68",
+            "brightBlue": "#0000FF",
+            "brightCyan": "#19D1D8",
+            "brightGreen": "#3f953a",
+            "brightPurple": "#FF00FF",
+            "brightRed": "#FF0000",
+            "brightWhite": "#E5E5E5",
+            "brightYellow": "#FF6600",
+            "cyan": "#44B4CC",
+            "foreground": "#16171D",
+            "green": "#3f953a",
+            "name": "VibrantTomLight",
+            "purple": "#9933CC",
+            "red": "#FF6600",
+            "white": "#F5F5F5",
+            "yellow": "#FFD93D"
+        },
+        {
+            "name": "OneDark",
+            "black": "#1e2127",
+            "red": "#e06c75",
+            "green": "#98c379",
+            "yellow": "#d19a66",
+            "blue": "#61afef",
+            "purple": "#c678dd",
+            "cyan": "#56b6c2",
+            "white": "#abb2bf",
+            "brightBlack": "#5c6370",
+            "brightRed": "#e06c75",
+            "brightGreen": "#98c379",
+            "brightYellow": "#d19a66",
+            "brightBlue": "#61afef",
+            "brightPurple": "#c678dd",
+            "brightCyan": "#56b6c2",
+            "brightWhite": "#ffffff",
+            "background": "#1e2127",
+            "foreground": "#abb2bf",
+            "cursorColor": "#aaaaaa"
+        },
+        {
+            "name": "OneLight",
+            "black": "#000000",
+            "red": "#de3e35",
+            "green": "#3f953a",
+            "yellow": "#d2b67c",
+            "blue": "#2f5af3",
+            "purple": "#950095",
+            "cyan": "#3f953a",
+            "white": "#bbbbbb",
+            "brightBlack": "#000000",
+            "brightRed": "#de3e35",
+            "brightGreen": "#3f953a",
+            "brightYellow": "#44B4CC",
+            "brightBlue": "#2f5af3",
+            "brightPurple": "#a00095",
+            "brightCyan": "#3f953a",
+            "brightWhite": "#aaaaaa",
+            "background": "#f9f9f9",
+            "foreground": "#2a2c33",
+            "cursorColor": "#aaaaaa"
+        }
+    ],
+    // Add custom keybindings to this array.
+    // To unbind a key combination from your defaults.json, set the command to "unbound".
+    // To learn more about keybindings, visit https://aka.ms/terminal-keybindings
+    "keybindings": [
+        // Copy and paste are bound to Ctrl+Shift+C and Ctrl+Shift+V in your defaults.json.
+        // These two lines additionally bind them to Ctrl+C and Ctrl+V.
+        // To learn more about selection, visit https://aka.ms/terminal-selection
+        {"command": {"action": "copy","singleLine": false},"keys": "ctrl+c"},
+        {"command": "paste","keys": "ctrl+v"},
+        // Press Ctrl+Shift+F to open the search box
+        {"command": "find","keys": "ctrl+f"},
+        // Press Alt+Shift+D to open a new pane.
+        // - "split": "auto" makes this pane open in the direction that provides the most surface area.
+        // - "splitMode": "duplicate" makes the new pane use the focused pane's profile.
+        // To learn more about panes, visit https://aka.ms/terminal-panes
+        {"command": {"action": "splitPane","split": "auto","splitMode": "duplicate"},"keys": "ctrl+shift+t"},
+        {"command": "closePane","keys": "ctrl+q"},
+        {"command": "newTab","keys": "ctrl+shift+n"},
+
+        // currently works only in windows-terminal-preview
+        {"command": "commandPalette","keys": "ctrl+shift+p"},
+        {"command": "toggleFocusMode","keys": "shift+f11"},
+        {"command": "toggleAlwaysOnTop","keys": "alt+shift+f11"},
+        {"command": "toggleRetroEffect","keys": "ctrl+d"}
+    ]
+}
 ```
-wsl -l --verbose
+## vscode settings.json
 ```
-- wslconfig /unregister ubuntu
-```
-wsl -l --verbose
+{
+  // eslint:
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "[javascriptreact]": {
+    "editor.formatOnSave": false,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true // change to false if wanted
+    }
+  },
+  "[javascript]": {
+    "editor.formatOnSave": false,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    }
+  },
+  "[typescript]": {
+    "editor.formatOnSave": false,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    }
+  },
+  "[typescriptreact]": {
+    "editor.formatOnSave": false,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    }
+  },
+  "editor.formatOnSave": false, // change to true if other languages as (js,jsx,ts,tsx) are used
+
+  // vs-code editor settings:
+  "window.titleBarStyle": "custom",
+  "workbench.colorTheme": "Community Material Theme Palenight High Contrast",
+  "workbench.iconTheme": "material-icon-theme",
+  "editor.minimap.enabled": false,
+  "window.zoomLevel": 0, // dont go below 0 or terminal can look blurry
+  "editor.mouseWheelZoom": true,
+  "window.menuBarVisibility": "default",
+  "workbench.statusBar.visible": true,
+  "workbench.activityBar.visible": true,
+  "editor.selectionClipboard": false, // disables mousewheelclick copy paste
+
+  // console zsh + powerline integration and integrated terminal customizations
+  "terminal.integrated.shell.linux": "/bin/zsh",
+  "terminal.integrated.fontFamily": "Firacode Nerd Font Mono", // "Inconsolata for Powerline",
+  "terminal.integrated.fontSize": 15, // integrated TERMINAL font size
+	"terminal.integrated.cursorStyle": "line",
+  "terminal.integrated.cursorBlinking": true,
+
+  // emmet:
+  "emmet.triggerExpansionOnTab": true,
+
+  // gitlens disable inline contributor info
+  "gitlens.currentLine.enabled": false,
+
+  // Settings Sync:
+  "sync.gist": "790b30233683d5807d5f1c172397045d",
+  "sync.autoDownload": false,
+  "sync.autoUpload": false,
+  "sync.forceDownload": false,
+  "sync.forceUpload": false,
+  "sync.quietSync": false,
+  "sync.removeExtensions": true,
+  "sync.syncExtensions": true,
+
+  // ---------------- disabled settings ----------------------------
+  // "editor.tabSize": 2,
+  // "editor.insertSpaces": true,
+  // "editor.detectIndentation": false,
+
+  // better comments:
+  // "better-comments.multilineComments": true,
+
+  // you can create a .vscode file in your repository to use repository specifized workbench colors:
+  // "workbench.colorCustomizations": {
+  //   "activityBar.activeBackground": "#1a202c",
+  //   "activityBar.background": "#1a202c",
+  //   "activityBar.foreground": "#e7e7e7",
+  //   "activityBar.inactiveForeground": "#e7e7e799",
+  //   "activityBarBadge.foreground": "#e7e7e7",
+  //   "statusBar.background": "#1a202c",
+  //   "statusBar.border": "#1a202c",
+  //   "statusBar.foreground": "#e7e7e7",
+  //   "statusBarItem.hoverBackground": "#1a202c",
+  //   "titleBar.activeBackground": "#1a202c",
+  //   "titleBar.activeForeground": "#e7e7e7",
+  //   "titleBar.border": "#1a202c",
+  //   "titleBar.inactiveBackground": "#1a202c",
+  //   "titleBar.inactiveForeground": "#e7e7e799"
+  // },
+}
 ```
 
-- reinstall ubuntu on wsl2:
-- go to microsoft store and launch app
-- check release on ununtu terminal:
-```
-lsb_release -a
-```
-- after appstore launch, creating username and password update apt:
-```
-sudo apt update -y && sudo apt upgrade -y
-```
-- restart ubuntu console
-
-- check running distro and wsl version on windows powershell:
-```
-wsl -l --verbose
-```
-
-- DONE! Now we can run our ubuntu-fresh-install-shell-script
-
-# TROUBLESHOOT SECTION 
-
-- if fzf hotkeys(ctrl+t) dont work, add this to .bashrc or .zshrc:
-```
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-```
-- or cd into ~/.local/repos/fzf/ and execute ./install manually which should source the .fzf.bash path:
-```
-cd ~/.local/repos/fzf && ./install
-```
-
-- if you have problems with powerline font visit:
-https://github.com/powerline/fonts
-Maybe go to terminal>preferences and look for your installed fonts and change to a powerline font
-
-## original shell script from bernhard:
-
+## first version of original shell script:
 ```
 #!/bin/bash
 # base dependencies
