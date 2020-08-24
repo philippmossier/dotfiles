@@ -1,92 +1,94 @@
-# Whats in there?
-Fast and powerfull developer-environment.
-
+## 🚀 Fast and powerfull developer-environment.
+---
 Every step is well documented and nothing happens in the background.
-
 No framework is used, everything is installed the old fashion way with binaries etc.
+Tested with WSL2 Ubuntu 20.04, Ubuntu/POP-OS 20.04.
 
-Tested with *WSL2 Ubuntu 20.04*, *Ubuntu/POP-OS 20.04*.
-<br/><br/>
 
-## ⚙️ HOW TO INSTALL ⚙️
+### 💻 How to install:
 ```
 cd ~
 git clone https://github.com/philippmossier/dotfiles.git
 ./dotfiles/installScript.sh
 chsh -s $(which zsh)
 ```
-<br/><br/>
+---
 
-**What gets installed?**
-> - cli-tools for a better command-line experience.
-> - standard packages for developers (nvm, fzf ...).
+🕮 *What gets installed?*
+- cli-tools for a better command-line experience.
+- standard packages for developers (nvm, fzf ...).
 
-**How the shell gets configurated?**
-> All dotfiles get automaticly symlinked into your homedirectory with the right file endings (you dont have to copy them manually into your home-folder (the repository representates your homedirectory dotfiles)
 
-**Where all the installed packages get saved?**
+🕮 *How the shell gets configurated?*
+
+All dotfiles get automaticly symlinked into your homedirectory with the right file endings (you dont have to copy them manually into your home-folder (the repository representates your homedirectory dotfiles)
+
+🕮 *Where all the installed packages get saved?*
 
 Awareness about what happens in the background and how the CLI works, was one of my main motivation points to write a shell interface the old fashion way. No hidden things happen like it does in oh-my-zsh or other shell frameworks.
-
 At the start of the shell-script a directory tree gets created so nothing gets installed without documentation (so its easy to uninstall or update all your packages)
-
 The zshell dont uses any frameworks or plugin managers, everything in the .zshrc sources `binaries` or writes executables into the `PATH` variable.
 Every installed package lives in the .local folder except of "tldr" because its a global npm package but "tldr" has a readme in the .local folder for uninstall.
 
-**How to modify your environment after install:**
-> For further customization only update the repo itself. With symlinks it doesnt matter if you modify your ~/.zshrc or ~/dotfiles/.zshrc because they are linked together anyway.
+---
+
+⚙️ **How to modify your environment after install:**
+
+For further customization only update the repo itself. With symlinks it doesnt matter if you modify your ~/.zshrc or ~/dotfiles/.zshrc because they are linked together anyway.
 Best practice is to push all your changes into a private repository as your main source of truth, so you can sync it arround all your devices.
 
-**How to install powerline Fonts**
+
+✨ **How to install powerline Fonts:**
 
 Use powerline-fonts or nerdfonts https://www.nerdfonts.com/ i personally used `FiraCode Nerd Font Mono`
-
 *There are 2 sections where fonts need to be selected depending on your OS*
 | WSL2 Ubuntu | Ubuntu or Pop-OS |
 | ----------- | ----------- |
 | Windows Terminal > Settings > settings.json | Terminal > Preferences > Fonts |
 | vscode > settings.json | vscode > settings.json |
 
-## Steps for WSL2 after running the installScript.sh: 
+
+💡 **Steps for WSL2 after running the installScript:**
+
 1. Its the best to install Docker Desktop on Windows which uses WSL2 under the hood 
   **if you have Windows 10 Pro, the virtual machine runs even faster with docker.
   You find the checkbox under docker settings: `"Use the WSL 2 based engine"`**
 2. Vscode needs to be installed also under windows (just use the WSL2 vscode-extension)
 3. For remembering SSH pass phrases on WSL2 you need the fix at the end of .zshrc file otherwise the ssh agent does not start automaticly.
 
-## Usefull WSL2 commands for powershell:
+🏝️ **Usefull WSL2 commands for powershell:**
 
-**List installed WSL distros and show version:**
+*List installed WSL distros and show version:*
 
 ```
 wsl -l -v
 ```
 
-**Set defaul distro (used when you execute `wsl.exe` on the command-line)**
+*Set defaul distro (used when you execute `wsl.exe` on the command-line)*
 
 ```
 wsl --setdefault <DistributionName>
 ```
 
-**Run distro:**
+*Run distro:*
 
 ```
 wsl -d <DistributionName>
 ```
 
-**Stop distro:**
+*Stop distro:*
 
 ```
 wsl -t <DistributionName>
 ```
 
-**Delete distro:**
+*Delete distro:*
 
 ```
 wsl --unregister <DistributionName>
 ```
 
-**--export \<Distro> \<FileName>**
+*--export \<Distro> \<FileName>*
 
 ```
 wsl --export Ubuntu D:\WSL2\wsl2-ubuntu-images\ubuntu.tar
@@ -96,44 +98,44 @@ wsl --export Ubuntu D:\WSL2\wsl2-ubuntu-images\ubuntu.tar
 wsl --export Ubuntu D:\WSL2\wsl2-ubuntu-images\ubuntu-empty.tar
 ```
 
-**--import \<Distro> \<InstallLocation> \<FileName>**
+*--import \<Distro> \<InstallLocation> \<FileName>*
 
 ```
-wsl --import ubuntu-main C:\Users\mossi\AppData\Local\Packages\ubuntu-main D:\WSL2\wsl2-ubuntu-images\ubuntu.tar
-```
-
-```
-wsl --import ubuntu-empty C:\Users\mossi\AppData\Local\Packages\ubuntu-empty D:\WSL2\wsl2-ubuntu-images\ubuntu-empty.tar
+wsl --import ubuntu-main C:\Users\username\AppData\Local\Packages\ubuntu-main D:\WSL2\wsl2-ubuntu-images\ubuntu.tar
 ```
 
 ```
-wsl --import ubuntu-test C:\Users\mossi\AppData\Local\Packages\ubuntu-test D:\WSL2\wsl2-ubuntu-images\ubuntu-empty.tar
+wsl --import ubuntu-empty C:\Users\username\AppData\Local\Packages\ubuntu-empty D:\WSL2\wsl2-ubuntu-images\ubuntu-empty.tar
 ```
 
-**Usefull links:**
+```
+wsl --import ubuntu-test C:\Users\username\AppData\Local\Packages\ubuntu-test D:\WSL2\wsl2-ubuntu-images\ubuntu-empty.tar
+```
+
+*Usefull links:*
 https://docs.microsoft.com/en-us/windows/wsl/wsl-config
 https://docs.microsoft.com/en-us/windows/wsl/reference
 
 
-### WSL2 always ROOT user Bug when using multiple WSL2 distros.
+**🐛 WSL2 always ROOT user Bug when using multiple WSL2 distros:**
 Needed to solve this wierd bug where i always was logged into root at start of a new wsl-session
 and had no access to my backups (exported .tar files)
 I needed to modify the windows registry to use standard user in all my disto copies.
 
-
-**Registry Key must be changed in:**
+*Registry Key must be changed in:*
 `Computer\HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Lxss\{your_Distro_ID}`
 
 Change `DefaultUid` to Decimal: `1000`
-
 Do that for all your installed distro copies.
 
 Usefull link:
 https://superuser.com/questions/1506304/setting-default-user-in-linux-wsl-in-sideloaded-distro
 
-## JSON SETTINGS SECTION:
+### ⚙️ JSON SETTINGS SECTION:
 
-# windows-terminal seittings.json:
+---
+
+**windows-terminal settings.json:**
 ```
 // This file was initially generated by Windows Terminal 1.1.2233.0
 // It should still be usable in newer versions, but newer versions might have additional
@@ -169,7 +171,7 @@ https://superuser.com/questions/1506304/setting-default-user-in-linux-wsl-in-sid
         "list":
         [
             {
-                "guid": "{f9c241d1-a787-5c2c-93f8-1fafa3cf501a}",
+                "guid": "{uniqueID}",
                 "hidden": false,
                 "name": "ubuntu-main",
                 "source": "Windows.Terminal.Wsl",
@@ -187,32 +189,32 @@ https://superuser.com/questions/1506304/setting-default-user-in-linux-wsl-in-sid
             },
             {
                 // Make changes here to the powershell.exe profile.
-                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+                "guid": "{uniqueID}",
                 "name": "Windows PowerShell",
                 "commandline": "powershell.exe",
                 "hidden": false
             },
             {
                 // Make changes here to the cmd.exe profile.
-                "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+                "guid": "{uniqueID}",
                 "name": "Command Prompt",
                 "commandline": "cmd.exe",
                 "hidden": false
             },
             {
-                "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
+                "guid": "{uniqueID}",
                 "hidden": false,
                 "name": "Ubuntu",
                 "source": "Windows.Terminal.Wsl"
             },
             {
-                "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
+                "guid": "{uniqueID}",
                 "hidden": false,
                 "name": "Azure Cloud Shell",
                 "source": "Windows.Terminal.Azure"
             },
             {
-                "guid": "{3b172dc0-c78c-5ec2-9be6-e06c09670078}",
+                "guid": "{uniqueID}",
                 "hidden": false,
                 "name": "ubuntu-empty",
                 "source": "Windows.Terminal.Wsl",
@@ -223,7 +225,7 @@ https://superuser.com/questions/1506304/setting-default-user-in-linux-wsl-in-sid
                 "startingDirectory": "//wsl$/ubuntu-main/home/phil"
             },
             {
-                "guid": "{eabe1964-306c-51bd-9969-691c73b896a2}",
+                "guid": "{uniqueID}",
                 "hidden": false,
                 "name": "ubuntu-test",
                 "source": "Windows.Terminal.Wsl",              
@@ -237,7 +239,7 @@ https://superuser.com/questions/1506304/setting-default-user-in-linux-wsl-in-sid
     },
 
   // Add custom color schemes to this array.
-    // To learn more about color schemes, visit https://aka.ms/terminal-color-schemes
+  // To learn more about color schemes, visit https://aka.ms/terminal-color-schemes
     "schemes": [
         {
             // Color Scheme: VibrantInk
@@ -465,7 +467,7 @@ https://superuser.com/questions/1506304/setting-default-user-in-linux-wsl-in-sid
     ]
 }
 ```
-## vscode settings.json
+**vscode settings.json**
 ```
 {
   // eslint:
@@ -515,7 +517,7 @@ https://superuser.com/questions/1506304/setting-default-user-in-linux-wsl-in-sid
 
   // console zsh + powerline integration and integrated terminal customizations
   "terminal.integrated.shell.linux": "/bin/zsh",
-  "terminal.integrated.fontFamily": "Firacode Nerd Font Mono", // "Inconsolata for Powerline",
+"terminal.integrated.fontFamily": "FiraCode Nerd Font Mono", // FiraCode NF , Cascadia Code PL , DejaVu Sans Mono for Powerline, Inconsolata for Powerline, Source Code Pro for Powerline
   "terminal.integrated.fontSize": 15, // integrated TERMINAL font size
 	"terminal.integrated.cursorStyle": "line",
   "terminal.integrated.cursorBlinking": true,
