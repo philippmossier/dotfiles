@@ -458,8 +458,4 @@ function clubhouse_issues_in_development() {
 #     if [[ -n $pids ]]; then
 #         echo "$pids" | xargs kill -9 "$@"
 #     fi
-<<<<<<< HEAD
-# }
-=======
-# }
->>>>>>> 5bbcf58e25ea4c7a479d575b760d4aed23cf3465
+#   }
