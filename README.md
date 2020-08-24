@@ -1,8 +1,12 @@
 ## 🚀 Fast and powerfull developer-environment.
 
-No framework or plugin manager used! Everything is installed the old fashion way, depending mainly on sourced binaries. Every step is well documented and nothing happens in the background.
+💎 Supercharged shell, no framework or plugin manager needed.
 
-🧪 *Tested on the newest stable versions (20.04) of Ubuntu , Pop-OS and WSL2*
+💾 Everything is installed the old fashion way, depending mainly on sourced binaries. 
+
+📜 Every step is well documented and nothing happens in the background.
+
+🧪 Tested on the newest stable versions (20.04) of Ubuntu , Pop-OS and WSL2
 
 ### 💻 How to install:
 
@@ -117,7 +121,6 @@ https://docs.microsoft.com/en-us/windows/wsl/reference
 
 
 **🐛 WSL2 always ROOT user Bug when using multiple WSL2 distros:**
-
 Needed to solve this wierd bug where i always was logged into root at start of a new wsl-session
 and had no access to my backups (exported .tar files)
 I needed to modify the windows registry to use standard user in all my disto copies.
