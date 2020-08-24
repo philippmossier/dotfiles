@@ -386,3 +386,69 @@ function open_current_repository_url() {
 function clubhouse_issues_in_development() {
     curl -X GET -H "Content-Type: application/json" -s -d '{ "page_size": 25, "query": "owner:philippmossier state:\"In Development\" sort:changed" }' -L "https://api.clubhouse.io/api/v3/search/stories?token=$CH_API_TOKEN" | jq ".data | map({story: .name, ch: .id, type: .story_type})"
 }
+
+# # try with --select-1 or without (enables scrolling the preview)
+# fzf_git_add() {
+#     local selections=$(
+#       git status --porcelain | \
+#       fzf --select-1 --ansi \
+#           --preview 'if (git ls-files --error-unmatch {2} &>/dev/null); then
+#                          git diff --color=always {2} | diff-so-fancy
+#                      else
+#                          bat --color=always --line-range :500 {2}
+#                      fi'
+#       )
+#     if [[ -n $selections ]]; then
+#         git add --verbose $(echo "$selections" | cut -c 4- | tr '\n' ' ')
+#     fi
+# }
+# # try with --select-1 or without (enables scrolling the preview)
+# fzf_git_unadd() {
+#     local selections=$(
+#       git status --porcelain | \
+#       fzf --select-1  --ansi \
+#           --preview 'if (git ls-files --error-unmatch {2} &>/dev/null); then
+#                          git diff --color=always {2} | diff-so-fancy
+#                      else
+#                          bat --color=always --line-range :500 {2}
+#                      fi'
+#       )
+#     if [[ -n $selections ]]; then
+#         git restore --staged $(echo "$selections" | cut -c 4- | tr '\n' ' ')
+#     fi
+# }
+
+# # scroll preview only works wiith exit-0 
+# fzf_grep_edit(){
+#     if [[ $# == 0 ]]; then
+#         echo 'Error: search term was not provided.'
+#         return
+#     fi
+#     local match=$(
+#       rg --color=never --line-number "$1" |
+#         fzf --no-multi --delimiter : \
+#             --exit-0 --preview "bat --color=always --line-range {2}: {1}"
+#       )
+#     local file=$(echo "$match" | cut -d':' -f1)
+#     if [[ -n $file ]]; then
+#         $SecondaryEDITOR "$file" +$(echo "$match" | cut -d':' -f2)
+#     fi
+# }
+# # scroll search results with mouse only works with exit-0 
+# fzf_kill() {
+#     local pid_col
+#     if [[ $OS = Linux ]]; then
+#         pid_col=2
+#     elif [[ $OS = Darwin ]]; then
+#         pid_col=3;
+#     else
+#         echo 'Error: unknown platform'
+#         return
+#     fi
+#     local pids=$(
+#       ps -f -u $USER | sed 1d | fzf --multi --exit-0  --reverse | tr -s '[:blank:]' | cut -d' ' -f"$pid_col"
+#       )
+#     if [[ -n $pids ]]; then
+#         echo "$pids" | xargs kill -9 "$@"
+#     fi
+# }
