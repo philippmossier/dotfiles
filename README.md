@@ -118,11 +118,12 @@ https://docs.microsoft.com/en-us/windows/wsl/reference
 https://docs.microsoft.com/en-us/windows/wsl/wsl-config
 
 
-🐞 **WSL2 always ROOT user Bug when using multiple WSL2 distros:**
+🐞 **WSL2 always ROOT user Bug solution (needed for multiple `wsl --import` distros):**
 
-Needed to solve this wierd bug where i always was logged into root at start of a new wsl-session
-and had no access to my backups (exported .tar files)
-I needed to modify the windows registry to use standard user in all my disto copies.
+WSL2 starts always with root user at start of a new wsl-session which results in no access to the imported files (distro-backups.tar).
+
+This solution gives you back your standard user at login.
+I needed to modify the windows registry to use my standard user in all my disto copies.
 
 🛠️ Windows Registry Key path:
 
@@ -132,7 +133,7 @@ Change `DefaultUid` to Decimal: `1000`
 Do that for all your installed distro copies.
 
 Now you get your default username at start of a new wsl session.
-Now you can run different distro copies in only one Windows Terminal. 
+Now you can run different distro copies in only one Windows Terminal (one tab for each distro). 
 Dont forget to use the right settings.json for windows terminal (found in the DOCS folder).
 
 Usefull link:
