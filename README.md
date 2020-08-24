@@ -1,4 +1,4 @@
-## 🚀 Fast and powerfull developer-environment.
+# 🚀 Fast and powerfull developer-environment.
 
 💎 Supercharged shell, no framework or plugin manager needed.
 
