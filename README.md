@@ -56,6 +56,10 @@ Use powerline-fonts or nerdfonts https://www.nerdfonts.com/ i personally used `F
 2. Vscode needs to be installed also under windows (just use the WSL2 vscode-extension)
 3. For remembering SSH pass phrases on WSL2 you need the fix at the end of .zshrc file otherwise the ssh agent does not start automaticly.
 
+⚙️ **JSON SETTINGS SECTION:**
+
+The **windows-terminal `settings.json`** and **.vscode `settings.json`** are in the DOCS folder.
+
 🏝️ **Usefull WSL2 commands for powershell:**
 
 *List installed WSL distros and show version:*
@@ -130,7 +134,3 @@ Do that for all your installed distro copies.
 
 Usefull link:
 https://superuser.com/questions/1506304/setting-default-user-in-linux-wsl-in-sideloaded-distro
-
-⚙️ **JSON SETTINGS SECTION:**
-
-The **windows-terminal `settings.json`** and **.vscode `settings.json`** are in the DOCS folder.
