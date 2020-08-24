@@ -44,8 +44,9 @@ Best practice is to push all your changes into a private repository as your main
 
 ✨ **How to install powerline Fonts:**
 
-Use powerline-fonts or nerdfonts https://www.nerdfonts.com/ i personally used `FiraCode Nerd Font Mono`
-*There are 2 sections where fonts need to be selected depending on your OS*
+Use powerline-fonts https://www.nerdfonts.com/ i personally used `FiraCode Nerd Font Mono`
+There are 2 sections where fonts need to be selected depending on your OS:
+
 | WSL2 Ubuntu | Ubuntu or Pop-OS |
 | ----------- | ----------- |
 | Windows Terminal > Settings > settings.json | Terminal > Preferences > Fonts |
@@ -93,16 +94,13 @@ wsl --unregister <DistributionName>
 
 *--export \<Distro> \<FileName>*
 ```
-wsl --export Ubuntu D:\WSL2\wsl2-ubuntu-images\ubuntu.tar
-```
-
-```
-wsl --export Ubuntu D:\WSL2\wsl2-ubuntu-images\ubuntu-empty.tar
+wsl --export Perfect-Ubuntu D:\WSL2\wsl2-ubuntu-images\ubuntu-main.tar
+wsl --export Fresh-and-untouched-Ubuntu D:\WSL2\wsl2-ubuntu-images\ubuntu-empty.tar
 ```
 
 *--import \<Distro> \<InstallLocation> \<FileName>*
 ```
-wsl --import ubuntu-main C:\Users\username\AppData\Local\Packages\ubuntu-main D:\WSL2\wsl2-ubuntu-images\ubuntu.tar
+wsl --import ubuntu-main C:\Users\username\AppData\Local\Packages\ubuntu-main D:\WSL2\wsl2-ubuntu-images\ubuntu-main.tar
 ```
 
 ```
@@ -115,21 +113,27 @@ wsl --import ubuntu-test C:\Users\username\AppData\Local\Packages\ubuntu-test D:
 
 Usefull links:
 
-https://docs.microsoft.com/en-us/windows/wsl/wsl-config
-
 https://docs.microsoft.com/en-us/windows/wsl/reference
 
+https://docs.microsoft.com/en-us/windows/wsl/wsl-config
 
-**🐛 WSL2 always ROOT user Bug when using multiple WSL2 distros:**
+
+🐞 **WSL2 always ROOT user Bug when using multiple WSL2 distros:**
+
 Needed to solve this wierd bug where i always was logged into root at start of a new wsl-session
 and had no access to my backups (exported .tar files)
 I needed to modify the windows registry to use standard user in all my disto copies.
 
-*Registry Key must be changed in:*
-`Computer\HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Lxss\{your_Distro_ID}`
+🛠️ Windows Registry Key path:
+
+`HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Lxss\{your_Distro_ID}`
 
 Change `DefaultUid` to Decimal: `1000`
 Do that for all your installed distro copies.
+
+Now you get your default username at start of a new wsl session.
+Now you can run different distro copies in only one Windows Terminal. 
+Dont forget to use the right settings.json for windows terminal (found in the DOCS folder).
 
 Usefull link:
 
