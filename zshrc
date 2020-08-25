@@ -18,10 +18,14 @@ alias bbbs='bitbucket_build_status'
 alias rurl='open_current_repository_url'
 alias chid='clubhouse_issues_in_development'
 
+# ================================= CUSTOMAZATION ===================================
+
+PrimaryEDITOR=code 
+SecondaryEDITOR=vim # only used for 'tf' (ripgrep search)
+ShellTheme=spaceship # Select agnoster or spaceship
+
 # ================================= variables used in functions ===================================
 
-PrimaryEDITOR=code
-SecondaryEDITOR=vim
 OS=`uname`
 USER=`whoami`
 DEFAULT_USER=`whoami`
@@ -45,11 +49,6 @@ fi
 
 # ------------ ---------------- bat config --------------------
 export BAT_CONFIG_PATH="$HOME/dotfiles/bat.conf"
-export BAT_PAGER="less --mouse -RF"
-
-# ------------ ---------------- load agnoster theme --------------------
-source ~/.zsh/themes/agnoster-zsh-theme/agnoster.zsh-theme
-setopt promptsubst
 
 # ------------ load autosuggestion and change highlight color ----------
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -169,7 +168,7 @@ fzf_git_add() {
       git status --porcelain | \
       fzf --ansi \
           --preview 'if (git ls-files --error-unmatch {2} &>/dev/null); then
-                         git diff --color=always {2}
+                         git diff --color=always {2} | diff-so-fancy
                      else
                          bat --color=always --line-range :500 {2}
                      fi'
@@ -184,7 +183,7 @@ fzf_git_unadd() {
       git status --porcelain | \
       fzf --ansi \
           --preview 'if (git ls-files --error-unmatch {2} &>/dev/null); then
-                         git diff --color=always {2}
+                         git diff --color=always {2} | diff-so-fancy
                      else
                          bat --color=always --line-range :500 {2}
                      fi'
@@ -236,7 +235,7 @@ fzf_git_log_pickaxe() {
 
 # # ========================== NVM normal loading with nvmhook ===================================
 
-# #normal nvm loading (slow at start of a new terminal but works with nvm hook below)
+#normal nvm loading (slow at start of a new terminal but works with nvm hook below)
 # export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 # # place this nvm-version-hook after nvm initialization! (https://github.com/creationix/nvm#zsh)
@@ -261,16 +260,69 @@ if [ -s "$HOME/.nvm/nvm.sh" ] && [ ! "$(type -f __init_nvm)" = function ]; then
   for i in "${__node_commands[@]}"; do alias $i='__init_nvm && '$i; done
 fi
 
+# =================================== Load ShellTheme ========================================
+
+if [[ $ShellTheme = spaceship ]] && [ -d ~/.zsh/themes/spaceship-prompt ]; then
+    # ------------ ---------------- spaceship theme --------------------
+    SPACESHIP_PROMPT_ADD_NEWLINE=true
+    SPACESHIP_PROMPT_SEPARATE_LINE=false
+    SPACESHIP_CHAR_SYMBOL=❯
+    SPACESHIP_CHAR_SUFFIX=" "
+    SPACESHIP_HG_SHOW=false
+    SPACESHIP_PACKAGE_SHOW=false
+    SPACESHIP_NODE_SHOW=false
+    SPACESHIP_RUBY_SHOW=false
+    SPACESHIP_ELM_SHOW=false
+    SPACESHIP_ELIXIR_SHOW=false
+    SPACESHIP_XCODE_SHOW_LOCAL=false
+    SPACESHIP_SWIFT_SHOW_LOCAL=false
+    SPACESHIP_GOLANG_SHOW=false
+    SPACESHIP_PHP_SHOW=false
+    SPACESHIP_RUST_SHOW=false
+    SPACESHIP_JULIA_SHOW=false
+    SPACESHIP_DOCKER_SHOW=false
+    SPACESHIP_DOCKER_CONTEXT_SHOW=false
+    SPACESHIP_AWS_SHOW=false
+    SPACESHIP_CONDA_SHOW=false
+    SPACESHIP_VENV_SHOW=false
+    SPACESHIP_PYENV_SHOW=false
+    SPACESHIP_DOTNET_SHOW=false
+    SPACESHIP_EMBER_SHOW=false
+    SPACESHIP_KUBECONTEXT_SHOW=false
+    SPACESHIP_TERRAFORM_SHOW=false
+    SPACESHIP_TERRAFORM_SHOW=false
+    SPACESHIP_JOBS_SHOW=false
+    SPACESHIP_VI_MODE_SHOW=false
+    source ~/.zsh/themes/spaceship-prompt/spaceship.zsh-theme
+    # let this comment out if it works without
+    # autoload -U promptinit; promptinit
+    # prompt spaceship
+elif  [[ $ShellTheme = agnoster ]] && [ -d ~/.zsh/themes/agnoster-zsh-theme ]; then
+    # ------------ ---------------- agnoster theme --------------------
+    source ~/.zsh/themes/agnoster-zsh-theme/agnoster.zsh-theme
+    setopt promptsubst
+else
+    echo 'WARNING: You have no ShellTheme selected in your .zshrc'
+    echo ''
+    echo 'Please select agnoster or spaceship as your ShellTheme'
+    echo ''
+    # fallback prompt if theme dont work:
+    PROMPT='%F{208}%n@%M%f%F{226} %~%f -> '
+fi
+
 # =================================================================================================
 # ================================= OUTCOMMENTED SETTINGS:=========================================
 # =================================================================================================
 
-
-
-# =================================== Prompt fallback =============================================
-
-# # fallback prompt if theme dont work:
-# PROMPT='%F{208}%n@%M%f%F{226} %~%f -> '
+# ======== Try this if you have problems with pager preview =======================================
+# export BAT_PAGER="less --mouse -RF"
+# # ===='bat' configuration.====
+# export BAT_CONFIG_PATH="$HOME/dotfiles/bat.conf"
+# # ==== LESS PAGER CONFIG ====
+# export LESS='--mouse -Q -R -X -F -s -i -g'
+# export LESS_TERMCAP_md=$(printf "\e[00;34m")
+# export LESS_TERMCAP_us=$(printf "\e[01;32m")
+# export PAGER=less
 
 # =================================== Emac key bindings ===========================================
 
@@ -297,49 +349,12 @@ fi
 # fi
 # unset env
 
-# =================================== Secondary zsh-themes ========================================
-
-# # spaceship theme (git clone https://github.com/denysdovhan/spaceship-prompt.git)
-# SPACESHIP_PROMPT_ADD_NEWLINE=false
-# SPACESHIP_PROMPT_SEPARATE_LINE=false
-# SPACESHIP_CHAR_SYMBOL=❯
-# SPACESHIP_CHAR_SUFFIX=" "
-# SPACESHIP_HG_SHOW=false
-# SPACESHIP_PACKAGE_SHOW=false
-# SPACESHIP_NODE_SHOW=false
-# SPACESHIP_RUBY_SHOW=false
-# SPACESHIP_ELM_SHOW=false
-# SPACESHIP_ELIXIR_SHOW=false
-# SPACESHIP_XCODE_SHOW_LOCAL=false
-# SPACESHIP_SWIFT_SHOW_LOCAL=false
-# SPACESHIP_GOLANG_SHOW=false
-# SPACESHIP_PHP_SHOW=false
-# SPACESHIP_RUST_SHOW=false
-# SPACESHIP_JULIA_SHOW=false
-# SPACESHIP_DOCKER_SHOW=false
-# SPACESHIP_DOCKER_CONTEXT_SHOW=false
-# SPACESHIP_AWS_SHOW=false
-# SPACESHIP_CONDA_SHOW=false
-# SPACESHIP_VENV_SHOW=false
-# SPACESHIP_PYENV_SHOW=false
-# SPACESHIP_DOTNET_SHOW=false
-# SPACESHIP_EMBER_SHOW=false
-# SPACESHIP_KUBECONTEXT_SHOW=false
-# SPACESHIP_TERRAFORM_SHOW=false
-# SPACESHIP_TERRAFORM_SHOW=false
-# SPACESHIP_JOBS_SHOW=false
-# SPACESHIP_VI_MODE_SHOW=false
-# source ~/.zsh/themes/spaceship-prompt/spaceship.zsh-theme
-# # let this comment out if it works without
-# # autoload -U promptinit; promptinit
-# # prompt spaceship
-
-# # theme 2:
+# # theme 3:
 # fpath+=~/.zsh/themes/pure
 # autoload -U promptinit; promptinit
 # prompt pure
 
-# # theme 3: (binary lives in /usr/local/bin)
+# # theme 4: (binary lives in /usr/local/bin)
 # eval "$(starship init zsh)"
 
 
@@ -358,14 +373,6 @@ fi
 # *.md=38;5;224:*.markdown=38;5;224:*README=38;5;224:*.ico=38;5;140:\
 # *.iso=38;5;205"
 
-# # ===='bat' configuration.====
-#     export BAT_CONFIG_PATH="$HOME/dotfiles/bat.conf"
-
-# # ==== LESS PAGER CONFIG ====
-# export LESS='--mouse -Q -R -X -F -s -i -g'
-# export LESS_TERMCAP_md=$(printf "\e[00;34m")
-# export LESS_TERMCAP_us=$(printf "\e[01;32m")
-# export PAGER=less
 
 # =============================== new experiments: ==================================
 
@@ -386,3 +393,69 @@ function open_current_repository_url() {
 function clubhouse_issues_in_development() {
     curl -X GET -H "Content-Type: application/json" -s -d '{ "page_size": 25, "query": "owner:philippmossier state:\"In Development\" sort:changed" }' -L "https://api.clubhouse.io/api/v3/search/stories?token=$CH_API_TOKEN" | jq ".data | map({story: .name, ch: .id, type: .story_type})"
 }
+
+# # try with --select-1 or without (enables scrolling the preview)
+# fzf_git_add() {
+#     local selections=$(
+#       git status --porcelain | \
+#       fzf --select-1 --ansi \
+#           --preview 'if (git ls-files --error-unmatch {2} &>/dev/null); then
+#                          git diff --color=always {2} | diff-so-fancy
+#                      else
+#                          bat --color=always --line-range :500 {2}
+#                      fi'
+#       )
+#     if [[ -n $selections ]]; then
+#         git add --verbose $(echo "$selections" | cut -c 4- | tr '\n' ' ')
+#     fi
+# }
+# # try with --select-1 or without (enables scrolling the preview)
+# fzf_git_unadd() {
+#     local selections=$(
+#       git status --porcelain | \
+#       fzf --select-1  --ansi \
+#           --preview 'if (git ls-files --error-unmatch {2} &>/dev/null); then
+#                          git diff --color=always {2} | diff-so-fancy
+#                      else
+#                          bat --color=always --line-range :500 {2}
+#                      fi'
+#       )
+#     if [[ -n $selections ]]; then
+#         git restore --staged $(echo "$selections" | cut -c 4- | tr '\n' ' ')
+#     fi
+# }
+
+# # scroll preview only works wiith exit-0 
+# fzf_grep_edit(){
+#     if [[ $# == 0 ]]; then
+#         echo 'Error: search term was not provided.'
+#         return
+#     fi
+#     local match=$(
+#       rg --color=never --line-number "$1" |
+#         fzf --no-multi --delimiter : \
+#             --exit-0 --preview "bat --color=always --line-range {2}: {1}"
+#       )
+#     local file=$(echo "$match" | cut -d':' -f1)
+#     if [[ -n $file ]]; then
+#         $SecondaryEDITOR "$file" +$(echo "$match" | cut -d':' -f2)
+#     fi
+# }
+# # scroll search results with mouse only works with exit-0 
+# fzf_kill() {
+#     local pid_col
+#     if [[ $OS = Linux ]]; then
+#         pid_col=2
+#     elif [[ $OS = Darwin ]]; then
+#         pid_col=3;
+#     else
+#         echo 'Error: unknown platform'
+#         return
+#     fi
+#     local pids=$(
+#       ps -f -u $USER | sed 1d | fzf --multi --exit-0  --reverse | tr -s '[:blank:]' | cut -d' ' -f"$pid_col"
+#       )
+#     if [[ -n $pids ]]; then
+#         echo "$pids" | xargs kill -9 "$@"
+#     fi
+# }

@@ -1,5 +1,5 @@
 [core]
-	pager = diff-so-fancy | less --mouse --quit-if-one-screen --raw-control-chars --tabs=4
+	pager = diff-so-fancy | less --mouse
 [color]
 	ui = true
 [color "diff-highlight"]
@@ -19,3 +19,9 @@
 	email = mossier.dev@gmail.com
 [alias]
 	ll = log --graph --format=\"%C(yellow)%h%C(red)%d%C(reset) - %C(bold green)(%ar)%C(reset) %s %C(blue)<%an>%C(reset)\"
+# pager = diff-so-fancy | less --mouse --quit-if-one-screen --raw-control-chars --tabs=4
+[diff-so-fancy]
+	rulerWidth = 47
+	changeHunkIndicators = true
+	stripLeadingSymbols = true
+	useUnicodeRuler = true

@@ -2,6 +2,13 @@
 
 echo ""
 echo "##################################################"
+echo "############# apt update & upgrade ###############"
+echo "##################################################"
+echo ""
+sudo apt -y update && sudo apt upgrade -y
+
+echo ""
+echo "##################################################"
 echo "############# creating dir tree ##################"
 echo "##################################################"
 echo ""
@@ -27,13 +34,6 @@ ln -s dotfiles/zshrc 			.zshrc
 ln -s dotfiles/gitconfig       		.gitconfig
 ln -s dotfiles/nvmhook.sh 		.nvmhook.sh
 ln -s dotfiles/vimrc    		.vimrc
-
-echo ""
-echo "##################################################"
-echo "############# apt update & upgrade ###############"
-echo "##################################################"
-echo ""
-sudo apt -y update && sudo apt upgrade -y
 
 echo ""
 echo "##################################################"
@@ -71,13 +71,6 @@ echo "################# tmuxinator #####################"
 echo "##################################################"
 echo ""
 sudo gem install tmuxinator
-
-echo ""
-echo "##################################################"
-echo "################ export path #####################"
-echo "##################################################"
-echo ""
-export PATH=$PATH:$HOME/.local/bin
 
 echo ""
 echo "##################################################"
@@ -119,40 +112,36 @@ echo "##################################################"
 echo "#################### exa #########################"
 echo "##################################################"
 echo ""
-pushd ~/.local/zip && \
+cd ~/.local/zip && \
 curl -OL https://github.com/ogham/exa/releases/download/v0.9.0/exa-linux-x86_64-0.9.0.zip && \
 unzip exa-linux-x86_64-0.9.0.zip && \
 mv exa-linux-x86_64 ~/.local/bin/exa && \
-popd
 
 echo ""
 echo "##################################################"
 echo "#################### fzf #########################"
 echo "##################################################"
 echo ""
-pushd ~/.local/repos
+cd ~/.local/repos
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.local/repos/fzf && \
-pushd fzf
+cd fzf
 ./install --key-bindings --completion --no-update-rc
-popd
-popd
 
 echo ""
 echo "##################################################"
 echo "#################### bat #########################"
 echo "##################################################"
 echo ""
-pushd ~/.local/pkgs
+cd ~/.local/pkgs
 wget https://github.com/sharkdp/bat/releases/download/v0.15.4/bat_0.15.4_amd64.deb && \
 sudo dpkg -i bat_0.15.4_amd64.deb && \
-popd
 
 echo ""
 echo "##################################################"
 echo "################# github cli #####################"
 echo "##################################################"
 echo ""
-pushd ~/.local/pkgs && \
+cd ~/.local/pkgs && \
 curl -OL https://github.com/cli/cli/releases/download/v0.11.1/gh_0.11.1_linux_amd64.deb && \
 sudo apt install ./gh_*_linux_amd64.deb
 
@@ -167,11 +156,11 @@ cp -r ~/.vim/repos/gruvbox/colors/gruvbox.vim ~/.vim/colors/
 
 echo ""
 echo "##################################################"
-echo "################# zsh theme #####################"
+echo "################# zsh themes #####################"
 echo "##################################################"
 echo ""
-pushd ~/.zsh/themes && \
-git clone https://github.com/agnoster/agnoster-zsh-theme.git
+git clone https://github.com/agnoster/agnoster-zsh-theme.git ~/.zsh/themes/agnoster-zsh-theme
+git clone https://github.com/denysdovhan/spaceship-prompt.git ~/.zsh/themes/spaceship-prompt
 
 echo ""
 echo "##################################################"
@@ -192,12 +181,19 @@ echo "##################################################"
 echo "#################### tree ########################"
 echo "##################################################"
 echo ""
-pushd ~/.local/zip
+cd ~/.local/zip
 curl -OL http://mama.indstate.edu/users/ice/tree/src/tree-1.8.0.tgz && \
 tar xf tree-1.8.0.tgz -C ~/.local/makeInstalls
-pushd ~/.local/makeInstalls/tree-1.8.0
+cd ~/.local/makeInstalls/tree-1.8.0
 make
 sudo make install
+
+echo ""
+echo "##################################################"
+echo "######## change shell to zsh #####################"
+echo "##################################################"
+echo ""
+chsh -s $(which zsh)
 
 echo "$(neofetch)"
 
@@ -236,4 +232,5 @@ cat << "PHIL"
 PHIL
 
 echo ""
-echo ">>-----> Done! Change to zshell and enjoy! <-----<<"
+echo ">>-----> Enjoy! <-----<<"
+echo ""
