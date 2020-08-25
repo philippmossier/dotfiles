@@ -133,10 +133,11 @@ fzf_grep_edit(){
         echo 'Error: search term was not provided.'
         return
     fi
+    # add --exit-0 for work (linux)  
     local match=$(
       rg --color=never --line-number "$1" |
         fzf --no-multi --delimiter : \
-            --exit-0 --preview "bat --color=always --line-range {2}: {1}") # add --exit-0 for work (linux)  
+            --exit-0 --preview "bat --color=always --line-range {2}: {1}")
     local file=$(echo "$match" | cut -d':' -f1)
     if [[ -n $file ]]; then
         $SecondaryEDITOR "$file" +$(echo "$match" | cut -d':' -f2)
@@ -144,6 +145,7 @@ fzf_grep_edit(){
 }
 
 fzf_kill() {
+     # add --exit-0 for work (linux) 
     local pid_col
     if [[ $OS = Linux ]]; then
         pid_col=2
@@ -153,16 +155,19 @@ fzf_kill() {
         echo 'Error: unknown platform'
         return
     fi
-    local pids=$(ps -f -u $USER | sed 1d | fzf --multi --reverse | tr -s '[:blank:]' | cut -d' ' -f "$pid_col") # add --exit-0 for work (linux) 
+    local pids=$(
+        ps -f -u $USER | sed 1d | fzf --multi --reverse | \
+        tr -s '[:blank:]' | cut -d' ' -f "$pid_col")
     if [[ -n $pids ]]; then
         echo "$pids" | xargs kill -9 "$@"
     fi
 }
 
 fzf_git_add() {
+    # add --select-1 for work (linux) 
     local selections=$(
       git status --porcelain | \
-      fzf --select-1 --ansi \ # add --select-1 for work (linux) 
+      fzf --select-1 --ansi \
           --preview 'if (git ls-files --error-unmatch {2} &>/dev/null); then
                          git diff --color=always {2} | diff-so-fancy
                      else
@@ -174,9 +179,10 @@ fzf_git_add() {
 }
 
 fzf_git_unadd() {
+    # add --select-1 for work (linux)
     local selections=$(
       git status --porcelain | \
-      fzf --select-1 --ansi \ # add --select-1 for work (linux) 
+      fzf --select-1 --ansi \
           --preview 'if (git ls-files --error-unmatch {2} &>/dev/null); then
                          git diff --color=always {2} | diff-so-fancy
                      else
