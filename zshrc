@@ -22,7 +22,7 @@ alias chid='clubhouse_issues_in_development'
 
 PrimaryEDITOR=code 
 SecondaryEDITOR=vim # only used for 'tf' (ripgrep search)
-ShellTheme=spaceship # Select agnoster or spaceship
+ShellTheme=agnoster # Select agnoster or spaceship
 
 # ================================= variables used in functions ===================================
 
@@ -48,7 +48,8 @@ if [[ ! "$PATH" == */home/phil/.local/repos/diff-so-fancy* ]]; then
 fi
 
 # ------------ ---------------- bat config --------------------
-export BAT_CONFIG_PATH="$HOME/dotfiles/bat.conf"
+# export BAT_CONFIG_PATH="$HOME/dotfiles/bat.conf"  # for private
+export BAT_CONFIG_PATH="$HOME/.config/bat/config" # for work
 
 # ------------ load autosuggestion and change highlight color ----------
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -110,9 +111,8 @@ export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -100'"
 
 fzf_find_edit() {
     local file=$(
-      fzf --query="$1" --reverse --height 95% --no-multi --select-1 --exit-0 \
-          --preview 'bat --color=always --line-range :500 {}'
-      )
+      fzf --query="$1" --no-multi --select-1 --exit-0 \
+          --preview 'bat --color=always --line-range :500 {}')
     if [[ -n $file ]]; then
         $PrimaryEDITOR "$file"
     fi
@@ -122,8 +122,7 @@ fzf_change_directory() {
     local directory=$(
       fdfind --type d | \
       fzf --query="$1" --no-multi --reverse --select-1 --exit-0 \
-          --preview 'tree -C {} | head -100'
-      )
+          --preview 'tree -C {} | head -100')
     if [[ -n $directory ]]; then
         cd "$directory"
     fi
@@ -137,8 +136,7 @@ fzf_grep_edit(){
     local match=$(
       rg --color=never --line-number "$1" |
         fzf --no-multi --delimiter : \
-            --preview "bat --color=always --line-range {2}: {1}"
-      )
+            --exit-0 --preview "bat --color=always --line-range {2}: {1}") # add --exit-0 for work (linux)  
     local file=$(echo "$match" | cut -d':' -f1)
     if [[ -n $file ]]; then
         $SecondaryEDITOR "$file" +$(echo "$match" | cut -d':' -f2)
@@ -155,9 +153,7 @@ fzf_kill() {
         echo 'Error: unknown platform'
         return
     fi
-    local pids=$(
-      ps -f -u $USER | sed 1d | fzf --multi --reverse | tr -s '[:blank:]' | cut -d' ' -f"$pid_col"
-      )
+    local pids=$(ps -f -u $USER | sed 1d | fzf --multi --reverse | tr -s '[:blank:]' | cut -d' ' -f "$pid_col") # add --exit-0 for work (linux) 
     if [[ -n $pids ]]; then
         echo "$pids" | xargs kill -9 "$@"
     fi
@@ -166,13 +162,12 @@ fzf_kill() {
 fzf_git_add() {
     local selections=$(
       git status --porcelain | \
-      fzf --ansi \
+      fzf --select-1 --ansi \ # add --select-1 for work (linux) 
           --preview 'if (git ls-files --error-unmatch {2} &>/dev/null); then
                          git diff --color=always {2} | diff-so-fancy
                      else
                          bat --color=always --line-range :500 {2}
-                     fi'
-      )
+                     fi')
     if [[ -n $selections ]]; then
         git add --verbose $(echo "$selections" | cut -c 4- | tr '\n' ' ')
     fi
@@ -181,13 +176,12 @@ fzf_git_add() {
 fzf_git_unadd() {
     local selections=$(
       git status --porcelain | \
-      fzf --ansi \
+      fzf --select-1 --ansi \ # add --select-1 for work (linux) 
           --preview 'if (git ls-files --error-unmatch {2} &>/dev/null); then
                          git diff --color=always {2} | diff-so-fancy
                      else
                          bat --color=always --line-range :500 {2}
-                     fi'
-      )
+                     fi')
     if [[ -n $selections ]]; then
         git restore --staged $(echo "$selections" | cut -c 4- | tr '\n' ' ')
     fi
@@ -198,8 +192,7 @@ fzf_git_log() {
       git ll --color=always "$@" |
         fzf --ansi --no-sort --no-height \
             --preview "echo {} | grep -o '[a-f0-9]\{7\}' | head -1 |
-                       xargs -I@ sh -c 'git show --color=always @'"
-      )
+                       xargs -I@ sh -c 'git show --color=always @'")
     if [[ -n $selections ]]; then
         local commits=$(echo "$selections" | cut -d' ' -f2 | tr '\n' ' ')
         git show $commits
@@ -210,8 +203,7 @@ fzf_git_reflog() {
     local selection=$(
       git reflog --color=always "$@" |
         fzf --no-multi --ansi --no-sort --no-height \
-            --preview "git show --color=always {1}"
-      )
+            --preview "git show --color=always {1}")
     if [[ -n $selection ]]; then
         git show $(echo $selection | cut -d' ' -f1)
     fi
@@ -225,8 +217,7 @@ fzf_git_log_pickaxe() {
      local selections=$(
        git log --oneline --color=always -S "$@" |
          fzf --ansi --no-sort --no-height \
-             --preview "git show --color=always {1}"
-       )
+             --preview "git show --color=always {1}")
      if [[ -n $selections ]]; then
          local commits=$(echo "$selections" | cut -d' ' -f1 | tr '\n' ' ')
          git show $commits
@@ -235,30 +226,30 @@ fzf_git_log_pickaxe() {
 
 # # ========================== NVM normal loading with nvmhook ===================================
 
-#normal nvm loading (slow at start of a new terminal but works with nvm hook below)
-# export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-# # place this nvm-version-hook after nvm initialization! (https://github.com/creationix/nvm#zsh)
-# source ~/.nvmhook.sh
+# normal nvm loading (slow at start of a new terminal but works with nvm hook below)
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+# place this nvm-version-hook after nvm initialization! (https://github.com/creationix/nvm#zsh)
+source ~/.nvmhook.sh
 
 # # ================================= NVM lazy loading ============================================
 
-# nvm lazy loading:(fast shell loading but doesnt work wirh nvm hook)
-# Defer initialization of nvm until nvm, node or a node-dependent command is
-# run. Ensure this block is only run once if .bashrc gets sourced multiple times
-# by checking whether __init_nvm is a function.
-if [ -s "$HOME/.nvm/nvm.sh" ] && [ ! "$(type -f __init_nvm)" = function ]; then
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
-  declare -a __node_commands=('nvm' 'node' 'npm' 'yarn' 'gulp' 'grunt' 'webpack' 'tldr')
-  function __init_nvm() {
-    for i in "${__node_commands[@]}"; do unalias $i; done
-    . "$NVM_DIR"/nvm.sh
-    unset __node_commands
-    unset -f __init_nvm
-  }
-  for i in "${__node_commands[@]}"; do alias $i='__init_nvm && '$i; done
-fi
+# # nvm lazy loading:(fast shell loading but doesnt work wirh nvm hook)
+# # Defer initialization of nvm until nvm, node or a node-dependent command is
+# # run. Ensure this block is only run once if .bashrc gets sourced multiple times
+# # by checking whether __init_nvm is a function.
+# if [ -s "$HOME/.nvm/nvm.sh" ] && [ ! "$(type -f __init_nvm)" = function ]; then
+#   export NVM_DIR="$HOME/.nvm"
+#   [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+#   declare -a __node_commands=('nvm' 'node' 'npm' 'yarn' 'gulp' 'grunt' 'webpack' 'tldr')
+#   function __init_nvm() {
+#     for i in "${__node_commands[@]}"; do unalias $i; done
+#     . "$NVM_DIR"/nvm.sh
+#     unset __node_commands
+#     unset -f __init_nvm
+#   }
+#   for i in "${__node_commands[@]}"; do alias $i='__init_nvm && '$i; done
+# fi
 
 # =================================== Load ShellTheme ========================================
 
@@ -328,8 +319,6 @@ fi
 
 ## Use emacs keybindings even if our EDITOR is set to vi
 # bindkey -e
-# source ~/.zsh/spaceship-prompt/spaceship.zsh-theme
-
 # =================================== SSH fix for Windows WSL2 ====================================
 
 # # SSH FIX for always asking for passphrase in windows 
@@ -349,15 +338,6 @@ fi
 # fi
 # unset env
 
-# # theme 3:
-# fpath+=~/.zsh/themes/pure
-# autoload -U promptinit; promptinit
-# prompt pure
-
-# # theme 4: (binary lives in /usr/local/bin)
-# eval "$(starship init zsh)"
-
-
 ## ==== extended EXA_COLORS: ====
 # no=00:fi=00:di=38;5;111:ln=38;5;81:pi=38;5;43:bd=38;5;212:\
 # cd=38;5;225:or=30;48;5;202:ow=38;5;75:so=38;5;177:su=36;48;5;63:ex=38;5;156:\
@@ -376,7 +356,7 @@ fi
 
 # =============================== new experiments: ==================================
 
-_3S_CREDENTIALS=''
+_3S_CREDENTIALS=pmossier:''
 CH_API_TOKEN=''
 
 function bitbucket_build_status() {
@@ -393,69 +373,3 @@ function open_current_repository_url() {
 function clubhouse_issues_in_development() {
     curl -X GET -H "Content-Type: application/json" -s -d '{ "page_size": 25, "query": "owner:philippmossier state:\"In Development\" sort:changed" }' -L "https://api.clubhouse.io/api/v3/search/stories?token=$CH_API_TOKEN" | jq ".data | map({story: .name, ch: .id, type: .story_type})"
 }
-
-# # try with --select-1 or without (enables scrolling the preview)
-# fzf_git_add() {
-#     local selections=$(
-#       git status --porcelain | \
-#       fzf --select-1 --ansi \
-#           --preview 'if (git ls-files --error-unmatch {2} &>/dev/null); then
-#                          git diff --color=always {2} | diff-so-fancy
-#                      else
-#                          bat --color=always --line-range :500 {2}
-#                      fi'
-#       )
-#     if [[ -n $selections ]]; then
-#         git add --verbose $(echo "$selections" | cut -c 4- | tr '\n' ' ')
-#     fi
-# }
-# # try with --select-1 or without (enables scrolling the preview)
-# fzf_git_unadd() {
-#     local selections=$(
-#       git status --porcelain | \
-#       fzf --select-1  --ansi \
-#           --preview 'if (git ls-files --error-unmatch {2} &>/dev/null); then
-#                          git diff --color=always {2} | diff-so-fancy
-#                      else
-#                          bat --color=always --line-range :500 {2}
-#                      fi'
-#       )
-#     if [[ -n $selections ]]; then
-#         git restore --staged $(echo "$selections" | cut -c 4- | tr '\n' ' ')
-#     fi
-# }
-
-# # scroll preview only works wiith exit-0 
-# fzf_grep_edit(){
-#     if [[ $# == 0 ]]; then
-#         echo 'Error: search term was not provided.'
-#         return
-#     fi
-#     local match=$(
-#       rg --color=never --line-number "$1" |
-#         fzf --no-multi --delimiter : \
-#             --exit-0 --preview "bat --color=always --line-range {2}: {1}"
-#       )
-#     local file=$(echo "$match" | cut -d':' -f1)
-#     if [[ -n $file ]]; then
-#         $SecondaryEDITOR "$file" +$(echo "$match" | cut -d':' -f2)
-#     fi
-# }
-# # scroll search results with mouse only works with exit-0 
-# fzf_kill() {
-#     local pid_col
-#     if [[ $OS = Linux ]]; then
-#         pid_col=2
-#     elif [[ $OS = Darwin ]]; then
-#         pid_col=3;
-#     else
-#         echo 'Error: unknown platform'
-#         return
-#     fi
-#     local pids=$(
-#       ps -f -u $USER | sed 1d | fzf --multi --exit-0  --reverse | tr -s '[:blank:]' | cut -d' ' -f"$pid_col"
-#       )
-#     if [[ -n $pids ]]; then
-#         echo "$pids" | xargs kill -9 "$@"
-#     fi
-#   }
