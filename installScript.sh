@@ -190,9 +190,28 @@ sudo make install
 
 echo ""
 echo "##################################################"
-echo "######## change shell to zsh #####################"
+echo "################## openshift #####################"
 echo "##################################################"
 echo ""
+pushd ~/.local/zip && \
+curl -OL https://github.com/openshift/origin/releases/download/v3.11.0/openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit.tar.gz && \
+tar -xzf openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit.tar.gz && \
+pushd openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit && \
+cp kubectl ~/.local/bin/ && \
+cp oc ~/.local/bin/ && \
+popd && \
+rm -rf openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit && \
+rm openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit.tar.gz && \
+popd
+
+echo ""
+echo "##################################################"
+echo "##################### yarn #######################"
+echo "##################################################"
+echo ""
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt update && sudo apt install --no-install-recommends yarn
 
 echo "$(neofetch)"
 
