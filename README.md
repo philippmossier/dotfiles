@@ -111,6 +111,10 @@ wsl --import ubuntu-empty C:\Users\username\AppData\Local\Packages\ubuntu-empty 
 wsl --import ubuntu-test C:\Users\username\AppData\Local\Packages\ubuntu-test D:\WSL2\wsl2-ubuntu-images\ubuntu-empty.tar
 ```
 
+```
+wsl --import ubuntu-empty C:\Users\phil\AppData\Local\Packages\ubuntu-empty C:\Users\phil\wsl2\images\ubuntu-empty.tar
+```
+
 Usefull links:
 
 https://docs.microsoft.com/en-us/windows/wsl/reference
