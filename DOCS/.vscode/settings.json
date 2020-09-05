@@ -1,13 +1,11 @@
 {
-  // eslint/eslint-prettier/markdownlint:
+  // eslint/eslint-prettier:
   "eslint.validate": [
     "javascript",
     "javascriptreact",
     "typescript",
     "typescriptreact",
-    "markdown"
   ],
-  "markdownlint.run": "onSave", 
   "eslint.run": "onSave", // only lints after saving and not during writing (also effects eslint-prettier addons)
   "[json]": {
     "editor.formatOnSave": false
@@ -37,12 +35,26 @@
       "source.fixAll.eslint": true
     }
   },
+  // stylelint:
+  "stylelint.validate": [
+    "css"
+  ],
+  // stylelint only supports run "onType" (not "onSave")
+  "[css]": {
+    "editor.formatOnSave": false,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": true
+    },
+  },
+  // markdownlint:
+  "markdownlint.run": "onSave", 
   "[markdown]": {
     "editor.formatOnSave": false,
     "editor.codeActionsOnSave": {
       "source.fixAll.markdownlint": true
     },
   },
+
   // vs-code editor settings:
   "window.titleBarStyle": "custom",
   "workbench.iconTheme": "vscode-icons",
@@ -68,7 +80,8 @@
   "terminal.integrated.cursorStyle": "line",
   "terminal.integrated.cursorBlinking": true,
   "vsicons.dontShowNewVersionMessage": true,
-  "javascript.preferences.importModuleSpecifier": "relative"
+  "javascript.preferences.importModuleSpecifier": "relative",
+  "workbench.colorTheme": "Community Material Theme Palenight High Contrast"
   // "terminal.integrated.lineHeight": 1,
   // disabled settings:
   // "editor.tabSize": 2,
