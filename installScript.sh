@@ -238,6 +238,10 @@ make
 # sudo apt install tcl -y
 # make test
 
+# make install or copying manually link: https://redis.io/topics/quickstart
+make install
+# sudo cp ~/.local/makeInstalls/redis-stable/src/redis-server /usr/local/bin/
+#sudo cp ~/.local/makeInstalls/redis-stable/src/redis-cli /usr/local/bin/
 
 echo "$(neofetch)"
 
