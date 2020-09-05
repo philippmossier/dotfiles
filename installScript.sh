@@ -225,6 +225,20 @@ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 sudo apt update && sudo apt install --no-install-recommends yarn
 
+echo ""
+echo "##################################################"
+echo "##################### redis ######################"
+echo "##################################################"
+echo ""
+cd ~/.local/zip
+wget http://download.redis.io/redis-stable.tar.gz && tar xvzf redis-stable.tar.gz -C ~/.local/makeInstalls
+cd ~/.local/makeInstalls/redis-stable
+make
+# optional test redis install (donwload tcl dependency first, !make test takes min 4mins!)
+# sudo apt install tcl -y
+# make test
+
+
 echo "$(neofetch)"
 
 cat << "PHIL"         
