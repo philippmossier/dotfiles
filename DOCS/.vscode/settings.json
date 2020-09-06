@@ -65,27 +65,75 @@
   "workbench.statusBar.visible": true,
   "workbench.activityBar.visible": true,
   "editor.selectionClipboard": false, // disables mousewheelclick copy paste
+  
   // emmet:
   "emmet.triggerExpansionOnTab": true,
+  // "emmet.includeLanguages": {
+  //   "javascript": "javascriptreact",
+  //   "typescript": "typescriptreact",
+  //   // "jsx-sublime-babel-tags": "javasriptreact",
+  //   // "jsx-sublime-babel-tags": "typescriptreact",
+  // },
+  "emmet.showExpandedAbbreviation": "never",
+
   // better comments:
   "better-comments.multilineComments": true,
+
   // gitlens disable inline contributor info
   "gitlens.currentLine.enabled": false,
-  // zsh and powerline integration
-  "terminal.integrated.shell.linux": "/bin/zsh",
-  "terminal.integrated.fontFamily": "FuraCode Nerd Font Mono", // FiraCode NF , "Cascadia Code PL" , "DejaVu Sans Mono for Powerline", "Inconsolata for Powerline", "Source Code Pro for Powerline", "FiraCode Nerd Font Mono"
 
+  // terminal zsh/powerline 
+  "terminal.integrated.shell.linux": "/bin/zsh",
+  "terminal.integrated.fontFamily": "Source Code Pro for Powerline", // Fira Code, FiraCode NF ,Source Code Pr for Powerline, "Cascadia Code PL" , "DejaVu Sans Mono for Powerline", "Inconsolata for Powerline", "Source Code Pro for Powerline", "FiraCode Nerd Font Mono","FuraCode Nerd Font Mono"
   "terminal.integrated.fontSize": 14,
-  // "terminal.integrated.fontWeight":"normal",
+  "terminal.integrated.fontWeight": "400",
+  "terminal.integrated.lineHeight": 1,
   "terminal.integrated.cursorStyle": "line",
   "terminal.integrated.cursorBlinking": true,
+
   "vsicons.dontShowNewVersionMessage": true,
   "javascript.preferences.importModuleSpecifier": "relative",
-  "workbench.colorTheme": "Community Material Theme Palenight High Contrast"
+  "workbench.colorTheme": "Community Material Theme Palenight High Contrast",
+  "editor.fontLigatures": true, // only works with ligatureFonts like "Fira Code" or 'Source Code Pro for Powerline', 'Cascadia Code'
+  // "editor.fontFamily": "Consolas", // default vscode fontFamily
+  "editor.fontFamily": "'Source Code Pro for Powerline','Cascadia Code', 'Fira Code' , 'Consolas', 'Operator Mono', 'iA Writer Duospace', 'Source Code Pr for Powerline', Menlo, Monaco, monospace",
+  // "editor.fontSize": 14,
+  // "editor.lineHeight": 24,
+
+  "editor.minimap.renderCharacters": false,
+  "workbench.editor.enablePreview": false,
+  "workbench.editor.showIcons": false,
+  "editor.cursorBlinking": "smooth",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.updateImportsOnFileMove.enabled": "always"
+
   // "terminal.integrated.lineHeight": 1,
   // disabled settings:
   // "editor.tabSize": 2,
   // "editor.insertSpaces": true,
   // "editor.detectIndentation": false,
   // "sync.gist": "790b30233683d5807d5f1c172397045d"
+
+//   "workbench.colorCustomizations": {
+//     "activityBar.background": "#111111",
+//     "activityBarBadge.background": "#FFA000",
+//     "list.activeSelectionForeground": "#FFA000",
+//     "list.inactiveSelectionForeground": "#FFA000",
+//     "list.highlightForeground": "#FFA000",
+//     "scrollbarSlider.activeBackground": "#FFA00050",
+//     "editorSuggestWidget.highlightForeground": "#FFA000",
+//     "textLink.foreground": "#FFA000",
+//     "progressBar.background": "#FFA000",
+//     "pickerGroup.foreground": "#FFA000",
+//     "tab.activeBorder": "#FFA000",
+//     "notificationLink.foreground": "#FFA000",
+//     "editorWidget.resizeBorder": "#FFA000",
+//     "editorWidget.border": "#FFA000",
+//     "settings.modifiedItemIndicator": "#FFA000",
+//     "settings.headerForeground": "#FFA000",
+//     "panelTitle.activeBorder": "#FFA000",
+//     "breadcrumb.activeSelectionForeground": "#FFA000",
+//     "menu.selectionForeground": "#FFA000",
+//     "menubar.selectionForeground": "#FFA000"
+// },
 }
