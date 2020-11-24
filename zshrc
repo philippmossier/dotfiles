@@ -118,6 +118,7 @@ fzf_find_edit() {
     fi
 }
 
+// try without --select-1, when there are errors
 fzf_change_directory() {
     local directory=$(
       fdfind --type d | \
@@ -247,7 +248,7 @@ source ~/.nvmhook.sh
 # if [ -s "$HOME/.nvm/nvm.sh" ] && [ ! "$(type -f __init_nvm)" = function ]; then
 #   export NVM_DIR="$HOME/.nvm"
 #   [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
-#   declare -a __node_commands=('nvm' 'node' 'npm' 'yarn' 'gulp' 'grunt' 'webpack' 'tldr')
+#   declare -a __node_commands=('nvm' 'node' 'npm' 'yarn' 'gulp' 'grunt' 'webpack' 'tldr' 'make' 'git')
 #   function __init_nvm() {
 #     for i in "${__node_commands[@]}"; do unalias $i; done
 #     . "$NVM_DIR"/nvm.sh
