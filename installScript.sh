@@ -127,7 +127,17 @@ echo ""
 cd ~/.local/zip && \
 curl -OL https://github.com/ogham/exa/releases/download/v0.9.0/exa-linux-x86_64-0.9.0.zip && \
 unzip exa-linux-x86_64-0.9.0.zip && \
-mv exa-linux-x86_64 ~/.local/bin/exa && \
+mv exa-linux-x86_64 ~/.local/bin/exa
+
+echo ""
+echo "##################################################"
+echo "################## golang ########################"
+echo "##################################################"
+echo ""
+# add go1.15.6 binary (path environment variable is in ~/.zshrc, i set custom path to ~/.local but default is /usr/local )
+sudo curl -OL https://golang.org/dl/go1.15.6.linux-amd64.tar.gz && \
+sudo tar -C ~/.local -xzf go1.15.6.linux-amd64.tar.gz && \
+sudo rm go1.15.6.linux-amd64.tar.gz
 
 echo ""
 echo "##################################################"
