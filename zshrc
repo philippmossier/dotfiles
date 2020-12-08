@@ -47,6 +47,11 @@ if [[ ! "$PATH" == */home/phil/.local/repos/diff-so-fancy* ]]; then
     export PATH="${PATH:+${PATH}:}/home/phil/.local/repos/diff-so-fancy"
 fi
 
+# ----------------------------- golang --------------------
+if [[ ! "$PATH" == */home/phil/.local/go/bin* ]]; then
+    export PATH="${PATH:+${PATH}:}/home/phil/.local/go/bin"
+fi
+
 # ------------ ---------------- bat config --------------------
 # export BAT_CONFIG_PATH="$HOME/dotfiles/bat.conf"  # for private
 export BAT_CONFIG_PATH="$HOME/.config/bat/config" # for work
