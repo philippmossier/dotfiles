@@ -52,6 +52,11 @@ if [[ ! "$PATH" == */home/phil/.local/go/bin* ]]; then
     export PATH="${PATH:+${PATH}:}/home/phil/.local/go/bin"
 fi
 
+# ----------------------------- rustlang --------------------
+if [[ ! "$PATH" == */home/phil/.cargo/bin* ]]; then
+    export PATH="${PATH:+${PATH}:}/home/phil/.cargo/bin"
+fi
+
 # ------------ ---------------- bat config --------------------
 # export BAT_CONFIG_PATH="$HOME/dotfiles/bat.conf"  # for private
 export BAT_CONFIG_PATH="$HOME/.config/bat/config" # for work
