@@ -141,6 +141,16 @@ sudo rm go1.15.6.linux-amd64.tar.gz
 
 echo ""
 echo "##################################################"
+echo "################# rustlang #######################"
+echo "##################################################"
+echo ""
+# add current stable rust version with default-profile
+# all binaries installed from profile default: 
+# cargo  cargo-clippy  cargo-fmt  cargo-miri  clippy-driver  rls  rust-gdb  rust-lldb  rustc  rustdoc  rustfmt  rustup
+sudo curl https://sh.rustup.rs -sSf | sh -s -- --profile default --default-toolchain stable -y
+
+echo ""
+echo "##################################################"
 echo "#################### fzf #########################"
 echo "##################################################"
 echo ""
