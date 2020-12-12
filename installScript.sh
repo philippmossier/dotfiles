@@ -2,7 +2,7 @@
 
 echo ""
 echo "##################################################"
-echo "############# add postgres to apt ################"
+echo "######## add postgres & R to apt  ################"
 echo "##################################################"
 echo ""
 # Create the file repository configuration:
@@ -11,6 +11,10 @@ sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 # Install the latest version of PostgreSQL.
 # If you want a specific version, use 'postgresql-12' or similar instead of 'postgresql'
+
+# add R 4.03 and up to apt
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+sudo add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/"
 
 echo ""
 echo "##################################################"
@@ -148,6 +152,14 @@ echo ""
 # all binaries installed from profile default: 
 # cargo  cargo-clippy  cargo-fmt  cargo-miri  clippy-driver  rls  rust-gdb  rust-lldb  rustc  rustdoc  rustfmt  rustup
 sudo curl https://sh.rustup.rs -sSf | sh -s -- --profile default --default-toolchain stable -y
+
+
+echo ""
+echo "##################################################"
+echo "#################### R ###########################"
+echo "##################################################"
+echo ""
+sudo apt install r-base
 
 echo ""
 echo "##################################################"
