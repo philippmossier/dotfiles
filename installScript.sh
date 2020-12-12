@@ -160,6 +160,8 @@ echo "#################### R ###########################"
 echo "##################################################"
 echo ""
 sudo apt install r-base
+# install dependencies for R packages ('tidyverse' package needs these)
+sudo apt install libcurl4-openssl-dev libssl-dev libxml2-dev
 
 echo ""
 echo "##################################################"
