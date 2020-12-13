@@ -16,6 +16,10 @@ wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 sudo add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/"
 
+# add .NET package
+wget https://packages.microsoft.com/config/ubuntu/20.10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+
 echo ""
 echo "##################################################"
 echo "############# apt update & upgrade ###############"
@@ -162,6 +166,17 @@ echo ""
 sudo apt install r-base
 # install dependencies for R packages ('tidyverse' package needs these)
 sudo apt install libcurl4-openssl-dev libssl-dev libxml2-dev
+
+
+echo ""
+echo "##################################################"
+echo "######### .NET 5.0 SDK & .NET 3.1 SDK ############"
+echo "##################################################"
+echo ""
+sudo apt-get install -y apt-transport-https && \
+sudo apt-get update && \
+sudo apt-get install -y dotnet-sdk-5.0 && \
+sudo apt install -y dotnet-sdk-3.1
 
 echo ""
 echo "##################################################"
