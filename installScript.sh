@@ -2,7 +2,7 @@
 
 echo ""
 echo "##################################################"
-echo "######## add postgres & R to apt  ################"
+echo "##### add PostgreSQL, R & .NET packages  #########"
 echo "##################################################"
 echo ""
 # Create the file repository configuration:
