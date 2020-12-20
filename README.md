@@ -122,6 +122,29 @@ https://docs.microsoft.com/en-us/windows/wsl/reference
 https://docs.microsoft.com/en-us/windows/wsl/wsl-config
 
 
+📁 **WSL2 file system access on Win10 & Linux**
+
+How to access WSL2 distro home direcory:
+Note: windows just uses backslashes compared to linux
+
+- In windows environment:
+
+\\wsl$\distroname\home\username
+
+example:
+``` powershell
+\\wsl$\ubuntu-main\home\johndoe\
+```
+
+- In linux environment:
+
+//wsl$/distroname/home/username
+
+example
+``` bash
+//wsl$/ubuntu-main/home/johndoe/
+```
+
 🐞 **WSL2 always ROOT user Bug solution (needed for multiple `wsl --import` distros):**
 
 WSL2 starts always with root user at start of a new wsl-session which results in no access to the imported files (distro-backups.tar).
