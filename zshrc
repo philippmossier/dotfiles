@@ -128,7 +128,7 @@ fzf_find_edit() {
     fi
 }
 
-// try without --select-1, when there are errors
+# try without --select-1, when there are errors
 fzf_change_directory() {
     local directory=$(
       fdfind --type d | \
