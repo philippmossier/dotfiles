@@ -52,6 +52,54 @@ There are 2 sections where fonts need to be selected depending on your OS:
 | Windows Terminal > Settings > settings.json | Terminal > Preferences > Fonts |
 | vscode > settings.json | vscode > settings.json |
 
+💡 **STEPS for first WSL2 install (fresh Windows 10)**
+
+*1. Enable WSL*
+```powershell
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+```
+
+*2. Enable Virtual Machine*
+```powershell
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+```
+
+*3. Restart computer*
+
+*4. Download linux kernel* 
+https://docs.microsoft.com/en-us/windows/wsl/install-win10
+
+*5. Set WSL2 as default*
+```powershell
+wsl --set-default-version 2
+```
+
+*6. Microsoft store*
+Install Linux distro of your choice
+Install windows terminal
+
+*7. Install Ubuntu (create username & pw)*
+Your default first Ubuntu installation path
+```
+\\wsl$\Ubuntu\home\username
+```
+
+**Now you can fresh install with dotfiles install script or import an existing Ubuntu img**
+
+*8. Install fonts for windows terminal*
+Font files end with (.otf) For example: Source Code Pro for Powerline.otf
+
+*9. Edit Windows-Terminal Settings*
+Use file settings.json file (but dont overwrite your auto generated guids)
+
+*10. Run dotfiles install script*
+```bash
+cd ~
+git clone https://github.com/philippmossier/dotfiles.git
+./dotfiles/installScript.sh
+chsh -s $(which zsh)
+```
+
 
 💡 **Steps for WSL2 after running the installScript:**
 
