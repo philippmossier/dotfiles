@@ -104,7 +104,7 @@ echo "##################################################"
 echo "################# nvm & node #####################"
 echo "##################################################"
 echo ""
-wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash && \
+wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash && \
 export NVM_DIR="$HOME/.nvm" && \
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && \
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" && \
@@ -143,8 +143,8 @@ echo "################## golang ########################"
 echo "##################################################"
 echo ""
 # add go1.15.6 binary (path environment variable is in ~/.zshrc, i set custom path to ~/.local but default is /usr/local )
-sudo curl -OL https://golang.org/dl/go1.15.6.linux-amd64.tar.gz && \
-sudo tar -C ~/.local -xzf go1.15.6.linux-amd64.tar.gz && \
+sudo curl -OL https://golang.org/dl/go1.16.2.linux-amd64.tar.gz && \
+sudo tar -C ~/.local -xzf go1.16.2.linux-amd64.tar.gz && \
 sudo rm go1.15.6.linux-amd64.tar.gz
 
 echo ""
@@ -194,8 +194,8 @@ echo "#################### bat #########################"
 echo "##################################################"
 echo ""
 cd ~/.local/pkgs
-wget https://github.com/sharkdp/bat/releases/download/v0.15.4/bat_0.15.4_amd64.deb && \
-sudo dpkg -i bat_0.15.4_amd64.deb && \
+wget https://github.com/sharkdp/bat/releases/download/v0.18.0/bat_0.18.0_amd64.deb && \
+sudo dpkg -i bat_0.18.0_amd64.deb && \
 
 echo ""
 echo "##################################################"
@@ -203,7 +203,7 @@ echo "################# github cli #####################"
 echo "##################################################"
 echo ""
 cd ~/.local/pkgs && \
-curl -OL https://github.com/cli/cli/releases/download/v0.11.1/gh_0.11.1_linux_amd64.deb && \
+curl -OL https://github.com/cli/cli/releases/download/v1.8.0/gh_1.8.0_linux_amd64.deb && \
 sudo apt install ./gh_*_linux_amd64.deb
 
 echo ""
