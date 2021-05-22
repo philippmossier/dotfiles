@@ -52,6 +52,11 @@ if [[ ! "$PATH" == */home/phil/.local/go/bin* ]]; then
     export PATH="${PATH:+${PATH}:}/home/phil/.local/go/bin"
 fi
 
+# --- gopath (folder where my programs live which i installed with go get <packagename> ---
+if [[ ! "$PATH" == */home/phil/go/bin* ]]; then
+    export PATH="${PATH:+${PATH}:}/home/phil/go/bin"
+fi
+
 # ----------------------------- rustlang --------------------
 if [[ ! "$PATH" == */home/phil/.cargo/bin* ]]; then
     export PATH="${PATH:+${PATH}:}/home/phil/.cargo/bin"
@@ -272,8 +277,8 @@ source ~/.nvmhook.sh
 
 if [[ $ShellTheme = spaceship ]] && [ -d ~/.zsh/themes/spaceship-prompt ]; then
     # ------------ ---------------- spaceship theme --------------------
-    SPACESHIP_PROMPT_ADD_NEWLINE=true
-    SPACESHIP_PROMPT_SEPARATE_LINE=false
+   SPACESHIP_PROMPT_ADD_NEWLINE=true
+    SPACESHIP_PROMPT_SEPARATE_LINE=true
     SPACESHIP_CHAR_SYMBOL=❯
     SPACESHIP_CHAR_SUFFIX=" "
     SPACESHIP_HG_SHOW=false
@@ -299,8 +304,15 @@ if [[ $ShellTheme = spaceship ]] && [ -d ~/.zsh/themes/spaceship-prompt ]; then
     SPACESHIP_KUBECONTEXT_SHOW=false
     SPACESHIP_TERRAFORM_SHOW=false
     SPACESHIP_TERRAFORM_SHOW=false
-    SPACESHIP_JOBS_SHOW=false
+    SPACESHIP_JOBS_SHOW=true
     SPACESHIP_VI_MODE_SHOW=false
+    SPACESHIP_TIME_SHOW=true
+    # SPACESHIP_DIR_PREFIX='in '
+    SPACESHIP_DIR_PREFIX=''
+    SPACESHIP_DIR_SUFFIX=' '
+    # SPACESHIP_GIT_PREFIX='on '
+    SPACESHIP_GIT_PREFIX=''
+    
     source ~/.zsh/themes/spaceship-prompt/spaceship.zsh-theme
     # let this comment out if it works without
     # autoload -U promptinit; promptinit
