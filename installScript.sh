@@ -133,8 +133,8 @@ echo "#################### exa #########################"
 echo "##################################################"
 echo ""
 cd ~/.local/zip && \
-curl -OL https://github.com/ogham/exa/releases/download/v0.9.0/exa-linux-x86_64-0.9.0.zip && \
-unzip exa-linux-x86_64-0.9.0.zip && \
+curl -OL https://github.com/ogham/exa/releases/download/v0.10.1/exa-linux-x86_64-0.10.1.zip && \
+unzip exa-linux-x86_64-0.10.1.zip && \
 mv exa-linux-x86_64 ~/.local/bin/exa
 
 echo ""
@@ -194,8 +194,8 @@ echo "#################### bat #########################"
 echo "##################################################"
 echo ""
 cd ~/.local/pkgs
-wget https://github.com/sharkdp/bat/releases/download/v0.18.0/bat_0.18.0_amd64.deb && \
-sudo dpkg -i bat_0.18.0_amd64.deb && \
+wget https://github.com/sharkdp/bat/releases/download/v0.18.1/bat_0.18.1_amd64.deb && \
+sudo dpkg -i bat_0.18.1_amd64.deb && \
 
 echo ""
 echo "##################################################"
@@ -203,7 +203,7 @@ echo "################# github cli #####################"
 echo "##################################################"
 echo ""
 cd ~/.local/pkgs && \
-curl -OL https://github.com/cli/cli/releases/download/v1.8.0/gh_1.8.0_linux_amd64.deb && \
+curl -OL https://github.com/cli/cli/releases/download/v1.12.1/gh_1.12.1_linux_amd64.deb && \
 sudo apt install ./gh_*_linux_amd64.deb
 
 echo ""
