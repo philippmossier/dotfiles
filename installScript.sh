@@ -143,9 +143,9 @@ echo "################## golang ########################"
 echo "##################################################"
 echo ""
 # add go1.15.6 binary (path environment variable is in ~/.zshrc, i set custom path to ~/.local but default is /usr/local )
-sudo curl -OL https://golang.org/dl/go1.16.4.linux-amd64.tar.gz && \
-sudo tar -C ~/.local -xzf go1.16.4.linux-amd64.tar.gz && \
-sudo rm go1.16.4.linux-amd64.tar.gz
+sudo curl -OL https://golang.org/dl/go1.16.5.linux-amd64.tar.gz && \
+sudo tar -C ~/.local -xzf go1.16.5.linux-amd64.tar.gz && \
+sudo rm go1.16.5.linux-amd64.tar.gz
 
 echo ""
 echo "##################################################"
