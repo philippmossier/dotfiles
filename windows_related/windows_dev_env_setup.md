@@ -1,64 +1,90 @@
-# -------- Powershell Setup commands
+# Windows developer setup
 
-# Check $profile
+- Very useful docs
+https://docs.microsoft.com/en-us/windows/dev-environment/
+
+---
+### Powershell Setup commands
+
+Check `$profile` path:
+```
 $profile
+```
 
-# if Microsoft.PowerShell_profile.ps1 does not exist create one
+If Microsoft.PowerShell_profile.ps1 does not exist create one
+```
 Test-Path $Profile
+```
 
-# if Test-Path => false (there is no Microsoft.PowerShell_profile.ps1, so we create one)
+If Test-Path => false (there is no Microsoft.PowerShell_profile.ps1, so we create one)
+```
 New-Item -Path $profile -Type File -Force
+```
 
-# Install package manager: chocolatey, scoop(optional)
-# choco/scoop website
-https://docs.chocolatey.org
-https://scoop.sh/
+Install package manager: chocolatey, scoop(optional)
+*choco/scoop website:*
+- <https://docs.chocolatey.org>
+- <https://scoop.sh/>
 
-# install chocolatey
-get command from their website
-# install scoop (package manager, optional)
+Install chocolatey
+```
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+```
+
+Install scoop (package manager, optional)
+```
 Set-ExecutionPolicy RemoteSigned -scope CurrentUser
 iwr -useb get.scoop.sh | iex
+```
 
-# Extend packages (scoop has default only core packages enabled, lets extend that to have access to more packages)
+Extend packages (scoop has default only core packages enabled, lets extend that to have access to more packages)
+```
 scoop bucket add extras
+```
 
-# install curl
+Install curl
+```
 scoop install curl
+```
 
-# Install posh-git (git autocompletion)
+```
+Install posh-git (git autocompletion)
 scoop install posh-git
+```
 
-# add posh-git to PowerShell_profile.ps1
+```
+Add posh-git to PowerShell_profile.ps1
 Add-PoshGitToProfile
+```
 
-# install starship prompt
+```
+Install starship prompt
 scoop install starship
+```
 
 
-
-# ------- Powershell config file:
+### Powershell config file:
 
 ```PowerShell_profile.ps1
-# import posh-git https://github.com/dahlbyk/posh-git
+## import posh-git https://github.com/dahlbyk/posh-git
 Import-Module posh-git
 
-# Shows navigable menu of all options when hitting Tab
+## Shows navigable menu of all options when hitting Tab
 Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 
-# Autocompletion for arrow keys
+## Autocompletion for arrow keys
 Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
 
-# set alternative path to starship config file
+## set alternative path to starship config file
 $ENV:STARSHIP_CONFIG = "$HOME\.starship\config.toml"
 
-# enable starship shell
+## enable starship shell
 Invoke-Expression (&starship init powershell)
 ```
 
 
-# WindowsTerminal settings.json
+## WindowsTerminal settings.json
 C:\Users\mossi\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json
 ```
       {
@@ -73,7 +99,7 @@ C:\Users\mossi\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\Lo
        },
 ```
 
-# VsCode Settings.json (only powershell/windows part)
+## VsCode Settings.json (only powershell/windows part)
 ```
 {
   // new powershell config args:  
