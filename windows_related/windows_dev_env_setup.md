@@ -9,8 +9,14 @@ Test-Path $Profile
 # if Test-Path => false (there is no Microsoft.PowerShell_profile.ps1, so we create one)
 New-Item -Path $profile -Type File -Force
 
+# Install package manager: chocolatey, scoop(optional)
+# choco/scoop website
+https://docs.chocolatey.org
+https://scoop.sh/
 
-# install scoop (package manager) 
+# install chocolatey
+get command from their website
+# install scoop (package manager, optional)
 Set-ExecutionPolicy RemoteSigned -scope CurrentUser
 iwr -useb get.scoop.sh | iex
 
