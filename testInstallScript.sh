@@ -265,16 +265,20 @@ echo "##################################################"
 echo "##################### redis ######################"
 echo "##################################################"
 echo ""
-cd ~/.local/zip
-wget http://download.redis.io/redis-stable.tar.gz && tar xvzf redis-stable.tar.gz -C ~/.local/makeInstalls
-cd ~/.local/makeInstalls/redis-stable
-make -j 8
+
+# cd ~/.local/zip
+# wget http://download.redis.io/redis-stable.tar.gz && tar xvzf redis-stable.tar.gz -C ~/.local/makeInstalls
+# cd ~/.local/makeInstalls/redis-stable
+# make -j 8
+
 # optional test redis install (donwload tcl dependency first, !make test takes min 4mins!)
 # sudo apt install tcl -y
 # make test
 
 # make install or copying manually link: https://redis.io/topics/quickstart
-make install
+
+# make install
+
 # sudo cp ~/.local/makeInstalls/redis-stable/src/redis-server /usr/local/bin/
 #sudo cp ~/.local/makeInstalls/redis-stable/src/redis-cli /usr/local/bin/
 
