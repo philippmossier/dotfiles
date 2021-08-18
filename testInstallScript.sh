@@ -116,16 +116,6 @@ git clone https://github.com/so-fancy/diff-so-fancy.git ~/.local/repos/diff-so-f
 
 echo ""
 echo "##################################################"
-echo "#################### exa #########################"
-echo "##################################################"
-echo ""
-cd ~/.local/zip && \
-curl -OL https://github.com/ogham/exa/releases/download/v0.10.1/exa-linux-x86_64-0.10.1.zip && \
-unzip exa-linux-x86_64-0.10.1.zip && \
-mv exa-linux-x86_64 ~/.local/bin/exa
-
-echo ""
-echo "##################################################"
 echo "################## golang ########################"
 echo "##################################################"
 echo ""
@@ -144,6 +134,13 @@ echo ""
 # cargo  cargo-clippy  cargo-fmt  cargo-miri  clippy-driver  rls  rust-gdb  rust-lldb  rustc  rustdoc  rustfmt  rustup
 sudo curl https://sh.rustup.rs -sSf | sh -s -- --profile default --default-toolchain stable -y
 
+echo ""
+echo "##################################################"
+echo "#################### exa #########################"
+echo "##################################################"
+echo ""
+cd ~
+cargo install exa
 
 echo ""
 echo "##################################################"
