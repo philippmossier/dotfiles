@@ -42,16 +42,16 @@ setopt histignorealldups sharehistory
 # ====== Local binaries, zsh-theme, zsh-autosuggest, zsh-autocomplete, bat-config =================
 
 # ----------------------------- load local binaries --------------------
-[ -d /home/phil/.local/bin ] && PATH="/home/phil/.local/bin:$PATH"
+[ -d $HOME/.local/bin ] && PATH="$HOME/.local/bin:$PATH"
 
 # ----------------------------- diff-so-fancy --------------------
-if [[ ! "$PATH" == */home/phil/.local/repos/diff-so-fancy* ]]; then
-    export PATH="${PATH:+${PATH}:}/home/phil/.local/repos/diff-so-fancy"
+if [[ ! "$PATH" == *$HOME/.local/repos/diff-so-fancy* ]]; then
+    export PATH="${PATH:+${PATH}:}$HOME/.local/repos/diff-so-fancy"
 fi
 
 # ----------------------------- golang --------------------
-if [[ ! "$PATH" == */home/phil/.local/go/bin* ]]; then
-    export PATH="${PATH:+${PATH}:}/home/phil/.local/go/bin"
+if [[ ! "$PATH" == *$HOME/.local/go/bin* ]]; then
+    export PATH="${PATH:+${PATH}:}$HOME/.local/go/bin"
 fi
 
 # ----- rust tab completion for zsh: -----------------------
@@ -63,8 +63,8 @@ fi
 # compinit -d ~/.zcompdump_custom
 
 # ----------------------------- rustlang --------------------	
-if [[ ! "$PATH" == */home/phil/.cargo/bin* ]]; then	
-    export PATH="${PATH:+${PATH}:}/home/phil/.cargo/bin"	
+if [[ ! "$PATH" == *$HOME/.cargo/bin* ]]; then	
+    export PATH="${PATH:+${PATH}:}$HOME/.cargo/bin"	
 fi
 
 # ------------ ---------------- bat config --------------------	
@@ -109,11 +109,11 @@ gm=38;5;203:ga=38;5;203:xa=38;5;239:*.ts=00:"
 
 # =================================== FZF SECTION =================================================
 
-if [[ ! "$PATH" == */home/phil/.local/repos/fzf/bin* ]]; then
-  export PATH="${PATH:+${PATH}:}/home/phil/.local/repos/fzf/bin"
+if [[ ! "$PATH" == *$HOME/.local/repos/fzf/bin* ]]; then
+  export PATH="${PATH:+${PATH}:}$HOME/.local/repos/fzf/bin"
 fi
-[[ $- == *i* ]] && source "/home/phil/.local/repos/fzf/shell/completion.zsh" 2> /dev/null
-source "/home/phil/.local/repos/fzf/shell/key-bindings.zsh"
+[[ $- == *i* ]] && source "$HOME/.local/repos/fzf/shell/completion.zsh" 2> /dev/null
+source "$HOME/.local/repos/fzf/shell/key-bindings.zsh"
 export FZF_DEFAULT_COMMAND='fdfind --type f --color=never'
 export FZF_DEFAULT_OPTS='
     --height 95% --multi --reverse --margin=0,1

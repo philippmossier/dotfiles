@@ -133,6 +133,7 @@ echo ""
 # all binaries installed from profile default: 
 # cargo  cargo-clippy  cargo-fmt  cargo-miri  clippy-driver  rls  rust-gdb  rust-lldb  rustc  rustdoc  rustfmt  rustup
 sudo curl https://sh.rustup.rs -sSf | sh -s -- --profile default --default-toolchain stable -y
+export PATH="${PATH:+${PATH}:}$HOME/.cargo/bin"
 
 echo ""
 echo "##################################################"
@@ -266,7 +267,7 @@ echo ""
 cd ~/.local/zip
 wget http://download.redis.io/redis-stable.tar.gz && tar xvzf redis-stable.tar.gz -C ~/.local/makeInstalls
 cd ~/.local/makeInstalls/redis-stable
-make
+make -j 8
 # optional test redis install (donwload tcl dependency first, !make test takes min 4mins!)
 # sudo apt install tcl -y
 # make test
