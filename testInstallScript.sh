@@ -16,6 +16,9 @@ wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 sudo add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/"
 
+# add newest python ppa to apt
+sudo add-apt-repository ppa:deadsnakes/ppa -y
+
 # add .NET package
 wget https://packages.microsoft.com/config/ubuntu/20.10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
@@ -62,8 +65,15 @@ echo " neofetch zsh zip unzip fd-find ripgrep postgres "
 echo "##################################################"
 echo ""
 sudo apt -y install \
-jq neofetch zsh zip unzip fd-find ripgrep postgresql build-essential
+jq neofetch zsh zip unzip fd-find ripgrep postgresql 
 
+echo ""
+echo "##################################################"
+echo "################ python and pip ##################"
+echo "##################################################"
+echo ""
+python3.9 -m ensurepip --default-pip --user
+python3.9 -m pip install --upgrade pip --user
 
 echo ""
 echo "##################################################"
@@ -133,7 +143,6 @@ echo ""
 # all binaries installed from profile default: 
 # cargo  cargo-clippy  cargo-fmt  cargo-miri  clippy-driver  rls  rust-gdb  rust-lldb  rustc  rustdoc  rustfmt  rustup
 sudo curl https://sh.rustup.rs -sSf | sh -s -- --profile default --default-toolchain stable -y
-# export PATH="${PATH:+${PATH}:}/home/phil/.cargo/bin" # does work but we have to change the username here, if needed
 source $HOME/.cargo/env
 
 echo ""
@@ -180,8 +189,8 @@ echo "#################### bat #########################"
 echo "##################################################"
 echo ""
 cd ~/.local/pkgs
-wget https://github.com/sharkdp/bat/releases/download/v0.18.1/bat_0.18.1_amd64.deb && \
-sudo dpkg -i bat_0.18.1_amd64.deb && \
+wget https://github.com/sharkdp/bat/releases/download/v0.18.2/bat_0.18.2_amd64.deb && \
+sudo dpkg -i bat_0.18.2_amd64.deb && \
 
 echo ""
 echo "##################################################"
@@ -189,7 +198,7 @@ echo "################# github cli #####################"
 echo "##################################################"
 echo ""
 cd ~/.local/pkgs && \
-curl -OL https://github.com/cli/cli/releases/download/v1.12.1/gh_1.12.1_linux_amd64.deb && \
+curl -OL https://github.com/cli/cli/releases/download/v1.14.0/gh_1.14.0_linux_amd64.deb && \
 sudo apt install ./gh_*_linux_amd64.deb
 
 echo ""
@@ -265,22 +274,18 @@ echo "##################################################"
 echo "##################### redis ######################"
 echo "##################################################"
 echo ""
-
-# cd ~/.local/zip
-# wget http://download.redis.io/redis-stable.tar.gz && tar xvzf redis-stable.tar.gz -C ~/.local/makeInstalls
-# cd ~/.local/makeInstalls/redis-stable
-# make -j 8
+cd ~/.local/zip
+wget http://download.redis.io/redis-stable.tar.gz && tar xvzf redis-stable.tar.gz -C ~/.local/makeInstalls
+cd ~/.local/makeInstalls/redis-stable
+make -j 8
+make install
 
 # optional test redis install (donwload tcl dependency first, !make test takes min 4mins!)
 # sudo apt install tcl -y
 # make test
-
 # make install or copying manually link: https://redis.io/topics/quickstart
-
-# make install
-
 # sudo cp ~/.local/makeInstalls/redis-stable/src/redis-server /usr/local/bin/
-#sudo cp ~/.local/makeInstalls/redis-stable/src/redis-cli /usr/local/bin/
+# sudo cp ~/.local/makeInstalls/redis-stable/src/redis-cli /usr/local/bin/
 
 echo "$(neofetch)"
 
