@@ -13,7 +13,7 @@
 ```bash
 git clone https://github.com/philippmossier/dotfiles.git
 ./dotfiles/installScript.sh
-chsh -s $(which zsh) && exec zsh
+chsh -s $(which zsh)
 ```
 
 *******************************************************************************
