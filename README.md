@@ -194,6 +194,16 @@ example
 ```
 
 🐞 **WSL2 always ROOT user Bug solution (needed for multiple `wsl --import` distros):**
+UPDATE: You can also try this json commandline setting instead of changing registry
+```windows terminal setting.json
+{
+    "commandline": "wsl.exe ~ -d ubuntu-main -u phil",
+    "guid": "{distroID}",
+    "hidden": false,
+    "name": "ubuntu-main",
+    "source": "Windows.Terminal.Wsl"
+},
+```
 
 WSL2 starts always with root user at start of a new wsl-session which results in no access to the imported files (distro-backups.tar).
 
