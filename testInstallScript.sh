@@ -65,13 +65,14 @@ echo " neofetch zsh zip unzip fd-find ripgrep postgres "
 echo "##################################################"
 echo ""
 sudo apt -y install \
-jq neofetch zsh zip unzip fd-find ripgrep postgresql 
+jq neofetch zsh zip unzip fd-find ripgrep postgresql build-essential
 
 echo ""
 echo "##################################################"
 echo "################ python and pip ##################"
 echo "##################################################"
 echo ""
+sudo apt -y install python3.9 python3.9-dev python3.9-venv
 python3.9 -m ensurepip --default-pip --user
 python3.9 -m pip install --upgrade pip --user
 
