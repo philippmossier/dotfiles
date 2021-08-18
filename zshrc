@@ -20,6 +20,11 @@ alias rurl='open_current_repository_url'
 alias chid='clubhouse_issues_in_development'
 alias python='python3'
 
+# List all node_modules found in a Directory
+alias list_node_modules='find . -name "node_modules" -type d -prune -print | xargs du -chs'
+# Delete all node_modules found in a Directory
+alias delete_node_modules='find . -name "node_modules" -type d -prune -print -exec rm -rf '{}' \;'
+
 # ================================= CUSTOMAZATION ===================================
 
 PrimaryEDITOR=code 
@@ -441,4 +446,4 @@ alias gd='gdnolock'
 #     test -z "$TMUX" && (tmux attach || tmux new-session) │	
 # fi
 
-echo "$(pyjoke)"
+# echo "$(pyjoke)"
