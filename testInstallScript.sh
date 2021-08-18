@@ -291,8 +291,6 @@ make install
 
 echo "$(neofetch)"
 
-echo "$(pyjoke)"
-
 cat << "PHIL"         
 	 
                                     /@
