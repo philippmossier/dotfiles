@@ -13,7 +13,6 @@ alias ls='exa'
 alias lsa='exa --all --long --header --git'
 alias cat='bat'
 alias killdocker='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
-eval $(thefuck --alias fuck)
 alias bbbs='bitbucket_build_status'
 alias rurl='open_current_repository_url'
 alias chid='clubhouse_issues_in_development'
