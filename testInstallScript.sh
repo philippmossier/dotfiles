@@ -133,8 +133,7 @@ echo ""
 # all binaries installed from profile default: 
 # cargo  cargo-clippy  cargo-fmt  cargo-miri  clippy-driver  rls  rust-gdb  rust-lldb  rustc  rustdoc  rustfmt  rustup
 sudo curl https://sh.rustup.rs -sSf | sh -s -- --profile default --default-toolchain stable -y
-# export PATH="${PATH:+${PATH}:}${HOME}/.cargo/bin" # does not worked , try exec zsh to instantly use cargo
-.bashrc
+export PATH="${PATH:+${PATH}:}home/phil/.cargo/bin" # does not worked , try exec zsh to instantly use cargo
 
 echo ""
 echo "##################################################"
@@ -321,4 +320,5 @@ PHIL
 echo ""
 echo ">>-----> Enjoy! <-----<<"
 echo ""
+cd
 exec zsh
