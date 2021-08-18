@@ -194,7 +194,8 @@ example
 ```
 
 🐞 **WSL2 always ROOT user Bug solution (needed for multiple `wsl --import` distros):**
-UPDATE: You can also try this json commandline setting instead of changing registry
+
+- UPDATE 08.2021: You can also try this json commandline setting instead of changing registry
 ```windows terminal setting.json
 {
     "commandline": "wsl.exe ~ -d ubuntu-main -u phil",
@@ -204,6 +205,8 @@ UPDATE: You can also try this json commandline setting instead of changing regis
     "source": "Windows.Terminal.Wsl"
 },
 ```
+- Update 08.2021: You may still need seting `DefaultUid` to Decimal: `1000` in registry because of always root user bug in vscode. 
+the ubunutu shell start with right user because of "commandline": "wsl.exe ~ -d ubuntu-main -u phil", but the code . command sometimes results in always root user in integrated vscode terminal, in that case we still need to change the registry value of  `DefaultUid` to Decimal: `1000`
 
 WSL2 starts always with root user at start of a new wsl-session which results in no access to the imported files (distro-backups.tar).
 
