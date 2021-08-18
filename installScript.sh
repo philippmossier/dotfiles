@@ -16,6 +16,9 @@ wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 sudo add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/"
 
+# add newest python ppa to apt
+sudo add-apt-repository ppa:deadsnakes/ppa -y
+
 # add .NET package
 wget https://packages.microsoft.com/config/ubuntu/20.10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
@@ -62,21 +65,17 @@ echo " neofetch zsh zip unzip fd-find ripgrep postgres "
 echo "##################################################"
 echo ""
 sudo apt -y install \
-jq neofetch zsh zip unzip fd-find ripgrep postgresql
+jq neofetch zsh zip unzip fd-find ripgrep postgresql build-essential
 
 echo ""
 echo "##################################################"
-echo "################# python (pip) ###################"
+echo "################ python and pip ##################"
 echo "##################################################"
 echo ""
-sudo apt -y install python3-dev python3-pip python3-setuptools
-
-echo ""
-echo "##################################################"
-echo "################## thefuck #######################"
-echo "##################################################"
-echo ""
-sudo pip3 install thefuck
+sudo apt -y install python3.9 python3.9-dev python3.9-venv
+python3.9 -m ensurepip --default-pip --user
+python3.9 -m pip install --upgrade pip --user
+python3.9 -m pip install pyjokes --user
 
 echo ""
 echo "##################################################"
@@ -129,23 +128,13 @@ git clone https://github.com/so-fancy/diff-so-fancy.git ~/.local/repos/diff-so-f
 
 echo ""
 echo "##################################################"
-echo "#################### exa #########################"
-echo "##################################################"
-echo ""
-cd ~/.local/zip && \
-curl -OL https://github.com/ogham/exa/releases/download/v0.10.1/exa-linux-x86_64-0.10.1.zip && \
-unzip exa-linux-x86_64-0.10.1.zip && \
-mv exa-linux-x86_64 ~/.local/bin/exa
-
-echo ""
-echo "##################################################"
 echo "################## golang ########################"
 echo "##################################################"
 echo ""
-# add go1.15.6 binary (path environment variable is in ~/.zshrc, i set custom path to ~/.local but default is /usr/local )
-sudo curl -OL https://golang.org/dl/go1.16.5.linux-amd64.tar.gz && \
-sudo tar -C ~/.local -xzf go1.16.5.linux-amd64.tar.gz && \
-sudo rm go1.16.5.linux-amd64.tar.gz
+# add go1.17 binary (path environment variable is in ~/.zshrc, i set custom path to ~/.local but default is /usr/local )
+sudo curl -OL https://golang.org/dl/go1.17.linux-amd64.tar.gz && \
+sudo tar -C ~/.local -xzf go1.17.linux-amd64.tar.gz && \
+sudo rm go1.17.linux-amd64.tar.gz
 
 echo ""
 echo "##################################################"
@@ -156,7 +145,15 @@ echo ""
 # all binaries installed from profile default: 
 # cargo  cargo-clippy  cargo-fmt  cargo-miri  clippy-driver  rls  rust-gdb  rust-lldb  rustc  rustdoc  rustfmt  rustup
 sudo curl https://sh.rustup.rs -sSf | sh -s -- --profile default --default-toolchain stable -y
+source $HOME/.cargo/env
 
+echo ""
+echo "##################################################"
+echo "#################### exa #########################"
+echo "##################################################"
+echo ""
+cd ~
+cargo install exa
 
 echo ""
 echo "##################################################"
@@ -194,8 +191,8 @@ echo "#################### bat #########################"
 echo "##################################################"
 echo ""
 cd ~/.local/pkgs
-wget https://github.com/sharkdp/bat/releases/download/v0.18.1/bat_0.18.1_amd64.deb && \
-sudo dpkg -i bat_0.18.1_amd64.deb && \
+wget https://github.com/sharkdp/bat/releases/download/v0.18.2/bat_0.18.2_amd64.deb && \
+sudo dpkg -i bat_0.18.2_amd64.deb && \
 
 echo ""
 echo "##################################################"
@@ -203,7 +200,7 @@ echo "################# github cli #####################"
 echo "##################################################"
 echo ""
 cd ~/.local/pkgs && \
-curl -OL https://github.com/cli/cli/releases/download/v1.12.1/gh_1.12.1_linux_amd64.deb && \
+curl -OL https://github.com/cli/cli/releases/download/v1.14.0/gh_1.14.0_linux_amd64.deb && \
 sudo apt install ./gh_*_linux_amd64.deb
 
 echo ""
@@ -282,15 +279,15 @@ echo ""
 cd ~/.local/zip
 wget http://download.redis.io/redis-stable.tar.gz && tar xvzf redis-stable.tar.gz -C ~/.local/makeInstalls
 cd ~/.local/makeInstalls/redis-stable
-make
+make -j 8
+make install
+
 # optional test redis install (donwload tcl dependency first, !make test takes min 4mins!)
 # sudo apt install tcl -y
 # make test
-
 # make install or copying manually link: https://redis.io/topics/quickstart
-make install
 # sudo cp ~/.local/makeInstalls/redis-stable/src/redis-server /usr/local/bin/
-#sudo cp ~/.local/makeInstalls/redis-stable/src/redis-cli /usr/local/bin/
+# sudo cp ~/.local/makeInstalls/redis-stable/src/redis-cli /usr/local/bin/
 
 echo "$(neofetch)"
 
@@ -331,3 +328,5 @@ PHIL
 echo ""
 echo ">>-----> Enjoy! <-----<<"
 echo ""
+cd
+exec zsh
