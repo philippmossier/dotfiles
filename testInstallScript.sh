@@ -75,6 +75,7 @@ echo ""
 sudo apt -y install python3.9 python3.9-dev python3.9-venv
 python3.9 -m ensurepip --default-pip --user
 python3.9 -m pip install --upgrade pip --user
+python3.9 -m pip install pyjokes --user
 
 echo ""
 echo "##################################################"
@@ -289,6 +290,8 @@ make install
 # sudo cp ~/.local/makeInstalls/redis-stable/src/redis-cli /usr/local/bin/
 
 echo "$(neofetch)"
+
+echo "$(pyjoke)"
 
 cat << "PHIL"         
 	 
