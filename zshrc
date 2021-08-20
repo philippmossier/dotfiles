@@ -1,29 +1,42 @@
-# MAIN zshrc file (Updated at 18.Aug.2021)
+# MAIN zshrc file (Updated at 20.Aug.2021)
 
 # ====================================== aliases ==================================================
+alias ls='exa'
+alias lsa='exa --all --long --header --git'
+alias cat='bat'
+
+alias pw1='tree -L 1 -C'
+alias pw2='tree -L 2 -C'
+alias pw3='tree -L 3 -C'
 
 alias ef='fzf_find_edit' # opens file with PrimaryEDITOR
 alias cf='fzf_change_directory'
 alias tf='fzf_grep_edit' # needs 1 argument to search for term, jumps to line at SecondaryEDITOR
+
 alias gadd='fzf_git_add'
 alias guadd='fzf_git_unadd'
 alias gll='fzf_git_log'
 alias grl='fzf_git_reflog'
 alias glS='fzf_git_log_pickaxe'
+
 alias fkill='fzf_kill'
-alias ls='exa'
-alias lsa='exa --all --long --header --git'
-alias cat='bat'
 alias killdocker='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
 alias bbbs='bitbucket_build_status'
 alias rurl='open_current_repository_url'
 alias chid='clubhouse_issues_in_development'
-alias python='python3'
+# alias python='python3' # default (python3 -V => 3.8 on Ubunutu default)
+
+# only use this if "python3.9 -V" returns a version
+alias python='python3.9'
+alias python3='python3.9'
 
 # List all node_modules found in a Directory
 alias list_node_modules='find . -name "node_modules" -type d -prune -print | xargs du -chs'
 # Delete all node_modules found in a Directory
 alias delete_node_modules='find . -name "node_modules" -type d -prune -print -exec rm -rf '{}' \;'
+
+# get new ssh-key and browser with github acc opens to add the new key
+alias ssh_setup_new='setupSSHKey'
 
 # ================================= CUSTOMAZATION ===================================
 
@@ -37,12 +50,25 @@ OS=`uname`
 USER=`whoami`
 DEFAULT_USER=`whoami`
 
-# ================================= shell history settings ========================================
+# +---------+
+# | HISTORY |
+# +---------+
 
 HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.zsh_history 
-setopt histignorealldups sharehistory
+# setopt histignorealldups sharehistory
+
+# new
+setopt EXTENDED_HISTORY          # Write the history file in the ':start:elapsed;command' format.
+setopt SHARE_HISTORY             # Share history between all sessions.
+setopt HIST_EXPIRE_DUPS_FIRST    # Expire a duplicate event first when trimming history.
+setopt HIST_IGNORE_DUPS          # Do not record an event that was just recorded again.
+setopt HIST_IGNORE_ALL_DUPS      # Delete an old recorded event if a new event is a duplicate.
+setopt HIST_FIND_NO_DUPS         # Do not display a previously found event.
+setopt HIST_IGNORE_SPACE         # Do not record an event starting with a space.
+setopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history file.
+setopt HIST_VERIFY               # Do not execute immediately upon history expansion.
 
 # ====== Local binaries, zsh-theme, zsh-autosuggest, zsh-autocomplete, bat-config =================
 
@@ -86,24 +112,35 @@ source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # change highlight colors in ~/.zsh/zsh-syntax-highlighting/highlighters/main/main-highlighter.zsh
 # current custom highlight color changes are: ${ZSH_HIGHLIGHT_STYLES[unknown-token]:=fg=#A32E2E,bold}
 
-# ================================ Tab Completion =================================================
+# ================================ Tab Completion OLD =================================================
 
-zstyle ':completion:*' auto-description 'specify: %d'
-zstyle ':completion:*' completer _expand _complete _correct _approximate
-zstyle ':completion:*' format 'Completing %d'
-zstyle ':completion:*' group-name ''
-zstyle ':completion:*' menu select=2
-eval "$(dircolors -b)"
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*' list-colors ''
-zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
-zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
-zstyle ':completion:*' menu select=long
-zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
-zstyle ':completion:*' use-compctl false
-zstyle ':completion:*' verbose true
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
-zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
+# zstyle ':completion:*' auto-description 'specify: %d'
+# zstyle ':completion:*' completer _expand _complete _correct _approximate
+# zstyle ':completion:*' format 'Completing %d'
+# zstyle ':completion:*' group-name ''
+# zstyle ':completion:*' menu select=2
+# # eval "$(dircolors -b)"
+# # zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+# # zstyle ':completion:*' list-colors ''
+# zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+# zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
+# zstyle ':completion:*' menu select=long
+# zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+# zstyle ':completion:*' use-compctl false
+# zstyle ':completion:*' verbose true
+# zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+# zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
+
+# zstyle ':completion:*:commands' list-colors '=*=1;31'
+# zstyle ':completion:*:aliases' list-colors '=*=2;38;5;128'
+# zstyle ':completion:*:*:kill:*' list-colors '=(#b) #([0-9]#)*( *[a-z])*=34=31=33'
+# zstyle ':completion:*:options' list-colors '=^(-- *)=34'
+
+# zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
+# zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
+
+# zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+
 
 # ============================================ exa colors =========================================
 
@@ -264,6 +301,26 @@ fzf_git_log_pickaxe() {
      fi
  }
 
+# Easy setup new SSH key on Ubuntu/Windows
+setupSSHKey() {
+    echo "Setting up Git"
+    ssh-keygen -t rsa -b 4096 -C "mossier.dev@gmail.com"
+    echo "new SSH key generated"
+    ssh-agent
+    ssh-add ~/.ssh/id_rsa
+    cat ~/.ssh/id_rsa.pub | clip.exe
+    cmd.exe /C start https://github.com/settings/ssh/new
+    echo "Your new ssh key was added to your clipboard, add it to GitHub (and consider turning on SSO)"
+    echo "Press any key when your key was added to GitHub"
+    while true; do
+        read -t 3 -n 1
+        if [ $? = 0 ] ; then
+            break;
+        else
+            echo "waiting for the keypress"
+        fi
+    done
+}
 # # ========================== NVM normal loading with nvmhook ===================================
 
 # normal nvm loading (slow at start of a new terminal but works with nvm hook below)
@@ -447,3 +504,108 @@ alias gd='gdnolock'
 # fi
 
 # echo "$(pyjoke)"
+
+
+
+
+
+## ---
+
+  # ____ ___  __  __ ____  _     _____ _____ ___ ___  _   _ 
+#  / ___/ _ \|  \/  |  _ \| |   | ____|_   _|_ _/ _ \| \ | |
+# | |  | | | | |\/| | |_) | |   |  _|   | |  | | | | |  \| |
+# | |__| |_| | |  | |  __/| |___| |___  | |  | | |_| | |\  |
+#  \____\___/|_|  |_|_|   |_____|_____| |_| |___\___/|_| \_|
+ #
+
+# +---------+
+# | General |
+# +---------+
+
+# zstyle pattern for the completion
+# :completion:<function>:<completer>:<command>:<argument>:<tag>
+
+# Should be called before compinit
+zmodload zsh/complist
+
+# Use hjlk in menu selection (during completion)
+# Doesn't work well with interactive mode
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+
+bindkey -M menuselect '^xg' clear-screen
+bindkey -M menuselect '^xi' vi-insert                      # Insert
+bindkey -M menuselect '^xh' accept-and-hold                # Hold
+bindkey -M menuselect '^xn' accept-and-infer-next-history  # Next
+bindkey -M menuselect '^xu' undo                           # Undo
+
+autoload -U compinit; compinit
+_comp_options+=(globdots) # With hidden files
+
+# +---------+
+# | Options |
+# +---------+
+
+# setopt GLOB_COMPLETE      # Show autocompletion menu with globs
+setopt MENU_COMPLETE        # Automatically highlight first element of completion menu
+setopt AUTO_LIST            # Automatically list choices on ambiguous completion.
+setopt COMPLETE_IN_WORD     # Complete from both ends of a word.
+
+# +---------+
+# | zstyles |
+# +---------+
+
+# Ztyle pattern
+# :completion:<function>:<completer>:<command>:<argument>:<tag>
+
+# Define completers
+zstyle ':completion:*' completer _extensions _complete _approximate
+
+# Use cache for commands using cache
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/.zcompcache"
+# Complete the alias when _expand_alias is used as a function
+zstyle ':completion:*' complete true
+
+zle -C alias-expension complete-word _generic
+bindkey '^A' alias-expension
+zstyle ':completion:alias-expension:*' completer _expand_alias
+
+# Use cache for commands which use it
+
+# Allow you to select in a menu
+zstyle ':completion:*' menu select
+
+# Autocomplete options for cd instead of directory stack
+zstyle ':completion:*' complete-options true
+
+zstyle ':completion:*' file-sort modification
+
+
+zstyle ':completion:*:*:*:*:corrections' format '%F{yellow}!- %d (errors: %e) -!%f'
+zstyle ':completion:*:*:*:*:descriptions' format '%F{blue}-- %D %d --%f'
+zstyle ':completion:*:*:*:*:messages' format ' %F{purple} -- %d --%f'
+zstyle ':completion:*:*:*:*:warnings' format ' %F{red}-- no matches found --%f'
+# zstyle ':completion:*:default' list-prompt '%S%M matches%s'
+# Colors for files and directory
+zstyle ':completion:*:*:*:*:default' list-colors ${(s.:.)LS_COLORS}
+
+# Only display some tags for the command cd
+zstyle ':completion:*:*:cd:*' tag-order local-directories directory-stack path-directories
+# zstyle ':completion:*:complete:git:argument-1:' tag-order !aliases
+
+# Required for completion to be in good groups (named after the tags)
+zstyle ':completion:*' group-name ''
+
+zstyle ':completion:*:*:-command-:*:*' group-order aliases builtins functions commands
+
+# See ZSHCOMPWID "completion matching control"
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
+zstyle ':completion:*' keep-prefix true
+
+zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
+
+
