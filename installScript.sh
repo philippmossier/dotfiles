@@ -257,14 +257,17 @@ echo "##################################################"
 echo ""
 pushd ~/.local/zip && \
 OPENSHIFT_VERSION='3.11.0'
-curl -OL https://github.com/openshift/origin/releases/download/v${OPENSHIFT_VERSION}/openshift-origin-client-tools-v${OPENSHIFT_VERSION}-0cbc58b-linux-64bit.tar.gz && \
-tar -xzf openshift-origin-client-tools-v${OPENSHIFT_VERSION}-0cbc58b-linux-64bit.tar.gz && \
-pushd openshift-origin-client-tools-v${OPENSHIFT_VERSION}-0cbc58b-linux-64bit && \
+OPENSHIFT_FILE='openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit.tar.gz'
+OPENSHIFT_FOLDER='openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit'
+
+curl -OL https://github.com/openshift/origin/releases/download/v${OPENSHIFT_VERSION}/${OPENSHIFT_FILE} && \
+tar -xzf $OPENSHIFT_FILE && \
+pushd $OPENSHIFT_FOLDER && \
 cp kubectl ~/.local/bin/ && \
 cp oc ~/.local/bin/ && \
 popd && \
-rm -rf openshift-origin-client-tools-v${OPENSHIFT_VERSION}-0cbc58b-linux-64bit && \
-rm openshift-origin-client-tools-v${OPENSHIFT_VERSION}-0cbc58b-linux-64bit.tar.gz && \
+rm -rf $OPENSHIFT_FOLDER && \
+rm $OPENSHIFT_FILE && \
 popd
 
 echo ""
