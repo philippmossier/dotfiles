@@ -36,14 +36,14 @@ echo "############# creating dir tree ##################"
 echo "##################################################"
 echo ""
 cd ~
-mkdir -p ~/.local/bin && \
-mkdir -p ~/.local/repos && \
-mkdir -p ~/.local/pkgs && \
-mkdir -p ~/.local/scripts && \
-mkdir -p ~/.local/zip && \ 
-mkdir -p ~/.zsh/themes && \
-mkdir -p ~/.local/makeInstalls && \
-mkdir -p ~/.local/npmGlobalInstalls && \
+mkdir -p ~/.local/bin
+mkdir -p ~/.local/repos
+mkdir -p ~/.local/pkgs
+mkdir -p ~/.local/scripts
+mkdir -p ~/.local/zip 
+mkdir -p ~/.zsh/themes
+mkdir -p ~/.local/makeInstalls
+mkdir -p ~/.local/npmGlobalInstalls
 mkdir -p ~/.ssh
 mkdir -p ~/.vim/colors
 mkdir -p ~/.vim/repos
@@ -53,10 +53,10 @@ echo "##################################################"
 echo "######## add symlinks to homedirectory ###########"
 echo "##################################################"
 echo ""
-ln -s dotfiles/zshrc 			.zshrc
-ln -s dotfiles/gitconfig       		.gitconfig
-ln -s dotfiles/nvmhook.sh 		.nvmhook.sh
-ln -s dotfiles/vimrc    		.vimrc
+ln -s dotfiles/zshrc .zshrc
+ln -s dotfiles/gitconfig .gitconfig
+ln -s dotfiles/nvmhook.sh .nvmhook.sh
+ln -s dotfiles/vimrc .vimrc
 
 echo ""
 echo "##################################################"
@@ -132,9 +132,10 @@ echo "################## golang ########################"
 echo "##################################################"
 echo ""
 # add go1.17 binary (path environment variable is in ~/.zshrc, i set custom path to ~/.local but default is /usr/local )
-sudo curl -OL https://golang.org/dl/go1.17.linux-amd64.tar.gz && \
-sudo tar -C ~/.local -xzf go1.17.linux-amd64.tar.gz && \
-sudo rm go1.17.linux-amd64.tar.gz
+GO_VERSION='1.17'
+sudo curl -OL https://golang.org/dl/go${GO_VERSION}.linux-amd64.tar.gz && \
+sudo tar -C ~/.local -xzf go${GO_VERSION}.linux-amd64.tar.gz && \
+sudo rm go${GO_VERSION}.linux-amd64.tar.gz
 
 echo ""
 echo "##################################################"
@@ -164,16 +165,16 @@ sudo apt install -y r-base
 # install dependencies for R packages ('tidyverse' package needs these)
 sudo apt install -y libcurl4-openssl-dev libssl-dev libxml2-dev
 
-
-echo ""
-echo "##################################################"
-echo "######### .NET 5.0 SDK & .NET 3.1 SDK ############"
-echo "##################################################"
-echo ""
-sudo apt-get install -y apt-transport-https && \
-sudo apt-get update && \
-sudo apt-get install -y dotnet-sdk-5.0 && \
-sudo apt install -y dotnet-sdk-3.1
+# enable .net just if needed
+# echo ""
+# echo "##################################################"
+# echo "######### .NET 5.0 SDK & .NET 3.1 SDK ############"
+# echo "##################################################"
+# echo ""
+# sudo apt-get install -y apt-transport-https && \
+# sudo apt-get update && \
+# sudo apt-get install -y dotnet-sdk-5.0 && \
+# sudo apt install -y dotnet-sdk-3.1
 
 echo ""
 echo "##################################################"
@@ -191,8 +192,9 @@ echo "#################### bat #########################"
 echo "##################################################"
 echo ""
 cd ~/.local/pkgs
-wget https://github.com/sharkdp/bat/releases/download/v0.18.2/bat_0.18.2_amd64.deb && \
-sudo dpkg -i bat_0.18.2_amd64.deb && \
+BAT_VERSION="0.18.2"
+wget https://github.com/sharkdp/bat/releases/download/v${BAT_VERSION}/bat_${BAT_VERSION}_amd64.deb && \
+sudo dpkg -i bat_${BAT_VERSION}_amd64.deb && \
 
 echo ""
 echo "##################################################"
@@ -200,7 +202,8 @@ echo "################# github cli #####################"
 echo "##################################################"
 echo ""
 cd ~/.local/pkgs && \
-curl -OL https://github.com/cli/cli/releases/download/v1.14.0/gh_1.14.0_linux_amd64.deb && \
+GIT_VERSION="1.14.0"
+curl -OL https://github.com/cli/cli/releases/download/v${GIT_VERSION}/gh_${GIT_VERSION}_linux_amd64.deb && \
 sudo apt install ./gh_*_linux_amd64.deb
 
 echo ""
@@ -240,9 +243,10 @@ echo "#################### tree ########################"
 echo "##################################################"
 echo ""
 cd ~/.local/zip
-curl -OL http://mama.indstate.edu/users/ice/tree/src/tree-1.8.0.tgz && \
-tar xf tree-1.8.0.tgz -C ~/.local/makeInstalls
-cd ~/.local/makeInstalls/tree-1.8.0
+TREE_VERSION="1.8.0"
+curl -OL http://mama.indstate.edu/users/ice/tree/src/tree-${TREE_VERSION}.tgz && \
+tar xf tree-${TREE_VERSION}.tgz -C ~/.local/makeInstalls
+cd ~/.local/makeInstalls/tree-${TREE_VERSION}
 make
 sudo make install
 
@@ -252,14 +256,15 @@ echo "################## openshift #####################"
 echo "##################################################"
 echo ""
 pushd ~/.local/zip && \
-curl -OL https://github.com/openshift/origin/releases/download/v3.11.0/openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit.tar.gz && \
-tar -xzf openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit.tar.gz && \
-pushd openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit && \
+OPENSHIFT_VERSION='3.11.0'
+curl -OL https://github.com/openshift/origin/releases/download/v${OPENSHIFT_VERSION}/openshift-origin-client-tools-v${OPENSHIFT_VERSION}-0cbc58b-linux-64bit.tar.gz && \
+tar -xzf openshift-origin-client-tools-v${OPENSHIFT_VERSION}-0cbc58b-linux-64bit.tar.gz && \
+pushd openshift-origin-client-tools-v${OPENSHIFT_VERSION}-0cbc58b-linux-64bit && \
 cp kubectl ~/.local/bin/ && \
 cp oc ~/.local/bin/ && \
 popd && \
-rm -rf openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit && \
-rm openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit.tar.gz && \
+rm -rf openshift-origin-client-tools-v${OPENSHIFT_VERSION}-0cbc58b-linux-64bit && \
+rm openshift-origin-client-tools-v${OPENSHIFT_VERSION}-0cbc58b-linux-64bit.tar.gz && \
 popd
 
 echo ""
@@ -279,8 +284,8 @@ echo ""
 cd ~/.local/zip
 wget http://download.redis.io/redis-stable.tar.gz && tar xvzf redis-stable.tar.gz -C ~/.local/makeInstalls
 cd ~/.local/makeInstalls/redis-stable
-make -j 8
-make install
+make --quiet -j 8
+make install --quiet
 
 # optional test redis install (donwload tcl dependency first, !make test takes min 4mins!)
 # sudo apt install tcl -y
@@ -326,7 +331,9 @@ cat << "PHIL"
 PHIL
 
 echo ""
-echo ">>-----> Enjoy! <-----<<"
+echo "To complete this setup you need to change your default shell to zsh."
+echo "Just run:"
+echo "chsh -s (which zsh)"
 echo ""
 cd
 exec zsh
