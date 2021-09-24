@@ -65,7 +65,10 @@ edit powershell.ps1 ($profile)
 Invoke-Expression (&starship init powershell)
 $ENV:STARSHIP_CONFIG = "$HOME\.starship\config.toml"
 ```
-# ================================================
+
+- Now just install 'Firac Code Nerd Font'
+- from https://www.nerdfonts.com/font-downloads
+# =========================================
 
 Install scoop (package manager, optional)
 ```
