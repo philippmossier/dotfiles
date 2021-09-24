@@ -31,6 +31,40 @@ Install chocolatey
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 ```
 
+Install all pks via choco:
+choco install git
+choco install node
+choco install poshgit
+choco install starship
+
+make ~/.starship/config.toml
+```
+# Inserts a blank line between shell prompts
+add_newline = true
+
+# Replace the "❯" symbol in the prompt with "➜"
+[character]                            # The name of the module we are configuring is "character"
+success_symbol = "[❯](bold green)"     # The "success_symbol" segment is being set to "➜" with the color "bold green"
+
+# Disable the package module, hiding it from the prompt completely
+[package]
+disabled = true
+
+# Disable the nodejs module, hiding it from the prompt completely
+[nodejs]
+disabled = true
+```
+
+edit powershell.ps1 ($profile)
+```
+# Set next line only if choco does not auto set posh-git module like: Import-Module 'C:\tools\poshgit\dahlbyk-posh-git-9bda399\src\posh-git.psd1'
+# Import-Module posh-git  
+
+Invoke-Expression (&starship init powershell)
+$ENV:STARSHIP_CONFIG = "$HOME\.starship\config.toml"
+```
+
+
 Install scoop (package manager, optional)
 ```
 Set-ExecutionPolicy RemoteSigned -scope CurrentUser
