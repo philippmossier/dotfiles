@@ -31,11 +31,13 @@ Install chocolatey
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 ```
 
-Install all pks via choco:
+# ========= Install all pks via choco: ===========
+```
 choco install git
 choco install node
 choco install poshgit
 choco install starship
+```
 
 make ~/.starship/config.toml
 ```
@@ -63,7 +65,7 @@ edit powershell.ps1 ($profile)
 Invoke-Expression (&starship init powershell)
 $ENV:STARSHIP_CONFIG = "$HOME\.starship\config.toml"
 ```
-
+# ================================================
 
 Install scoop (package manager, optional)
 ```
