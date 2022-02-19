@@ -58,7 +58,7 @@
   "defaultProfile": "{id1}",
   "profiles": {
     "defaults": {
-      "fontFace": "FiraCode NF",
+      "fontFace": "Hack NF" // SauceCodePro NF, Hack NF, RobotoMono NF
       "fontSize": 10,
       "useAcrylic": false
     },
@@ -68,7 +68,7 @@
         "colorScheme": "OneDark",
         "commandline": "wsl.exe ~ -d ubuntu_main -u phil",
         "experimental.retroTerminalEffect": false,
-        "fontFace": "FiraCode NF",
+        "fontFace": "Hack NF" // SauceCodePro NF, Hack NF, RobotoMono NF
         "guid": "{id1}",
         "hidden": false,
         "name": "ubuntu_main",
@@ -100,7 +100,7 @@
         "bellStyle": "none",
         "colorScheme": "OneDark",
         "commandline": "wsl.exe ~ -d ubuntu-main -u phil",
-        "fontFace": "FiraCode NF",
+        "fontFace": "Hack NF" // SauceCodePro NF, Hack NF, RobotoMono NF
         "fontSize": 10,
         "guid": "{id5}",
         "hidden": true,
