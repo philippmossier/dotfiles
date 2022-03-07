@@ -20,6 +20,15 @@
       "after": [
         "<Esc>"
       ]
+    },
+    {
+      "before": [
+        "j",
+        "k"
+      ],
+      "after": [
+        "<Esc>"
+      ]
     }
     // {
     //   "before": ["k", "j"],
@@ -168,18 +177,26 @@
       ]
     },
     // overwrites "tab" indent (tab indent is on "shift+>" instead )
-    {
-      "before": [
-        "<tab>"
-      ],
-      "commands": [
-        "workbench.action.nextEditor"
-      ]
-    },
+    // {
+    //   "before": [
+    //     "<tab>"
+    //   ],
+    //   "commands": [
+    //     "workbench.action.nextEditor"
+    //   ]
+    // },
     // overwrites "shift+tab" unident (tab unindent is on "shift+<" instead )
+    // {
+    //   "before": [
+    //     "<S-tab>"
+    //   ],
+    //   "commands": [
+    //     "workbench.action.previousEditor"
+    //   ]
+    // },
     {
       "before": [
-        "<S-tab>"
+        "<S-h>"
       ],
       "commands": [
         "workbench.action.previousEditor"
@@ -187,12 +204,10 @@
     },
     {
       "before": [
-        "<leader>",
-        "d"
+        "<S-l>"
       ],
-      "after": [
-        "d",
-        "d"
+      "commands": [
+        "workbench.action.nextEditor"
       ]
     },
     // turn off highlighting (after search for example)
@@ -240,15 +255,22 @@
         "workbench.action.closeActiveEditor"
       ]
     },
-    {
-      "before": [
-        "<leader>",
-        "w"
-      ],
-      "commands": [
-        "workbench.action.closeActiveEditor"
-      ]
-    },
+    // {
+    //   "key": "xxxx",
+    //   "command": "workbench.action.toggleSidebarVisibility",
+    //   "when": "editorTextFocus && vim.active && vim.mode != 'Insert'"
+    // },
+    // {
+    //   "before": [
+    //     "<cmd>",
+    //     "B",
+    //     "d",
+    //     "<cr>",
+    //   ],
+    //   "commands": [
+    //     "workbench.action.closeActiveEditor"
+    //   ]
+    // },
     {
       "before": [
         "<leader>",
@@ -283,10 +305,25 @@
     {
       "before": [
         "<leader>",
+        "e",
         "e"
       ], // ctrl+shift+e vscodeDefaulteybindings
       "commands": [
         "workbench.view.explorer"
+        // "workbench.action.toggleSidebarVisibility",
+        // "workbench.action.focusSideBar"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "e",
+        "q"
+      ], // ctrl+shift+e vscodeDefaulteybindings
+      "commands": [
+        // "workbench.view.explorer"
+        "workbench.action.toggleSidebarVisibility",
+        // "workbench.action.focusSideBar"
       ]
     },
     {
@@ -626,12 +663,12 @@
   // "editor.tabSize": 4
   // "terminal.integrated.lineHeight": 1,
   // disabled settings:
-  
- 
+  "sync.gist": "6fc2914c0c217e0b699eae187cde132c",
+  // "sync.gist": "6fc2914c0c217e0b699eae187cde132c",
   // "sync.removeExtensions": false // to disable deleting remote(wsl) extensions
   // "editor.formatOnSave": true,
   // "editor.detectIndentation": false,
-
+  // "sync.gist": "790b30233683d5807d5f1c172397045d"
   // "workbench.colorCustomizations": {
   // sections found here: https://code.visualstudio.com/api/references/theme-colorsdf
   //"titleBar.activeBackground":"#6f6f6f",
