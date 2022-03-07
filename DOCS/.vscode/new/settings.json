@@ -1,0 +1,676 @@
+{
+  // -------- neovim ------
+  // "vscode-neovim.useWSL": true,
+  // "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
+  // ------- neovim end ----------
+  // ------------------ Vim Notes -------------------------------
+  // -- Visual mode/normal mode ---
+  // 1. Select lines and (delete/copy) and paste somewhere else
+  // shift + V + j(repeat) + d/j(delete/copy) => p(paste)
+  // 2. Select occurences and change selected value:
+  // ctrl + d(repeat) => c(change) + <new input>
+  // ------------------ Vim Notes end----------------------------
+  // ------------------- vim extension settings --------------------------
+  "vim.insertModeKeyBindings": [
+    {
+      "before": [
+        "j",
+        "j"
+      ],
+      "after": [
+        "<Esc>"
+      ]
+    }
+    // {
+    //   "before": ["k", "j"],
+    //   "after": ["<Esc>"]
+    // },
+    // {
+    //   "before": ["<C-j>"],
+    //   "after": ["<Esc>"]
+    // },
+    // {
+    //   "before": ["<C-k>"],
+    //   "after": ["<Esc>"]
+    // }
+  ],
+  // "files.autoSave": "onFocusChange",
+  "vim.easymotion": true,
+  "vim.incsearch": true,
+  "vim.useSystemClipboard": true,
+  "vim.useCtrlKeys": true,
+  "vim.hlsearch": true,
+  // "vim.sneak": true, // uses the "s" key (https://github.com/justinmk/vim-sneak)
+  "vim.cursorStylePerMode.insert": "line",
+  "vim.cursorStylePerMode.normal": "block",
+  "vim.cursorStylePerMode.replace": "block-outline",
+  "vim.cursorStylePerMode.visual": "block-outline",
+  "vim.cursorStylePerMode.visualblock": "block-outline",
+  "vim.cursorStylePerMode.visualline": "block-outline",
+  "vim.normalModeKeyBindings": [],
+  "vim.visualModeKeyBindings": [
+    {
+      "before": [
+        ">"
+      ],
+      "after": [
+        ">",
+        "g",
+        "v"
+      ]
+    },
+    {
+      "before": [
+        "<"
+      ],
+      "after": [
+        "<",
+        "g",
+        "v"
+      ]
+    },
+    {
+      "before": [
+        "<C-j>"
+      ],
+      "after": [
+        "<Esc>"
+      ]
+    },
+    {
+      "before": [
+        "<C-k>"
+      ],
+      "after": [
+        "<Esc>"
+      ]
+    },
+    {
+      "before": [
+        "p"
+      ],
+      "after": [
+        "\"",
+        "_",
+        "d",
+        "P" // description at 11:46 (https://www.youtube.com/watch?v=435-amtVYJ8&list=PLhoH5vyxr6Qq41NFL4GvhFp-WLd5xzIzZ&index=3)
+      ]
+    }
+  ],
+  "vim.normalModeKeyBindingsNonRecursive": [
+    // Part of TOP 5 VIM remaps https://www.youtube.com/watch?v=hSHATqh8svM
+    {
+      "before": [
+        "Y"
+      ],
+      "after": [
+        "y",
+        "$"
+      ]
+    },
+    {
+      "before": [
+        "n"
+      ],
+      "after": [
+        "n",
+        "z",
+        "z",
+        "z",
+        "v"
+      ]
+    },
+    {
+      "before": [
+        "N"
+      ],
+      "after": [
+        "N",
+        "z",
+        "z",
+        "z",
+        "v"
+      ]
+    },
+    {
+      "before": [
+        "J"
+      ],
+      "after": [
+        "m",
+        "z",
+        "J",
+        "`",
+        "z"
+      ]
+    },
+    // ------------------------------------------------------------
+    // undo works in vscode-vim but the file dirty indicator does not disappear when pressing "u" (only after ctrl+z (vscode undo))
+    // https://github.com/VSCodeVim/Vim/issues/3201
+    // https://github.com/VSCodeVim/Vim/issues/1490
+    // next line sets vim undo to vscode undo:
+    {
+      "before": [
+        "u"
+      ],
+      "commands": [
+        "undo"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "d"
+      ],
+      "after": [
+        "d",
+        "d"
+      ]
+    },
+    // overwrites "tab" indent (tab indent is on "shift+>" instead )
+    {
+      "before": [
+        "<tab>"
+      ],
+      "commands": [
+        "workbench.action.nextEditor"
+      ]
+    },
+    // overwrites "shift+tab" unident (tab unindent is on "shift+<" instead )
+    {
+      "before": [
+        "<S-tab>"
+      ],
+      "commands": [
+        "workbench.action.previousEditor"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "d"
+      ],
+      "after": [
+        "d",
+        "d"
+      ]
+    },
+    // turn off highlighting (after search for example)
+    {
+      "before": [
+        "<C-h>"
+      ],
+      "commands": [
+        ":nohl"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "s"
+      ],
+      "commands": [
+        "workbench.action.splitEditor"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "."
+      ],
+      "commands": [
+        "workbench.action.splitEditorToRightGroup"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        ","
+      ],
+      "commands": [
+        "workbench.action.splitEditorToPreviousGroup"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "q"
+      ],
+      "commands": [
+        "workbench.action.closeActiveEditor"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "w"
+      ],
+      "commands": [
+        "workbench.action.closeActiveEditor"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "p"
+      ],
+      "commands": [
+        "workbench.action.keepEditor"
+      ]
+    },
+    // {
+    //   "before": ["<leader>", "a"],
+    //   "commands": ["workbench.action.closeEditor esInGroup"]
+    // },
+    {
+      "before": [
+        "<leader>",
+        "b"
+      ], // ctrl+shift+b vscodeDefaulteybindings
+      "commands": [
+        "workbench.action.toggleSidebarVisibility"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "f"
+      ],
+      "commands": [
+        "revealInExplorer"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "e"
+      ], // ctrl+shift+e vscodeDefaulteybindings
+      "commands": [
+        "workbench.view.explorer"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "h"
+      ],
+      "after": [
+        "_"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "l"
+      ],
+      "after": [
+        "$"
+      ]
+    }
+    // use ctrl+shift+z OR ctrl+y instead (vscode redo)
+    // {
+    //   "before": ["<C-r>"],
+    //   "commands": ["redo"]
+    // }
+  ],
+  "vim.leader": "<space>",
+  "vim.handleKeys": {
+    "<C-a>": false,
+    "<C-f>": false,
+    // VS Code new marker @ next occurence
+    "<C-d>": true, // this is the vim "half page down" command. addSelectionToNextFindMatch(vscode new marker @ next occurence) is set to ctrl+shift+d instead
+    // Copy
+    "<C-c>": false,
+    // Cut
+    "<C-x>": false,
+    // Paste
+    "<C-v>": false,
+    "<C-z>": false,
+    "<C-y>": false,
+    "<C-r>": true
+  },
+  // -------------------- vim extension settings end ---------------------
+  "docsView.documentationView.updateMode": "live", // docsView extension which shows onHover docs in sidepanel
+  // twin.macro settings, https://github.com/ben-rogerson/twin.macro/discussions/227
+  // "tailwindCSS.experimental.classRegex": [
+  //   "tw`([^`]*)", // tw`...`
+  //   "tw=\"([^\"]*)", // <div tw="..." />
+  //   "tw={\"([^\"}]*)", // <div tw={"..."} />
+  //   "tw\\.\\w+`([^`]*)", // tw.xxx`...`
+  //   "tw\\(.*?\\)`([^`]*)" // tw(Component)`...`
+  // ],
+  // new powershell config args:
+  // "terminal.integrated.shellArgs.windows": ["-NoLogo", "-NoExit", "-Command", "& { Write-Host }"],
+  // "r.rterm.linux": "/usr/bin/R",
+  // new powershell config args:
+  "terminal.integrated.defaultProfile.windows": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe (migrated)",
+  "terminal.integrated.profiles.windows": {
+    "PowerShell": {
+      "source": "PowerShell",
+      "args": [
+        "-NoLogo",
+        "-NoExit",
+        "-Command",
+        "& { Write-Host }"
+      ]
+    }
+  },
+  "go.languageServerFlags": [
+    "-rpc.trace"
+  ],
+  // skip node source code when debugging (not working)
+  "debug.javascript.terminalOptions": {
+    "skipFiles": [
+      "<node_internals>/**"
+    ]
+  },
+  "prettier.trailingComma": "es5",
+  "prettier.arrowParens": "always",
+  "prettier.jsxBracketSameLine": true,
+  "debug.javascript.autoAttachSmartPattern": [
+    "${workspaceFolder}/**",
+    "!**/node_modules/**",
+    "**/$KNOWN_TOOLS$/**"
+  ],
+  // "editor.snippetSuggestions": "bottom",
+  "editor.suggestSelection": "first",
+  "[go]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "golang.go"
+  },
+  // "go.autocompleteUnimportedPackages": true,
+  "go.formatTool": "goimports",
+  "[solidity]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "JuanBlanco.solidity"
+  },
+  "editor.autoClosingQuotes": "always",
+  "tailwindCSS.includeLanguages": {
+    "typescript": "javascript",
+    "typescriptreact": "javascript",
+    "plaintext": "html" // for tailwind css intellisense extension (Brad Cornes):
+  },
+  "tailwindCSS.emmetCompletions": true,
+  "tailwindCSS.colorDecorators": true,
+  "tailwindCSS.validate": true,
+  // new vscode update settings ----
+  "workbench.editor.decorations.colors": false,
+  "workbench.editor.decorations.badges": false,
+  "workbench.editor.wrapTabs": true,
+  "workbench.editor.tabSizing": "shrink", // shrink hides badges
+  // ---------
+  "editor.renderWhitespace": "selection",
+  // eslint/eslint-prettier:
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "eslint.run": "onType", // only lints after saving and not during writing (also effects eslint-prettier addons)
+  "[json]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    // when using vanilla js:
+    // "editor.formatOnSave": true,
+    // "editor.defaultFormatter": "esbenp.prettier-vscode",
+    // with react and esLint prettier:
+    // "editor.formatOnSave": false,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    }
+  },
+  "[javascriptreact]": {
+    "editor.formatOnSave": false,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    }
+    // "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    // "editor.formatOnSave": false,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
+    // "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "prettier.printWidth": 100,
+  "[typescriptreact]": {
+    // "editor.formatOnSave": false,
+    "editor.formatOnSave": false,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
+    // "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "less.validate": false,
+  "scss.validate": false,
+  "stylelint.enable": true,
+  "stylelint.validate": [
+    "css",
+    "scss",
+    "sass"
+  ],
+  // stylelint only supports run "onType" (not "onSave")
+  "[css]": {
+    // "editor.formatOnSave": false,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": true
+    }
+  },
+  // "[scss]": {
+  //   "editor.formatOnSave": false,
+  //   "editor.codeActionsOnSave": {
+  //     "source.fixAll.stylelint": true
+  //   }
+  // },
+  "[scss]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "stylelint.vscode-stylelint"
+  },
+  // html standard prettier formatter:
+  // (maybe change settings/default Formatter to: esbenp.prettier-vscode)
+  "[html]": {
+    // "editor.formatOnSave": false,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  // markdownlint:
+  "markdownlint.run": "onSave",
+  "[markdown]": {
+    // "editor.formatOnSave": false,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.markdownlint": true
+    }
+  },
+  // sql formatter:
+  "[sql]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "mtxr.sqltools"
+  },
+  // python:
+  "[python]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "ms-python.python",
+    "editor.tabSize": 4
+  },
+  // code runner
+  "code-runner.executorMap": {
+    "python": "python3"
+  },
+  "code-runner.runInTerminal": true,
+  // vs-code editor settings:
+  "window.titleBarStyle": "custom",
+  "workbench.iconTheme": "material-icon-theme",
+  "editor.minimap.enabled": false,
+  "editor.mouseWheelZoom": true,
+  "window.menuBarVisibility": "classic",
+  "workbench.statusBar.visible": true,
+  "workbench.activityBar.visible": true,
+  "editor.selectionClipboard": false, // disables mousewheelclick copy paste
+  // emmet:
+  "emmet.triggerExpansionOnTab": true,
+  // "emmet.includeLanguages": {
+  //   "javascript": "javascriptreact",
+  //   "typescript": "typescriptreact",
+  //   "jsx-sublime-babel-tags": "javasriptreact",
+  //   "jsx-sublime-babel-tags": "typescriptreact",
+  // },
+  "emmet.showExpandedAbbreviation": "never",
+  // better comments:
+  // "better-comments.multilineComments": true,
+  // gitlens disable inline contributor info
+  "gitlens.currentLine.enabled": false,
+  // editor:
+  // "editor.tabSize": 2,
+  "editor.insertSpaces": false,
+  // "editor.cursorStyle": "line", // better disable this line when using vscode-vim (can relate to bugs)
+  "workbench.colorTheme": "Material Theme Palenight High Contrast", // ghosting arrives under 0, needs gpu acc off to fix this
+  // "terminal.integrated.gpuAcceleration": "off", // this line results in a bug on neovim inside vscode terminal (curor in normal mode is missing)
+  // terminal zsh/powerline
+  // "terminal.integrated.shell.linux": "/bin/zsh",
+  "terminal.integrated.defaultProfile.linux": "zsh",
+  "terminal.integrated.fontFamily": "SauceCodePro NF", //"Source Code Pro for Powerline",//"Cascadia Code PL",//"Source Code Pro for Powerline", // Fira Code, FiraCode NF ,Source Code Pr for Powerline, "Cascadia Code PL" , "DejaVu Sans Mono for Powerline", "Inconsolata for Powerline", "Source Code Pro for Powerline", "FiraCode Nerd Font Mono","FuraCode Nerd Font Mono"
+  "terminal.integrated.fontSize": 14,
+  // "terminal.integrated.fontWeight": "400",
+  // "terminal.integrated.lineHeight": 1,
+  // "terminal.external.windowsExec": "%userprofile%\\AppData\\Local\\hyper\\Hyper.exe",
+  // "terminal.integrated.defaultProfile.windows": "wsl.exe",
+  // "terminal.integrated.cursorStyle": "line",
+  // "terminal.integrated.cursorBlinking": false,
+  // "terminal.integrated.cursorWidth": 1,
+  // "workbench.colorCustomizations": {
+  //   "terminalCursor.foreground": "#ff0000",
+  //   "terminalCursor.background": "#0000ff"
+  // },
+  // "terminal.integrated.cursorBlinking": true, // currenly bugged
+  // "terminal.integrated.altClickMovesCursor": true,
+  // "terminal.integrated.fastScrollSensitivity": 5,
+  // "terminal.integrated.minimumContrastRatio": 1, // contrast of suggestions 1 is default
+  // "terminal.integrated.rightClickBehavior": "copyPaste",
+  "vsicons.dontShowNewVersionMessage": true,
+  "javascript.preferences.importModuleSpecifier": "relative",
+  "editor.fontLigatures": false, // only works with ligatureFonts like "Fira Code" or 'Source Code Pro for Powerline', 'Cascadia Code'
+  // "editor.fontFamily": "Consolas", // default vscode fontFamily
+  "editor.fontFamily": "'Consolas','Cascadia Code','FiraCode NF' , 'Operator Mono', 'iA Writer Duospace', 'Source Code Pro for Powerline', Menlo, Monaco, monospace",
+  // "editor.fontSize": 12,
+  // "editor.lineHeight": 24,
+  "editor.minimap.renderCharacters": false,
+  "workbench.editor.enablePreview": true, // keep tabs always open or not
+  "workbench.editor.showIcons": true,
+  "editor.cursorBlinking": "smooth",
+  "editor.cursorStyle": "line",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "files.associations": {
+    "*.xml": "html",
+    "*.rmd": "markdown",
+    "*.tmpl": "html"
+  },
+  // "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.singleQuote": true,
+  "css.lint.float": "warning",
+  "css.lint.argumentsInColorFunction": "ignore",
+  "css.lint.fontFaceProperties": "ignore",
+  "css.validate": false,
+  "css.lint.hexColorLength": "ignore",
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  // "editor.tokenColorCustomizations": {
+  //   "textMateRules": [
+  //     {
+  //       "name": "One Dark italic",
+  //       "scope": [
+  //         "comment",
+  //         "entity.other.attribute-name",
+  //         "keyword",
+  //         "markup.underline.link",
+  //         "storage.modifier",
+  //         "storage.type",
+  //         "string.url",
+  //         "variable.language.super",
+  //         "variable.language.this"
+  //       ],
+  //       "settings": {
+  //         "fontStyle": "italic"
+  //       }
+  //     },
+  //     {
+  //       "name": "One Dark italic reset",
+  //       "scope": [
+  //         "keyword.operator",
+  //         "keyword.other.type",
+  //         "storage.modifier.import",
+  //         "storage.modifier.package",
+  //         "storage.type.built-in",
+  //         "storage.type.function.arrow",
+  //         "storage.type.generic",
+  //         "storage.type.java",
+  //         "storage.type.primitive"
+  //       ],
+  //       "settings": {
+  //         "fontStyle": ""
+  //       }
+  //     }
+  //   ]
+  // },
+  // python settings(only if needed)
+  // "editor.detectIndentation": true,
+  // "editor.insertSpaces": true,
+  // "editor.tabSize": 4
+  // "terminal.integrated.lineHeight": 1,
+  // disabled settings:
+  
+ 
+  // "sync.removeExtensions": false // to disable deleting remote(wsl) extensions
+  // "editor.formatOnSave": true,
+  // "editor.detectIndentation": false,
+
+  // "workbench.colorCustomizations": {
+  // sections found here: https://code.visualstudio.com/api/references/theme-colorsdf
+  //"titleBar.activeBackground":"#6f6f6f",
+  // "window.activeBorder":"#c21b1b",
+  // "activityBar.background": "#111111",
+  // "activityBarBadge.background": "#FFA000",
+  // "list.activeSelectionForeground": "#FFA000",
+  // "list.inactiveSelectionForeground": "#FFA000",
+  // "list.highlightForeground": "#FFA000",
+  // "scrollbarSlider.activeBackground": "#FFA00050",
+  // "editorSuggestWidget.highlightForeground": "#FFA000",
+  // "textLink.foreground": "#FFA000",
+  // "progressBar.background": "#FFA000",
+  // "pickerGroup.foreground": "#FFA000",
+  // "tab.activeBorder": "#FFA000",
+  // "notificationLink.foreground": "#FFA000",
+  // "editorWidget.resizeBorder": "#FFA000",
+  // "editorWidget.border": "#FFA000",
+  // "settings.modifiedItemIndicator": "#FFA000",
+  // "settings.headerForeground": "#FFA000",
+  // "panelTitle.activeBorder": "#FFA000",
+  // "breadcrumb.activeSelectionForeground": "#FFA000",
+  // "menu.selectionForeground": "#FFA000",
+  // "menubar.selectionForeground": "#FFA000"
+  // },
+  "redhat.telemetry.enabled": false,
+  "security.workspace.trust.untrustedFiles": "open",
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter-notebook"
+  },
+  "notebook.cellToolbarLocation": {
+    "default": "right",
+    "jupyter-notebook": "left"
+  },
+  "diffEditor.wordWrap": "on",
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[lua]": {
+    "editor.defaultFormatter": "yinfei.luahelper"
+  }
+}
