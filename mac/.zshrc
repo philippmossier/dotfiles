@@ -1,0 +1,494 @@
+# +-------------+
+# |  ALIASES    |
+# +-------------+
+
+alias ls='exa'
+alias lsa='exa --all --long --header --git --icons'
+alias cat='bat'
+
+alias pw1='tree -L 1 -C'
+alias pw2='tree -L 2 -C'
+alias pw3='tree -L 3 -C'
+
+alias ef='fzf_find_edit' # opens file with PrimaryEDITOR
+alias cf='fzf_change_directory'
+alias tf='fzf_grep_edit' # needs 1 argument to search for term, jumps to line at SecondaryEDITOR
+
+alias gadd='fzf_git_add'
+alias guadd='fzf_git_unadd'
+alias gll='fzf_git_log'
+alias grl='fzf_git_reflog'
+alias glS='fzf_git_log_pickaxe'
+
+alias fdfind='fd' # just in case some func uses fdfind instead of fd
+
+alias fkill='fzf_kill'
+alias killdocker='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
+
+# List all node_modules found in a Directory
+alias list_node_modules='find . -name "node_modules" -type d -prune -print | xargs du -chs'
+# Delete all node_modules found in a Directory
+alias delete_node_modules='find . -name "node_modules" -type d -prune -print -exec rm -rf '{}' \;'
+
+alias update_nvim_nightly='rm -rf .cache/nvim && rm -rf .local/share/nvim && rm -rf .local/bin/nvim-macos && curl -LO https://github.com/neovim/neovim/releases/download/nightly/nvim-macos.tar.gz && tar xzf nvim-macos.tar.gz && mv nvim-macos .local/bin/nvim-macos && rm -rf nvim-macos && rm nvim-macos.tar.gz'
+alias update_nvim_stable='rm -rf .cache/nvim && rm -rf .local/share/nvim && rm -rf .local/bin/nvim-macos && curl -LO https://github.com/neovim/neovim/releases/download/v0.8.0/nvim-macos.tar.gz && tar xzf nvim-macos.tar.gz && mv nvim-macos .local/bin/nvim-macos && rm -rf nvim-macos && rm nvim-macos.tar.gz'
+# alias nvim='~/.local/bin/nvim-macos/bin/nvim'
+alias remove_nvim_cache_share='rm -rf .cache/nvim && rm -rf .local/share/nvim'
+# alias vim='~/.local/bin/nvim-macos/bin/nvim'
+# alias nvim='~/nvim-macos/bin/nvim'
+# alias vim='~/nvim-macos/bin/nvim'
+
+alias lvim='~/.local/bin/lvim'
+alias astronvim_config='nvim ~/.config/nvim/lua/user/init.lua'
+
+# alias vim='/opt/homebrew/bin/nvim'g
+
+# +-------------+
+# |  VARIABLES  |
+# +-------------+
+
+PrimaryEDITOR=code
+SecondaryEDITOR=vim # only used for 'tf' (ripgrep search)
+ShellTheme=starship  # Select agnoster, spaceship, starship
+OS=`uname`
+USER=`whoami`
+DEFAULT_USER=`whoami`
+
+# +-------------+
+# |     NVM     |
+# +-------------+
+
+## ================================= Default NVM loading ============================================
+export NVM_DIR="$HOME/.nvm"
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion (also work for zsh)
+
+## ================================= NVM lazy loading ============================================
+## nvm lazy loading:(fast shell loading but doesnt work wirh nvm hook)
+## Defer initialization of nvm until nvm, node or a node-dependent command is
+## run. Ensure this block is only run once if .bashrc gets sourced multiple times
+## by checking whether __init_nvm is a function.
+# if [ -s "$HOME/.nvm/nvm.sh" ] && [ ! "$(type -f __init_nvm)" = function ]; then
+#   export NVM_DIR="$HOME/.nvm"
+
+#   declare -a __node_commands=('nvm' 'node' 'npm' 'yarn' 'gulp' 'grunt' 'webpack' 'tldr' 'npx' 'husky' 'git')
+#   function __init_nvm() {
+#     for i in "${__node_commands[@]}"; do unalias $i; done
+#     . "$NVM_DIR"/nvm.sh
+#     unset __node_commands
+#     unset -f __init_nvm
+#   }
+#   for i in "${__node_commands[@]}"; do alias $i='__init_nvm && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" && '$i; done # This also oads nvm bash_completion (also work for zsh)
+# fi
+
+## ================================= NVM lazy loading via plugin ============================================
+# Zsh plugin for installing, updating and loading nvm (currently used for faster loading (lazyloading)) https://github.com/lukechilds/zsh-nvm
+# source ~/.zsh-nvm/zsh-nvm.plugin.zsh
+
+# +-------------+
+# |  ZSH THEME  |
+# +-------------+
+
+if [[ $ShellTheme = spaceship ]] && [ -d ~/.zsh/themes/spaceship-prompt ]; then
+    # ------------ ---------------- spaceship theme --------------------
+    SPACESHIP_PROMPT_ADD_NEWLINE=true
+    SPACESHIP_PROMPT_SEPARATE_LINE=true
+    SPACESHIP_CHAR_SYMBOL=❯
+    SPACESHIP_CHAR_SUFFIX=" "
+
+    SPACESHIP_HG_SHOW=false
+    SPACESHIP_PACKAGE_SHOW=false
+    SPACESHIP_NODE_SHOW=false
+    SPACESHIP_RUBY_SHOW=false
+    SPACESHIP_ELM_SHOW=false
+    SPACESHIP_ELIXIR_SHOW=false
+    SPACESHIP_XCODE_SHOW_LOCAL=false
+    SPACESHIP_SWIFT_SHOW_LOCAL=false
+    SPACESHIP_GOLANG_SHOW=false
+    SPACESHIP_PHP_SHOW=false
+    SPACESHIP_RUST_SHOW=false
+    SPACESHIP_JULIA_SHOW=false
+    SPACESHIP_DOCKER_SHOW=false
+    SPACESHIP_DOCKER_CONTEXT_SHOW=false
+    SPACESHIP_AWS_SHOW=false
+    SPACESHIP_CONDA_SHOW=false
+    SPACESHIP_VENV_SHOW=false
+    SPACESHIP_PYENV_SHOW=false
+    SPACESHIP_DOTNET_SHOW=false
+    SPACESHIP_EMBER_SHOW=false
+    SPACESHIP_KUBECONTEXT_SHOW=false
+    SPACESHIP_TERRAFORM_SHOW=false
+    SPACESHIP_TERRAFORM_SHOW=false
+    SPACESHIP_VI_MODE_SHOW=false
+
+    SPACESHIP_JOBS_SHOW=true # some prefer this to false
+    SPACESHIP_TIME_SHOW=true
+
+    SPACESHIP_DIR_PREFIX='' # default is 'in '
+    SPACESHIP_DIR_SUFFIX=' '
+    SPACESHIP_GIT_PREFIX='' # default is 'on '
+
+    source ~/.zsh/themes/spaceship-prompt/spaceship.zsh-theme
+    # let this comment out if it works without
+    # autoload -U promptinit; promptinit
+    # prompt spaceship
+elif  [[ $ShellTheme = agnoster ]] && [ -d ~/.zsh/themes/agnoster-zsh-theme ]; then
+    # ------------ ---------------- agnoster theme --------------------
+    source ~/.zsh/themes/agnoster-zsh-theme/agnoster.zsh-theme
+    setopt promptsubst
+
+elif  [[ $ShellTheme = starship ]] && [ -f /opt/homebrew/bin/starship ]; then
+    eval "$(starship init zsh)"
+elif  [[ $ShellTheme = starship ]] && [ -d ~/.zsh/themes/starship ]; then
+    eval "$(starship init zsh)"
+else
+    echo 'WARNING: You have no ShellTheme selected in your .zshrc'
+    echo ''
+    echo 'Please select agnoster or spaceship as your ShellTheme'
+    echo ''
+    # fallback prompt if theme dont work:
+    PROMPT='%F{208}%n@%M%f%F{226} %~%f -> '
+fi
+
+# +-------------+
+# |   HISTORY   |
+# +-------------+
+
+# History wrapper
+function omz_history {
+  local clear list
+  zparseopts -E c=clear l=list
+
+  if [[ -n "$clear" ]]; then
+    # if -c provided, clobber the history file
+    echo -n >| "$HISTFILE"
+    fc -p "$HISTFILE"
+    echo >&2 History file deleted.
+  elif [[ -n "$list" ]]; then
+    # if -l provided, run as if calling `fc' directly
+    builtin fc "$@"
+  else
+    # unless a number is provided, show all history events (starting from 1)
+    [[ ${@[-1]-} = *[0-9]* ]] && builtin fc -l "$@" || builtin fc -l "$@" 1
+  fi
+}
+
+# Timestamp format
+case ${HIST_STAMPS-} in
+  "mm/dd/yyyy") alias history='omz_history -f' ;;
+  "dd.mm.yyyy") alias history='omz_history -E' ;;
+  "yyyy-mm-dd") alias history='omz_history -i' ;;
+  "") alias history='omz_history' ;;
+  *) alias history="omz_history -t '$HIST_STAMPS'" ;;
+esac
+
+## History file configuration
+[ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
+[ "$HISTSIZE" -lt 50000 ] && HISTSIZE=50000
+[ "$SAVEHIST" -lt 10000 ] && SAVEHIST=10000
+
+## History command configuration
+setopt extended_history       # record timestamp of command in HISTFILE
+setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt hist_ignore_dups       # ignore duplicated commands history list
+setopt hist_ignore_space      # ignore commands that start with space
+setopt hist_verify            # show command with history expansion to user before running it
+setopt share_history          # share command history data
+# setopt HIST_IGNORE_ALL_DUPS
+# setopt HIST_FIND_NO_DUPS
+# setopt HIST_SAVE_NO_DUPS
+
+# +-------------+
+# |     FZF     |
+# +-------------+
+
+# if [[ ! "$PATH" == *$HOME/.local/repos/fzf/bin* ]]; then
+#   export PATH="${PATH:+${PATH}:}$HOME/.local/repos/fzf/bin"
+# fi
+
+# [[ $- == *i* ]] && source "$HOME/.local/repos/fzf/shell/completion.zsh" 2> /dev/null
+# source "$HOME/.local/repos/fzf/shell/key-bindings.zsh"
+export FZF_DEFAULT_COMMAND='fd --type f --color=never'
+export FZF_DEFAULT_OPTS='
+    --height 95% --multi --reverse --margin=0,1
+    --bind ctrl-f:page-down,ctrl-b:page-up
+    --prompt="❯ "
+    --color bg+:#262626,fg+:#dadada,hl:#ae81ff,hl+:#ae81ff
+    --color border:#303030,info:#cfcfb0,header:#80a0ff,spinner:#42cf89
+    --color prompt:#87afff,pointer:#ff5189,marker:#f09479
+'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+# export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :500 {}'"
+# export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
+export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200' --preview 'bat --color=always --line-range :500 {}'"
+export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :500 {}'"
+# export FZF_CTRL_R_OPTS='+s --tac' reverse history search only needed with bash shell
+export FZF_ALT_C_COMMAND='fd --type d . --color=never'
+export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -100'"
+
+fzf_find_edit() {
+    local file=$(
+      fzf --query="$1" --no-multi --select-1 --exit-0 \
+          --preview 'bat --color=always --line-range :500 {}')
+    if [[ -n $file ]]; then
+        $PrimaryEDITOR "$file"
+    fi
+}
+
+# try without --select-1, when there are errors
+fzf_change_directory() {
+    local directory=$(
+      fd --type d | \
+      fzf --query="$1" --no-multi --reverse --select-1 --exit-0 \
+          --preview 'tree -C {} | head -100')
+    if [[ -n $directory ]]; then
+        cd "$directory"
+    fi
+}
+
+fzf_grep_edit(){
+    if [[ $# == 0 ]]; then
+        echo 'Error: search term was not provided.'
+        return
+    fi
+    # add --exit-0 for work (linux)
+    local match=$(
+      rg --color=never --line-number "$1" |
+        fzf --no-multi --delimiter : \
+            --exit-0 --preview "bat --color=always --line-range {2}: {1}")
+    local file=$(echo "$match" | cut -d':' -f1)
+    if [[ -n $file ]]; then
+        $SecondaryEDITOR "$file" +$(echo "$match" | cut -d':' -f2)
+    fi
+}
+
+fzf_kill() {
+     # add --exit-0 for work (linux)
+    local pid_col
+    if [[ $OS = Linux ]]; then
+        pid_col=2
+    elif [[ $OS = Darwin ]]; then
+        pid_col=3;
+    else
+        echo 'Error: unknown platform'
+        return
+    fi
+    local pids=$(
+        ps -f -u $USER | sed 1d | fzf --multi --reverse | \
+        tr -s '[:blank:]' | cut -d' ' -f "$pid_col")
+    if [[ -n $pids ]]; then
+        echo "$pids" | xargs kill -9 "$@"
+    fi
+}
+
+fzf_git_add() {
+    # add --select-1 for work (linux)
+    local selections=$(
+      git status --porcelain | \
+      fzf --select-1 --ansi \
+          --preview 'if (git ls-files --error-unmatch {2} &>/dev/null); then
+                         git diff --color=always {2} | diff-so-fancy
+                     else
+                         bat --color=always --line-range :500 {2}
+                     fi')
+    if [[ -n $selections ]]; then
+        git add --verbose $(echo "$selections" | cut -c 4- | tr '\n' ' ')
+    fi
+}
+
+fzf_git_unadd() {
+    # add --select-1 for work (linux)
+    local selections=$(
+      git status --porcelain | \
+      fzf --select-1 --ansi \
+          --preview 'if (git ls-files --error-unmatch {2} &>/dev/null); then
+                         git diff --color=always {2} | diff-so-fancy
+                     else
+                         bat --color=always --line-range :500 {2}
+                     fi')
+    if [[ -n $selections ]]; then
+        git restore --staged $(echo "$selections" | cut -c 4- | tr '\n' ' ')
+    fi
+}
+
+fzf_git_log() {
+    local selections=$(
+      git ll --color=always "$@" |
+        fzf --ansi --no-sort --no-height \
+            --preview "echo {} | grep -o '[a-f0-9]\{7\}' | head -1 |
+                       xargs -I@ sh -c 'git show --color=always @'")
+    if [[ -n $selections ]]; then
+        local commits=$(echo "$selections" | cut -d' ' -f2 | tr '\n' ' ')
+        git show $commits
+    fi
+}
+
+fzf_git_reflog() {
+    local selection=$(
+      git reflog --color=always "$@" |
+        fzf --no-multi --ansi --no-sort --no-height \
+            --preview "git show --color=always {1}")
+    if [[ -n $selection ]]; then
+        git show $(echo $selection | cut -d' ' -f1)
+    fi
+}
+
+fzf_git_log_pickaxe() {
+     if [[ $# == 0 ]]; then
+         echo 'Error: search term was not provided.'
+         return
+     fi
+     local selections=$(
+       git log --oneline --color=always -S "$@" |
+         fzf --ansi --no-sort --no-height \
+             --preview "git show --color=always {1}")
+     if [[ -n $selections ]]; then
+         local commits=$(echo "$selections" | cut -d' ' -f1 | tr '\n' ' ')
+         git show $commits
+     fi
+ }
+
+# +-------------+
+# | CARGO (RUST)|
+# +-------------+
+
+export PATH="${PATH:+${PATH}:}$HOME/.cargo/bin"
+
+# +-------------+
+# | Cursor FIX  |
+# +-------------+
+# fix cursor style when moving from neovim to zsh https://unix.stackexchange.com/questions/433273/changing-cursor-style-based-on-mode-in-both-zsh-and-vim
+_fix_cursor() {
+   echo -ne '\e[5 q'
+}
+precmd_functions+=(_fix_cursor)
+
+
+
+ # ____ ___  __  __ ____  _     _____ _____ ___ ___  _   _
+#  / ___/ _ \|  \/  |  _ \| |   | ____|_   _|_ _/ _ \| \ | |
+# | |  | | | | |\/| | |_) | |   |  _|   | |  | | | | |  \| |
+# | |__| |_| | |  | |  __/| |___| |___  | |  | | |_| | |\  |
+#  \____\___/|_|  |_|_|   |_____|_____| |_| |___\___/|_| \_|
+ #
+
+# +------------------------------------------+
+# | homebrew Configuring Completions in zsh  |
+# +------------------------------------------+
+
+# https://docs.brew.sh/Shell-Completion
+if type brew &>/dev/null
+then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+fi
+
+# +--------------------------------------------+
+# | homebrew source installed autocompletions  |
+# +--------------------------------------------+
+
+# zsh-fast-syntax-highlighting
+source $(brew --prefix)/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+
+# zsh-autosuggestions
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh # auto generated after running `$(brew --prefix)/opt/fzf/install` (this enables keybindings like cmd+r but autocompletions seem NOT to work from /opt/homebrew/Cellar/fzf/0.32.1/shell/completion.zsh)
+
+# +---------+
+# | General |
+# +---------+
+
+# zstyle pattern for the completion
+# :completion:<function>:<completer>:<command>:<argument>:<tag>
+
+# Should be called before compinit
+zmodload zsh/complist
+
+# Use hjlk in menu selection (during completion)
+# Doesn't work well with interactive mode
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+
+bindkey -M menuselect '^xg' clear-screen
+bindkey -M menuselect '^xi' vi-insert                      # Insert
+bindkey -M menuselect '^xh' accept-and-hold                # Hold
+bindkey -M menuselect '^xn' accept-and-infer-next-history  # Next
+bindkey -M menuselect '^xu' undo                           # Undo
+
+autoload -U compinit; compinit
+_comp_options+=(globdots) # With hidden files
+
+# +---------+
+# | Options |
+# +---------+
+
+# setopt GLOB_COMPLETE      # Show autocompletion menu with globs
+setopt MENU_COMPLETE        # Automatically highlight first element of completion menu
+setopt AUTO_LIST            # Automatically list choices on ambiguous completion.
+setopt COMPLETE_IN_WORD     # Complete from both ends of a word.
+
+# +---------+
+# | zstyles |
+# +---------+
+
+# Ztyle pattern
+# :completion:<function>:<completer>:<command>:<argument>:<tag>
+
+# Define completers
+zstyle ':completion:*' completer _extensions _complete _approximate
+
+# Use cache for commands using cache
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/.zcompcache"
+# Complete the alias when _expand_alias is used as a function
+zstyle ':completion:*' complete true
+
+zle -C alias-expension complete-word _generic
+bindkey '^A' alias-expension
+zstyle ':completion:alias-expension:*' completer _expand_alias
+
+# Use cache for commands which use it
+
+# Allow you to select in a menu
+zstyle ':completion:*' menu select
+
+# Autocomplete options for cd instead of directory stack
+zstyle ':completion:*' complete-options true
+
+zstyle ':completion:*' file-sort modification
+
+
+zstyle ':completion:*:*:*:*:corrections' format '%F{yellow}!- %d (errors: %e) -!%f'
+zstyle ':completion:*:*:*:*:descriptions' format '%F{blue}-- %D %d --%f'
+zstyle ':completion:*:*:*:*:messages' format ' %F{purple} -- %d --%f'
+zstyle ':completion:*:*:*:*:warnings' format ' %F{red}-- no matches found --%f'
+# zstyle ':completion:*:default' list-prompt '%S%M matches%s'
+# Colors for files and directory
+zstyle ':completion:*:*:*:*:default' list-colors ${(s.:.)LS_COLORS}
+
+# Only display some tags for the command cd
+zstyle ':completion:*:*:cd:*' tag-order local-directories directory-stack path-directories
+# zstyle ':completion:*:complete:git:argument-1:' tag-order !aliases
+
+# Required for completion to be in good groups (named after the tags)
+zstyle ':completion:*' group-name ''
+
+zstyle ':completion:*:*:-command-:*:*' group-order aliases builtins functions commands
+
+# See ZSHCOMPWID "completion matching control"
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
+zstyle ':completion:*' keep-prefix true
+
+zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
+
+
+# Go
+export GOPATH=/Users/phil/p/go
+
+# pnpm
+export PNPM_HOME="/Users/phil/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end
