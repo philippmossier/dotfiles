@@ -1,3 +1,6 @@
+# On first use you have to symlink github repo dotfiles with local dofiles
+# ln -s ~/dotfiles/mac/zshrc ~/.zshrc
+
 # +-------------+
 # |  ALIASES    |
 # +-------------+
