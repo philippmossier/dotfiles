@@ -2,22 +2,78 @@
 
 echo ""
 echo "##################################################"
-echo "###### Welcome to Ubuntu22 install script ########"
-echo "##################################################"
-echo ""
-sudo touch ~/.bashrc ~/.zshrc
-
-echo ""
-echo "##################################################"
-echo "################### starship #####################"
+echo "##### Ubuntu22 bash/zsh utilities script #########"
 echo "##################################################"
 echo ""
 cd ~
-sudo curl https://starship.rs/install.sh | sh -s -- -y
+sudo apt update -y && sudo apt upgrade -y
+touch ~/.bashrc ~/.zshrc
+
+echo ""
+echo "##################################################"
+echo "################# nvm & node #####################"
+echo "##################################################"
+echo ""
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+export NVM_DIR="$HOME/.nvm" && \
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && \
+nvm install --lts
+
+echo ""
+echo "##################################################"
+echo "##################### exa ########################"
+echo "##################################################"
+echo ""
+sudo apt install exa -y
+echo "alias ls='exa'" | tee -a ~/.bashrc ~/.zshrc
+echo "alias lsa='exa --all --long'" | tee -a ~/.bashrc ~/.zshrc
+
+echo ""
+echo "##################################################"
+echo "##################### bat ########################"
+echo "##################################################"
+echo ""
+apt install bat -y
+mkdir -p ~/.local/bin
+ln -s /usr/bin/batcat ~/.local/bin/bat
+
+echo ""
+echo "##################################################"
+echo "### tree fd-find ripgrep zip unzip jq neofetch ###"
+echo "##################################################"
+echo ""
+apt install tree fd-find ripgrep zip unzip jq neofetch -y
+
+echo ""
+echo "##################################################"
+echo "############## starship prompt ###################"
+echo "##################################################"
+echo ""
+curl https://starship.rs/install.sh | sh -s -- -y
 echo 'eval "$(starship init bash)"' >> ~/.bashrc
 echo 'eval "$(starship init zsh)"' >> ~/.zshrc
 mkdir -p ~/.config && touch ~/.config/starship.toml
 starship preset nerd-font-symbols > ~/.config/starship.toml
+
+echo ""
+echo "##################################################"
+echo "##################### fzf ########################"
+echo "##################################################"
+echo ""
+mkdir -p ~/.local/repos
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.local/repos/.fzf
+~/.local/repos/.fzf/install --all --update-rc
+
+echo ""
+echo "##################################################"
+echo "### zsh autosuggestions & syntax-highlighting ####"
+echo "##################################################"
+echo ""
+mkdir -p ~/.zsh
+git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.zsh/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting
+echo source "~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ~/.zshrc
+echo source "~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ~/.zshrc
 
 echo ""
 echo "##################################################"
@@ -32,14 +88,14 @@ mkdir -p ~/.local/packages/zsh
 
 echo ""
 echo "##################################################"
-echo "### install zsh build from source dependencies ###"
+echo "# install build tools (to build zsh from source) #"
 echo "##################################################"
 echo ""
-sudo apt install libncurses5-dev libncursesw5-dev build-essential -y
+apt install libncurses5-dev libncursesw5-dev build-essential -y
 
 echo ""
 echo "##################################################"
-echo "########## fetch & unzip zsh-download ##########"
+echo "##### download and unzip zsh from sourceforge #####"
 echo "##################################################"
 echo ""
 curl -Lo ~/.local/packages/zsh.tar.xz https://sourceforge.net/projects/zsh/files/zsh/5.9/zsh-5.9.tar.xz/download
@@ -69,10 +125,10 @@ make -j
 
 echo ""
 echo "##################################################"
-echo "################ install zsh #####################"
+echo "#### install zsh binary to /usr/local/bin/zsh ####"
 echo "##################################################"
 echo ""
-sudo make install
+make install
 
 echo ""
 echo "##################################################"
@@ -92,64 +148,9 @@ echo "##################################################"
 echo ""
 
 echo ""
-echo "##################################################"
-echo "### zsh autosuggestions & syntax-highlighting ####"
-echo "##################################################"
-echo ""
-mkdir -p ~/.zsh
-git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.zsh/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting
-echo source "~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ~/.zshrc
-echo source "~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ~/.zshrc
-
 echo ""
 echo "##################################################"
-echo "################# nvm & node #####################"
-echo "##################################################"
-echo ""
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
-export NVM_DIR="$HOME/.nvm" && \
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && \
-nvm install --lts
-
-echo ""
-echo "##################################################"
-echo "##################### exa ########################"
-echo "##################################################"
-echo ""
-sudo apt install exa -y
-echo "alias ls='exa'" | tee -a ~/.bashrc ~/.zshrc
-echo "alias lsa='exa --all --long'" | tee -a ~/.bashrc ~/.zshrc
-
-echo ""
-echo "##################################################"
-echo "##################### fzf ########################"
-echo "##################################################"
-echo ""
-mkdir -p ~/.local/repos
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.local/repos/.fzf
-~/.local/repos/.fzf/install --all --update-rc
-
-echo ""
-echo "##################################################"
-echo "##################### bat ########################"
-echo "##################################################"
-echo ""
-sudo apt install bat -y
-mkdir -p ~/.local/bin
-ln -s /usr/bin/batcat ~/.local/bin/bat
-
-echo ""
-echo "##################################################"
-echo "### tree fd-find ripgrep zip unzip jq neofetch ###"
-echo "##################################################"
-echo ""
-sudo apt install tree fd-find ripgrep zip unzip jq neofetch -y
-
-echo ""
-echo ""
-echo "##################################################"
-echo "#################### DONE !!! ####################"
+echo "############ Installation done !!! ###############"
 echo "##################################################"
 echo ""
 echo "$(neofetch)"
