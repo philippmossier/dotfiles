@@ -49,7 +49,7 @@ echo "##################################################"
 echo "############## starship prompt ###################"
 echo "##################################################"
 echo ""
-sudo curl https://starship.rs/install.sh | sh -s -- -y
+curl https://starship.rs/install.sh | sh -s -- -y
 echo 'eval "$(starship init bash)"' >> ~/.bashrc
 echo 'eval "$(starship init zsh)"' >> ~/.zshrc
 mkdir -p ~/.config && touch ~/.config/starship.toml
@@ -95,7 +95,7 @@ sudo apt install libncurses5-dev libncursesw5-dev build-essential -y
 
 echo ""
 echo "##################################################"
-echo "##### download and unzip zsh from sourceforge #####"
+echo "##### download and unzip zsh from sourceforge ####"
 echo "##################################################"
 echo ""
 curl -Lo ~/.local/packages/zsh.tar.xz https://sourceforge.net/projects/zsh/files/zsh/5.9/zsh-5.9.tar.xz/download
