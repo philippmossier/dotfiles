@@ -8,6 +8,7 @@ echo ""
 cd ~
 sudo apt update -y && sudo apt upgrade -y
 touch ~/.bashrc ~/.zshrc
+echo '[ -d $HOME/.local/bin ] && PATH="$HOME/.local/bin:$PATH"' >> .zshrc
 
 echo ""
 echo "##################################################"
