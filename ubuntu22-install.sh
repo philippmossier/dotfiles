@@ -73,8 +73,10 @@ echo "##################################################"
 echo ""
 mkdir -p ~/.local/repos
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.local/repos/.fzf
-~/.local/repos/.fzf/install --all --update-rc
+~/.local/repos/.fzf/install --key-bindings --completion --update-rc
 
+echo ""
+echo "add custom fzf settings to bashrc and zshrc"
 cat << EOT | tee -a ~/.bashrc ~/.zshrc
 export FZF_DEFAULT_COMMAND='fd --type f --color=never'
 export FZF_DEFAULT_OPTS='
