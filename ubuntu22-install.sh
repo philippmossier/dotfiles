@@ -8,7 +8,8 @@ echo ""
 cd ~
 sudo apt update -y && sudo apt upgrade -y
 touch ~/.bashrc ~/.zshrc
-echo '[ -d $HOME/.local/bin ] && PATH="$HOME/.local/bin:$PATH"' >> .zshrc
+echo '# --- Generated settings from ubuntu22 utilities script ---' | tee -a ~/.zshrc ~/.bashrc > /dev/null
+echo '[ -d $HOME/.local/bin ] && PATH="$HOME/.local/bin:$PATH"' >> .zshrc > /dev/null
 
 echo ""
 echo "##################################################"
@@ -20,8 +21,8 @@ export NVM_DIR="$HOME/.nvm" && \
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && \
 nvm install --lts
 
-echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.zshrc
-echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm' >> ~/.zshrc
+echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.zshrc > /dev/null
+echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm' >> ~/.zshrc > /dev/null
 
 echo ""
 echo "##################################################"
@@ -29,8 +30,8 @@ echo "##################### exa ########################"
 echo "##################################################"
 echo ""
 sudo apt install exa -y
-echo "alias ls='exa'" | tee -a ~/.bashrc ~/.zshrc
-echo "alias lsa='exa --all --long'" | tee -a ~/.bashrc ~/.zshrc
+echo "alias ls='exa'" | tee -a ~/.bashrc ~/.zshrc > /dev/null
+echo "alias lsa='exa --all --long'" | tee -a ~/.bashrc ~/.zshrc > /dev/null
 
 echo ""
 echo "##################################################"
@@ -76,8 +77,6 @@ mkdir -p ~/.local/repos
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.local/repos/.fzf
 ~/.local/repos/.fzf/install --key-bindings --completion --update-rc
 
-echo ""
-echo "add custom fzf settings to bashrc and zshrc"
 cat << EOT | tee -a ~/.bashrc ~/.zshrc
 export FZF_DEFAULT_COMMAND='fd --type f --color=never'
 export FZF_DEFAULT_OPTS='
@@ -92,7 +91,7 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :500 {}'"
 export FZF_ALT_C_COMMAND='fd --type d . --color=never'
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -100'"
-EOT
+EOT > /dev/null
 
 echo ""
 echo "##################################################"
@@ -102,8 +101,8 @@ echo ""
 mkdir -p ~/.zsh
 git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.zsh/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting
-echo source "~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ~/.zshrc
-echo source "~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ~/.zshrc
+echo source "~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ~/.zshrc > /dev/null
+echo source "~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ~/.zshrc > /dev/null
 
 echo ""
 echo "##################################################"
@@ -176,6 +175,13 @@ echo "##################################################"
 echo "##################################################"
 echo "##################################################"
 echo ""
+
+echo ""
+echo "##################################################"
+echo "#### bash and zsh auto generated settings done ###"
+echo "##################################################"
+echo ""
+echo '# ---- Generated settings from ubuntu22 utilities end! ----' | tee -a ~/.zshrc ~/.bashrc > /dev/null
 
 echo ""
 echo "##################################################"
