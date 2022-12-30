@@ -75,6 +75,22 @@ mkdir -p ~/.local/repos
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.local/repos/.fzf
 ~/.local/repos/.fzf/install --all --update-rc
 
+cat << EOT | tee -a ~/.bashrc ~/.zshrc
+export FZF_DEFAULT_COMMAND='fd --type f --color=never'
+export FZF_DEFAULT_OPTS='
+    --height 95% --multi --reverse --margin=0,1
+    --bind ctrl-f:page-down,ctrl-b:page-up
+    --prompt="❯ "
+    --color bg+:#262626,fg+:#dadada,hl:#ae81ff,hl+:#ae81ff
+    --color border:#303030,info:#cfcfb0,header:#80a0ff,spinner:#42cf89
+    --color prompt:#87afff,pointer:#ff5189,marker:#f09479
+'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :500 {}'"
+export FZF_ALT_C_COMMAND='fd --type d . --color=never'
+export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -100'"
+EOT
+
 echo ""
 echo "##################################################"
 echo "### zsh autosuggestions & syntax-highlighting ####"
