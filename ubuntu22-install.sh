@@ -170,7 +170,7 @@ export FZF_DEFAULT_OPTS='
     --color border:#303030,info:#cfcfb0,header:#80a0ff,spinner:#42cf89
     --color prompt:#87afff,pointer:#ff5189,marker:#f09479
 '
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_CTRL_T_COMMAND="fd --type f --color=never"
 export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :500 {}'"
 export FZF_ALT_C_COMMAND='fd --type d . --color=never'
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -100'"
