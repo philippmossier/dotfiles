@@ -39,10 +39,18 @@ ln -s /usr/bin/batcat ~/.local/bin/bat
 
 echo ""
 echo "##################################################"
-echo "### tree fd-find ripgrep zip unzip jq neofetch ###"
+echo "##################### fd-find ####################"
 echo "##################################################"
 echo ""
-sudo apt install tree fd-find ripgrep zip unzip jq neofetch -y
+sudo apt install fd-find -y
+ln -s $(which fdfind) ~/.local/bin/fd
+
+echo ""
+echo "##################################################"
+echo "####### tree ripgrep zip unzip jq neofetch #######"
+echo "##################################################"
+echo ""
+sudo apt install tree ripgrep zip unzip jq neofetch -y
 
 echo ""
 echo "##################################################"
