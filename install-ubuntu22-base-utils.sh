@@ -2,7 +2,9 @@
 
 echo ""
 echo "##################################################"
-echo "##### Ubuntu22 bash/zsh utilities script #########"
+echo "#####   Ubuntu22 bash/zsh utilities script   #####"
+echo "#####       without dotfiles symlinks        #####"
+echo "#####      basic bash and zsh settings       #####"
 echo "##################################################"
 echo ""
 cd ~
@@ -17,9 +19,15 @@ echo "##################################################"
 echo "################# nvm & node #####################"
 echo "##################################################"
 echo ""
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
-export NVM_DIR="$HOME/.nvm" && \
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && \
+# curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+# export NVM_DIR="$HOME/.nvm" && \
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && \
+# nvm install --lts
+export NVM_DIR="$HOME/.nvm" && (
+  git clone https://github.com/nvm-sh/nvm.git "$NVM_DIR"
+  cd "$NVM_DIR"
+  git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --tags --max-count=1)`
+) && \. "$NVM_DIR/nvm.sh"
 nvm install --lts
 
 echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.zshrc
@@ -170,7 +178,7 @@ export FZF_DEFAULT_OPTS='
     --color border:#303030,info:#cfcfb0,header:#80a0ff,spinner:#42cf89
     --color prompt:#87afff,pointer:#ff5189,marker:#f09479
 '
-export FZF_CTRL_T_COMMAND="fd --type f --color=never"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :500 {}'"
 export FZF_ALT_C_COMMAND='fd --type d . --color=never'
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -100'"
@@ -184,8 +192,11 @@ echo ""
 echo '# ---- Generated settings from ubuntu22 utilities end! ----' | tee -a ~/.zshrc ~/.bashrc > /dev/null
 echo "$(neofetch)"
 echo "Finished. Restart your shell or reload config file."
-echo "  source ~/.profile && source ~/.bashrc  # bash"
-echo "  source ~/.zshrc                        # zsh"
+echo ""
+echo "source ~/.profile && source ~/.bashrc     # bash"
+echo ""
+echo "source ~/.zshrc                           # zsh"
 echo ""
 echo "change your default shell to zsh with this command:"
-echo "  chsh -s \$(which zsh)"
+echo ""
+echo "chsh -s \$(which zsh)"
