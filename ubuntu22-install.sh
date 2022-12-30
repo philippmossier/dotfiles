@@ -33,7 +33,7 @@ echo "##################################################"
 echo "##################### bat ########################"
 echo "##################################################"
 echo ""
-apt install bat -y
+sudo apt install bat -y
 mkdir -p ~/.local/bin
 ln -s /usr/bin/batcat ~/.local/bin/bat
 
@@ -42,14 +42,14 @@ echo "##################################################"
 echo "### tree fd-find ripgrep zip unzip jq neofetch ###"
 echo "##################################################"
 echo ""
-apt install tree fd-find ripgrep zip unzip jq neofetch -y
+sudo apt install tree fd-find ripgrep zip unzip jq neofetch -y
 
 echo ""
 echo "##################################################"
 echo "############## starship prompt ###################"
 echo "##################################################"
 echo ""
-curl https://starship.rs/install.sh | sh -s -- -y
+sudo curl https://starship.rs/install.sh | sh -s -- -y
 echo 'eval "$(starship init bash)"' >> ~/.bashrc
 echo 'eval "$(starship init zsh)"' >> ~/.zshrc
 mkdir -p ~/.config && touch ~/.config/starship.toml
@@ -91,7 +91,7 @@ echo "##################################################"
 echo "# install build tools (to build zsh from source) #"
 echo "##################################################"
 echo ""
-apt install libncurses5-dev libncursesw5-dev build-essential -y
+sudo apt install libncurses5-dev libncursesw5-dev build-essential -y
 
 echo ""
 echo "##################################################"
@@ -128,7 +128,7 @@ echo "##################################################"
 echo "#### install zsh binary to /usr/local/bin/zsh ####"
 echo "##################################################"
 echo ""
-make install
+sudo make install
 
 echo ""
 echo "##################################################"
@@ -147,7 +147,6 @@ echo "##################################################"
 echo "##################################################"
 echo ""
 
-echo ""
 echo ""
 echo "##################################################"
 echo "############ Installation done !!! ###############"
