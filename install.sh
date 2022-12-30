@@ -21,9 +21,6 @@ mkdir -p ~/.config # nvim, starship, neofetch etc.
 mkdir -p ~/.zsh/custom-settings # mostly zsh sourced files, custom zsh settings
 mkdir -p ~/.local/packages # for installations from source and other packages
 
-# echo '# --- Generated settings from ubuntu22 utilities script ---' | tee -a ~/.zshrc ~/.bashrc > /dev/null
-# echo '[ -d $HOME/.local/bin ] && PATH="$HOME/.local/bin:$PATH"' >> .zshrc
-
 echo ""
 echo "##################################################"
 echo "######## add symlinks to homedirectory ###########"
@@ -56,10 +53,6 @@ echo "##################################################"
 echo "################# nvm & node #####################"
 echo "##################################################"
 echo ""
-# curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
-# export NVM_DIR="$HOME/.nvm" && \
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && \
-# nvm install --lts
 export NVM_DIR="$HOME/.nvm" && (
   git clone https://github.com/nvm-sh/nvm.git "$NVM_DIR"
   cd "$NVM_DIR"
@@ -67,17 +60,12 @@ export NVM_DIR="$HOME/.nvm" && (
 ) && \. "$NVM_DIR/nvm.sh"
 nvm install --lts
 
-# echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.zshrc
-# echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm' >> ~/.zshrc
-
 echo ""
 echo "##################################################"
 echo "##################### exa ########################"
 echo "##################################################"
 echo ""
 sudo apt install exa -y
-# echo "alias ls='exa'" | tee -a ~/.bashrc ~/.zshrc > /dev/null
-# echo "alias lsa='exa --all --long'" | tee -a ~/.bashrc ~/.zshrc > /dev/null
 
 echo ""
 echo "##################################################"
@@ -108,10 +96,6 @@ echo "############## starship prompt ###################"
 echo "##################################################"
 echo ""
 curl https://starship.rs/install.sh | sh -s -- -y
-# echo 'eval "$(starship init bash)"' >> ~/.bashrc
-# echo 'eval "$(starship init zsh)"' >> ~/.zshrc
-# touch ~/.config/starship.toml
-# starship preset nerd-font-symbols > ~/.config/starship.toml
 
 echo ""
 echo "##################################################"
@@ -121,8 +105,6 @@ echo ""
 mkdir -p ~/.zsh
 git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.zsh/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting
-# echo source "~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ~/.zshrc
-# echo source "~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ~/.zshrc
 
 echo ""
 echo "##################################################"
@@ -205,28 +187,11 @@ mkdir -p ~/.local/repos
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.local/repos/.fzf
 ~/.local/repos/.fzf/install --key-bindings --completion --no-update-rc
 
-# tee -a ~/.bashrc ~/.zshrc > /dev/null << EOT
-# export FZF_DEFAULT_COMMAND='fd --type f --color=never'
-# export FZF_DEFAULT_OPTS='
-#     --height 95% --multi --reverse --margin=0,1
-#     --bind ctrl-f:page-down,ctrl-b:page-up
-#     --prompt="❯ "
-#     --color bg+:#262626,fg+:#dadada,hl:#ae81ff,hl+:#ae81ff
-#     --color border:#303030,info:#cfcfb0,header:#80a0ff,spinner:#42cf89
-#     --color prompt:#87afff,pointer:#ff5189,marker:#f09479
-# '
-# export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-# export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :500 {}'"
-# export FZF_ALT_C_COMMAND='fd --type d . --color=never'
-# export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -100'"
-# EOT
-
 echo ""
 echo "##################################################"
 echo "#### bash and zsh auto generated settings done ###"
 echo "##################################################"
 echo ""
-# echo '# ---- Generated settings from ubuntu22 utilities end! ----' | tee -a ~/.zshrc ~/.bashrc > /dev/null
 echo "$(neofetch)"
 echo "Finished. Restart your shell or reload config file."
 echo ""

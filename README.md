@@ -10,15 +10,22 @@
 
 ### 💻 How to install:
 
+Basic install (stable for all fresh ubuntu22 distros, does not symlink dotfiles)
 ```bash
+./install-ubuntu22-base-utils
+```
+
+Full install (symlinking zshrc gitconfig and alot other config files from this dotfiles repo)
+```bash
+cd ~
 git clone https://github.com/philippmossier/dotfiles.git
-./dotfiles/installScript.sh
-chsh -s $(which zsh)
+./dotfiles/install.sh
 ```
 
 *******************************************************************************
 
 🕮 *What gets installed?*
+- starship prompt for bash and zsh
 - cli-tools for a better command-line experience.
 - standard packages for developers (nvm, fzf ...).
 
