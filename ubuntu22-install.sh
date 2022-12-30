@@ -93,6 +93,24 @@ export FZF_ALT_C_COMMAND='fd --type d . --color=never'
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -100'"
 EOT
 
+touch ~/.fzf.zsh
+tee -a ~/.zshrc > /dev/null << EOT
+# Setup fzf
+# ---------
+if [[ ! "$PATH" == *$HOME/.local/repos/.fzf/bin* ]]; then
+  PATH="${PATH:+${PATH}:}/home/phil/.local/repos/.fzf/bin"
+fi
+
+# Auto-completion
+# ---------------
+[[ $- == *i* ]] && source "$HOME/.local/repos/.fzf/shell/completion.zsh" 2> /dev/null
+
+# Key bindings
+# ------------
+~source "$HOME/.local/repos/.fzf/shell/key-bindings.zsh"
+EOT
+echo "[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh" >> ~/.zshrc > /dev/null
+
 echo ""
 echo "##################################################"
 echo "### zsh autosuggestions & syntax-highlighting ####"
