@@ -18,7 +18,7 @@ echo ""
 mkdir -p ~/.local/bin # all custom binaries
 mkdir -p ~/.local/repos # github repos (binaries, and other utils related to the binaries)
 mkdir -p ~/.config # nvim, starship, neofetch etc.
-mkdir -p ~/.zsh # mostly zsh sourced files, custom zsh settings
+mkdir -p ~/.zsh/custom-settings # mostly zsh sourced files, custom zsh settings
 mkdir -p ~/.local/packages # for installations from source and other packages
 
 # echo '# --- Generated settings from ubuntu22 utilities script ---' | tee -a ~/.zshrc ~/.bashrc > /dev/null
@@ -30,12 +30,16 @@ echo "######## add symlinks to homedirectory ###########"
 echo "##################################################"
 echo ""
 cd ~
-ln -s dotfiles/zshrc .zshrc
-ln -s dotfiles/gitconfig .gitconfig
-ln -s dotfiles/nvmhook.sh .nvmhook.sh
-ln -s dotfiles/vimrc .vimrc
-ln -s dotfiles/zsh/custom-settings .zsh/custom-settings
-ln -s dotfiles/config/starship.toml .config/starship.toml
+ln -s ~/dotfiles/zshrc ~/.zshrc
+ln -s ~/dotfiles/zsh/custom-settings/completion.zsh ~/.zsh/custom-settings/completion.zsh
+ln -s ~/dotfiles/zsh/custom-settings/fzf.zsh ~/.zsh/custom-settings/fzf.zsh
+ln -s ~/dotfiles/zsh/custom-settings/gen-gh-ssh-key-inside-wsl.zsh ~/.zsh/custom-settings/gen-gh-ssh-key-inside-wsl.zsh
+ln -s ~/dotfiles/zsh/custom-settings/history.zsh ~/.zsh/custom-settings/history.zsh
+ln -s ~/dotfiles/zsh/custom-settings/nvm.zsh ~/.zsh/custom-settings/nvm.zsh
+
+ln -s ~/dotfiles/gitconfig ~/.gitconfig
+ln -s ~/dotfiles/nvmhook.sh ~/.nvmhook.sh
+ln -s ~/dotfiles/config/starship.toml ~/.config/starship.toml
 
 echo ""
 echo "##################################################"
