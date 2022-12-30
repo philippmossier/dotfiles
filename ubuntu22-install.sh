@@ -77,7 +77,7 @@ mkdir -p ~/.local/repos
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.local/repos/.fzf
 ~/.local/repos/.fzf/install --key-bindings --completion --update-rc
 
-cat << EOT | tee -a ~/.bashrc ~/.zshrc
+tee -a ~/.bashrc ~/.zshrc > /dev/null << EOT
 export FZF_DEFAULT_COMMAND='fd --type f --color=never'
 export FZF_DEFAULT_OPTS='
     --height 95% --multi --reverse --margin=0,1
@@ -91,7 +91,7 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :500 {}'"
 export FZF_ALT_C_COMMAND='fd --type d . --color=never'
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -100'"
-EOT > /dev/null
+EOT
 
 echo ""
 echo "##################################################"
