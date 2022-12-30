@@ -8,6 +8,7 @@ echo ""
 cd ~
 sudo apt update -y && sudo apt upgrade -y
 touch ~/.bashrc ~/.zshrc
+mkdir -p ~/.local/bin
 echo '# --- Generated settings from ubuntu22 utilities script ---' | tee -a ~/.zshrc ~/.bashrc > /dev/null
 echo '[ -d $HOME/.local/bin ] && PATH="$HOME/.local/bin:$PATH"' >> .zshrc > /dev/null
 
@@ -39,7 +40,6 @@ echo "##################### bat ########################"
 echo "##################################################"
 echo ""
 sudo apt install bat -y
-mkdir -p ~/.local/bin
 ln -s /usr/bin/batcat ~/.local/bin/bat
 
 echo ""
@@ -182,15 +182,18 @@ echo "#### bash and zsh auto generated settings done ###"
 echo "##################################################"
 echo ""
 echo '# ---- Generated settings from ubuntu22 utilities end! ----' | tee -a ~/.zshrc ~/.bashrc > /dev/null
-
-echo ""
-echo "##################################################"
-echo "############ Installation done !!! ###############"
-echo "##################################################"
-echo ""
 echo "$(neofetch)"
+echo ""
+echo "##################################################"
+echo "Finished. Restart your shell or reload config file"
+echo "##################################################"
+echo ""
+echo "source ~/.bashrc  # bash"
+echo "source ~/.profile  # bash"
+echo ""
+echo "source ~/.zshrc  # zsh"
 echo ""
 echo "change your default shell to zsh with this command:"
 echo ""
 echo "chsh -s \$(which zsh)"
-
+echo ""
