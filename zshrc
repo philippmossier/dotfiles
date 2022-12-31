@@ -40,7 +40,7 @@ eval "$(starship init zsh)"
 [ -f ~/.zsh/custom-settings/history.zsh ] && source ~/.zsh/custom-settings/history.zsh
 # Ubuntu WSL - Load ssh generator hook for ubuntu wsl (has no effect on MAC)
 [ -f ~/.zsh/custom-settings/gen-gh-ssh-key-inside-wsl.zsh ] && source ~/.zsh/custom-settings/gen-gh-ssh-key-inside-wsl.zsh
-# Ubuntu WSL - Ask ssh key only once a day (has no effect on MAC)
+# Ubuntu WSL - Ask ssh key only once a day (has no effect on MAC) (login hook needs testing)
 [ -f ~/.zsh/custom-settings/wsl-ssh-login-hook.zsh ] && source ~/.zsh/custom-settings/wsl-ssh-login-hook.zsh
 # ZSH completions and suggestions
 [ -f ~/.zsh/custom-settings/completion.zsh ] && source ~/.zsh/custom-settings/completion.zsh
