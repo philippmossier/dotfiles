@@ -1,31 +1,33 @@
 
-if [[ $OSTYPE == linux* ]]; then
-# LINUX detected
-	if [[ $(uname -r) =~ WSL ]]; then
-	# WSL detected
-		# SSH FIX for always asking for passphrase when commit/push in Windows WSL2 
-		env=~/.ssh/agent.env
+# Uncomment this after you have installed ssh access to github (otherwhise you get this warning `no such file or directory .ssh/agent.env`)
 
-		agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
+# if [[ $OSTYPE == linux* ]]; then
+# # LINUX detected
+# 	if [[ $(uname -r) =~ WSL ]]; then
+# 	# WSL detected
+# 		# SSH FIX for always asking for passphrase when commit/push in Windows WSL2 
+# 		env=~/.ssh/agent.env
 
-		agent_start () {
-			(umask 077; ssh-agent >| "$env")
-			. "$env" >| /dev/null ; }
+# 		agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
 
-		agent_load_env
+# 		agent_start () {
+# 			(umask 077; ssh-agent >| "$env")
+# 			. "$env" >| /dev/null ; }
 
-		# agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2= agent not running
-		agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
+# 		agent_load_env
 
-		if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
-			agent_start
-			ssh-add
-		elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
-			ssh-add
-		fi
+# 		# agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2= agent not running
+# 		agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
 
-		unset env
-	fi
-fi
+# 		if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
+# 			agent_start
+# 			ssh-add
+# 		elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
+# 			ssh-add
+# 		fi
+
+# 		unset env
+# 	fi
+# fi
 
 
