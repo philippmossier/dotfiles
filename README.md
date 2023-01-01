@@ -29,6 +29,13 @@ git clone https://github.com/philippmossier/dotfiles.git
 - cli-tools for a better command-line experience.
 - standard packages for developers (nvm, fzf ...).
 
+🕮 *Neovim Notes*
+- The nvim folder is a fork of https://github.com/AstroNvim/AstroNvim
+- Don't touch the nvim folder 
+- Use `:AstroUpdate` inside nvim to get newest changes from astronvim repo
+- Our personal astronvim user settings are stored in `dotfiles/config/custom/astronvim_config` 
+- Our personal astronvim config is symlinked with `nvim/lua/user` (recommended according astronvim docs: https://astronvim.github.io/Configuration/manage_user_config)
+- If the nvim folder gets deleted for some reason, maybe the symlink to our personal astronvim config has to be renewed with `ln -s ~/dotfiles/config/nvim/lua/user ~/dotfiles/config/custom/astronvim_config`
 
 🕮 *How the shell gets configurated?*
 

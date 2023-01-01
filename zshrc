@@ -25,6 +25,8 @@ alias delete_node_modules='find . -name "node_modules" -type d -prune -print -ex
 alias list_zone_identifier='find . -name "*Zone.Identifier" -type f -prune -print | xargs du -chs'
 alias delete_zone_identifier='find . -name "*Zone.Identifier" -type f -prune -print -exec rm -rf '{}' \;'
 alias remove_nvim_cache_share='rm -rf .cache/nvim && rm -rf .local/share/nvim'
+alias open_nvim_custom_user-config='code ~/.config/nvim/lua/user'
+alias renew_astronvim_user_config_symlink='ln -s ~/dotfiles/config/nvim/lua/user ~/dotfiles/config/custom/astronvim_config'
 
 # Set ~/.local/bin to beginning of the $PATH
 [ -d $HOME/.local/bin ] && PATH="$HOME/.local/bin:$PATH"
