@@ -35,6 +35,7 @@ ln -s ~/dotfiles/zsh/custom-settings/gen-gh-ssh-key-inside-wsl.zsh ~/.zsh/custom
 ln -s ~/dotfiles/zsh/custom-settings/history.zsh ~/.zsh/custom-settings/history.zsh
 ln -s ~/dotfiles/zsh/custom-settings/nvm.zsh ~/.zsh/custom-settings/nvm.zsh
 
+ln -s ~/dotfiles/config/nvim ~/.config/nvim
 ln -s ~/dotfiles/gitconfig ~/.gitconfig
 ln -s ~/dotfiles/nvmhook.sh ~/.nvmhook.sh
 ln -s ~/dotfiles/config/starship.toml ~/.config/starship.toml
@@ -97,6 +98,16 @@ echo "############## starship prompt ###################"
 echo "##################################################"
 echo ""
 curl https://starship.rs/install.sh | sh -s -- -y
+
+echo ""
+echo "##################################################"
+echo "################## neovim ########################"
+echo "##################################################"
+echo ""
+curl -LO https://github.com/neovim/neovim/releases/download/v0.8.2/nvim-linux64.tar.gz && \
+tar xf nvim-linux64.tar.gz -C ~/.local/packages
+rm nvim-linux64.tar.gz
+ln -s ~/.local/packages/nvim-linux64/bin/nvim ~/.local/bin/nvim
 
 echo ""
 echo "##################################################"
