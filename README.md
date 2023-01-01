@@ -18,9 +18,12 @@ Basic install (stable for all fresh ubuntu22 distros, does not symlink dotfiles)
 Full install (symlinking zshrc gitconfig and alot other config files from this dotfiles repo)
 ```bash
 cd ~
-git clone https://github.com/philippmossier/dotfiles.git
+git clone https://github.com/philippmossier/dotfiles.git --recursive
 ./dotfiles/install.sh
 ```
+
+Note: `--recursive` option is needed to also get the astonvim repo cloned (which is a submodule inside config/nvim)
+if you forgot the --recursive flag you can do `git submodule update --init`
 
 *******************************************************************************
 
