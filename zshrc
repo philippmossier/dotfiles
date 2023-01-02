@@ -1,3 +1,7 @@
+# +-------------+
+# |   Aliases   |
+# +-------------+
+
 alias ls='exa'
 alias lsa='exa --all --long'
 
@@ -28,11 +32,33 @@ alias remove_nvim_cache_share='rm -rf .cache/nvim && rm -rf .local/share/nvim'
 alias open_nvim_custom_user-config='code ~/.config/nvim/lua/user'
 alias renew_astronvim_user_config_symlink='ln -s ~/dotfiles/config/nvim/lua/user ~/dotfiles/config/custom/astronvim_config'
 
-# Set ~/.local/bin to beginning of the $PATH
-[ -d $HOME/.local/bin ] && PATH="$HOME/.local/bin:$PATH"
+# +-------------+
+# | Cursor FIX  |
+# +-------------+
+
+# fix cursor style when moving from neovim to zsh https://unix.stackexchange.com/questions/433273/changing-cursor-style-based-on-mode-in-both-zsh-and-vim
+_fix_cursor() {
+   echo -ne '\e[5 q'
+}
+precmd_functions+=(_fix_cursor)
+
+# +-------------+
+# |  Starship   |
+# +-------------+
 
 # Load starship prompt
 eval "$(starship init zsh)"
+
+# +-------------+
+# |    PATH     |
+# +-------------+
+
+# Set ~/.local/bin to beginning of the $PATH
+[ -d $HOME/.local/bin ] && PATH="$HOME/.local/bin:$PATH"
+
+# +-------------+
+# |   SOURCES   |
+# +-------------+
 
 # Load nvm and setup nvm hook (hook is disabled at default)
 [ -f ~/.zsh/custom-settings/nvm.zsh ] && source ~/.zsh/custom-settings/nvm.zsh

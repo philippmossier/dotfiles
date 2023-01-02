@@ -62,9 +62,9 @@ fzf_grep_edit(){
 fzf_kill() {
      # add --exit-0 for work (linux)
     local pid_col
-    if [[ $OS = Linux ]]; then
+    if [[ $OSTYPE == linux* ]]; then
         pid_col=2
-    elif [[ $OS = Darwin ]]; then
+    elif [[ $OSTYPE == darwin* ]]; then
         pid_col=3;
     else
         echo 'Error: unknown platform'
