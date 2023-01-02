@@ -26,6 +26,7 @@ if [[ $OSTYPE == linux* ]]; then
 					echo "waiting for the keypress"
 				fi
 			done
+			cd ~/dotfiles && git remote set-url origin git@github.com:philippmossier/dotfiles.git # test switch from http to ssh https://stackoverflow.com/questions/55246165/how-to-ssh-a-git-repository-after-already-cloned-with-https
 		}
 	fi
 fi
