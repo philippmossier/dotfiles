@@ -113,6 +113,16 @@ ln -s ~/.local/packages/nvim-linux64/bin/nvim ~/.local/bin/nvim
 
 echo ""
 echo "##################################################"
+echo "############## delta (git pager) #################"
+echo "##################################################"
+echo ""
+curl -LO https://github.com/dandavison/delta/releases/download/0.15.0/delta-0.15.0-x86_64-unknown-linux-gnu.tar.gz && \
+tar xf delta-0.15.0-x86_64-unknown-linux-gnu.tar.gz -C ~/.local/packages
+rm delta-0.15.0-x86_64-unknown-linux-gnu.tar.gz
+ln -s ~/.local/packages/delta-0.15.0-x86_64-unknown-linux-gnu/delta ~/.local/bin/delta
+
+echo ""
+echo "##################################################"
 echo "### zsh autosuggestions & syntax-highlighting ####"
 echo "##################################################"
 echo ""
@@ -145,6 +155,7 @@ echo "##################################################"
 echo ""
 curl -Lo ~/.local/packages/zsh.tar.xz https://sourceforge.net/projects/zsh/files/zsh/5.9/zsh-5.9.tar.xz/download
 tar xJvf ~/.local/packages/zsh.tar.xz -C ~/.local/packages/zsh --strip-components 1
+rm ~/.local/packages/zsh.tar.xz
 cd ~/.local/packages/zsh
 
 echo ""
@@ -174,6 +185,7 @@ echo "#### install zsh binary to /usr/local/bin/zsh ####"
 echo "##################################################"
 echo ""
 sudo make install
+cd ~
 
 echo ""
 echo "##################################################"

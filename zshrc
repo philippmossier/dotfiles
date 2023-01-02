@@ -33,6 +33,12 @@ alias open_nvim_custom_user-config='code ~/.config/nvim/lua/user'
 alias renew_astronvim_user_config_symlink='ln -s ~/dotfiles/config/nvim/lua/user ~/dotfiles/config/custom/astronvim_config'
 
 # +-------------+
+# |  Variables  |
+# +-------------+
+PrimaryEDITOR=code  # Used by fzf_find_edit 'ef'
+SecondaryEDITOR=nvim # only used for fzf_grep_edit 'tf' (ripgrep search)
+
+# +-------------+
 # | Cursor FIX  |
 # +-------------+
 

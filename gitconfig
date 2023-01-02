@@ -1,31 +1,48 @@
 [core]
-	pager = diff-so-fancy | less --mouse
-[color]
-	ui = true
-[color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = red bold 52
-	newNormal = green bold
-	newHighlight = green bold 22
-[color "diff"]
-	meta = 11
-	frag = magenta bold
-	commit = yellow bold
-	old = red bold
-	new = green bold
-	whitespace = red reverse
+	pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true    # use n and N to move between diff sections
+    light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default
+
+[core]
+    editor = nvim
+
 [user]
  	name = philippmossier
  	email = mossier.dev@gmail.com
+
 [includeIf "gitdir:~/dev/hydra/"]
 	path = ~/a1_git/.gitconfig
+
 [alias]
 	ll = log --graph --format=\"%C(yellow)%h%C(red)%d%C(reset) - %C(bold green)(%ar)%C(reset) %s %C(blue)<%an>%C(reset)\"
-[diff-so-fancy]
-	rulerWidth = 47
-	changeHunkIndicators = true
-	stripLeadingSymbols = true
-	useUnicodeRuler = true
+
+# [color]
+# 	ui = true
+
+# [color "diff-highlight"]
+# 	oldNormal = red bold
+# 	oldHighlight = red bold 52
+# 	newNormal = green bold
+# 	newHighlight = green bold 22
+
+# [color "diff"]
+# 	meta = 11
+# 	frag = magenta bold
+# 	commit = yellow bold
+# 	old = red bold
+# 	new = green bold
+# 	whitespace = red reverse
 
 # unused pager config:
 # pager = diff-so-fancy | less --mouse --quit-if-one-screen --raw-control-chars --tabs=4
