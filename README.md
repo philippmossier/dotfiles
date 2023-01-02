@@ -6,7 +6,7 @@
 
 📜 Every step is well documented and nothing happens in the background.
 
-🧪 Tested on the newest stable versions (20.04) of Ubuntu , Pop-OS and WSL2
+🧪 Tested on Ubuntu 22 LTS on WSL2
 
 ### 💻 How to install:
 
@@ -32,8 +32,12 @@ if you forgot the --recursive flag you can do `git submodule update --init`
 🕮 _What gets installed?_
 
 - starship prompt for bash and zsh
-- cli-tools for a better command-line experience.
-- standard packages for developers (nvm, fzf ...).
+- zsh 5.9 installed from source
+- zsh-autosuggestions https://github.com/zsh-users/zsh-autosuggestions
+- zsh-syntax-highlighting https://github.com/zsh-users/zsh-syntax-highlighting
+- neovim (configured for FullStack Typescript JavaScript (jsx, tsx))
+- cli-tools for a better command-line experience (fzf, node, nvm, bat, exa, tree, fd-find, ripgrep, delta)
+- some handy aliases (including awesome fzf utilities)
 
 🕮 _Neovim Notes_
 
