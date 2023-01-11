@@ -84,7 +84,7 @@ fzf_git_add() {
       git status --porcelain | \
       fzf --select-1 --ansi \
           --preview 'if (git ls-files --error-unmatch {2} &>/dev/null); then
-                         git diff --color=always {2} | diff-so-fancy
+                         git diff --color=always {2} | delta
                      else
                          bat --color=always --line-range :500 {2}
                      fi')
@@ -99,7 +99,7 @@ fzf_git_unadd() {
       git status --porcelain | \
       fzf --select-1 --ansi \
           --preview 'if (git ls-files --error-unmatch {2} &>/dev/null); then
-                         git diff --color=always {2} | diff-so-fancy
+                         git diff --color=always {2} | delta
                      else
                          bat --color=always --line-range :500 {2}
                      fi')

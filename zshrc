@@ -32,6 +32,13 @@ alias remove_nvim_cache_share='rm -rf .cache/nvim && rm -rf .local/share/nvim'
 alias open_nvim_custom_user-config='code ~/.config/nvim/lua/user'
 alias renew_astronvim_user_config_symlink='ln -s ~/dotfiles/config/nvim/lua/user ~/dotfiles/config/custom/astronvim_config'
 
+# +--- NEW  ----+
+
+# alias python3="python3.11"
+# alias python="python3.11"
+
+# +-------------+
+
 # +-------------+
 # |  Variables  |
 # +-------------+

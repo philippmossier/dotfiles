@@ -215,6 +215,17 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.local/repos/.fzf
 
 echo ""
 echo "##################################################"
+echo "##################### python ########################"
+echo "##################################################"
+echo ""
+sudo add-apt-repository ppa:deadsnakes/ppa -y
+sudo apt -y install python3.11 python3.11-dev python3.11-venv
+python3.11 -m ensurepip --default-pip --user
+python3.11 -m pip install --upgrade pip --user
+python3.11 -m pip install pyjokes --user
+
+echo ""
+echo "##################################################"
 echo "#### bash and zsh auto generated settings done ###"
 echo "##################################################"
 echo ""
