@@ -34,8 +34,8 @@ alias renew_astronvim_user_config_symlink='ln -s ~/dotfiles/config/nvim/lua/user
 
 # +--- NEW  ----+
 # ubuntu work setting:
-# alias python3="python3.11"
-# alias python="python3.11"
+alias python3="python3.11"
+alias python="python3.11"
 # +-------------+
 
 # +-------------+

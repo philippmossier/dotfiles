@@ -28,7 +28,7 @@ echo "##################################################"
 echo ""
 cd ~
 ln -s ~/dotfiles/zshrc ~/.zshrc
-ln -s ~/dotfiles/zprofile ~/.zprofile
+# ln -s ~/dotfiles/zprofile ~/.zprofile # moved to dotfiles/zsh/custom-settings/gen-gh-ssh-key-inside-wsl.zsh
 ln -s ~/dotfiles/zsh/custom-settings/completion.zsh ~/.zsh/custom-settings/completion.zsh
 ln -s ~/dotfiles/zsh/custom-settings/fzf.zsh ~/.zsh/custom-settings/fzf.zsh
 ln -s ~/dotfiles/zsh/custom-settings/gen-gh-ssh-key-inside-wsl.zsh ~/.zsh/custom-settings/gen-gh-ssh-key-inside-wsl.zsh
