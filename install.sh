@@ -220,6 +220,8 @@ echo "##################################################"
 echo ""
 sudo add-apt-repository ppa:deadsnakes/ppa -y
 sudo apt -y install python3.11 python3.11-dev python3.11-venv
+sudo rm /usr/bin/python3
+sudo ln -s /usr/bin/python3.11 /usr/bin/python3
 python3.11 -m ensurepip --default-pip --user
 python3.11 -m pip install --upgrade pip --user
 python3.11 -m pip install pyjokes --user
