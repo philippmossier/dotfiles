@@ -33,10 +33,9 @@ alias open_nvim_custom_user-config='code ~/.config/nvim/lua/user'
 alias renew_astronvim_user_config_symlink='ln -s ~/dotfiles/config/nvim/lua/user ~/dotfiles/config/custom/astronvim_config'
 
 # +--- NEW  ----+
-
+# ubuntu work setting:
 # alias python3="python3.11"
 # alias python="python3.11"
-
 # +-------------+
 
 # +-------------+
@@ -83,4 +82,3 @@ eval "$(starship init zsh)"
 [ -f ~/.zsh/custom-settings/gen-gh-ssh-key-inside-wsl.zsh ] && source ~/.zsh/custom-settings/gen-gh-ssh-key-inside-wsl.zsh
 # ZSH completions and suggestions
 [ -f ~/.zsh/custom-settings/completion.zsh ] && source ~/.zsh/custom-settings/completion.zsh
-

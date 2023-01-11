@@ -27,6 +27,7 @@ if [[ $OSTYPE == linux* ]]; then
 				fi
 			done
 			cd ~/dotfiles && git remote set-url origin git@github.com:philippmossier/dotfiles.git # test switch from http to ssh https://stackoverflow.com/questions/55246165/how-to-ssh-a-git-repository-after-already-cloned-with-https
+			echo "switched from https to ssh connection on dotfile repo"		
 		}
 	fi
 fi
