@@ -1,26 +1,16 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
-# Inserts a blank line between shell prompts
-add_newline = true
-
-# Replace the '❯' symbol in the prompt with '➜'
-[character] # The name of the module we are configuring is 'character'
-success_symbol = '[❯](bold green)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
-
 # separates the prompt into two lines
 [line_break]
 disabled = false
 
-# Disable the package module, hiding it from the prompt completely
-[package]
-disabled = false
-symbol = " "
+# Inserts a blank line between shell prompts
+add_newline = true
 
-# Disable the node module, hiding it from the prompt completely
-[nodejs]
-disabled = false
-symbol = " "
+# Replace the "❯" symbol in the prompt with "➜"
+[character] # The name of the module we are configuring is "character"
+success_symbol = "[➜](bold green)" # The "success_symbol" segment is being set to "➜" with the color "bold green"
 
 [aws]
 symbol = "  "
@@ -51,18 +41,13 @@ symbol = " "
 
 [git_branch]
 symbol = " "
+format = "[$symbol$branch(:$remote_branch)]($style)"
 
 [golang]
 symbol = " "
 
-[guix_shell]
-symbol = " "
-
 [haskell]
 symbol = " "
-
-[haxe]
-symbol = "⌘ "
 
 [hg_branch]
 symbol = " "
@@ -88,43 +73,14 @@ symbol = " "
 [nix_shell]
 symbol = " "
 
-[os.symbols]
-Alpine = " "
-Amazon = " "
-Android = " "
-Arch = " "
-CentOS = " "
-Debian = " "
-DragonFly = " "
-Emscripten = " "
-EndeavourOS = " "
-Fedora = " "
-FreeBSD = " "
-Garuda = "﯑ "
-Gentoo = " "
-HardenedBSD = "ﲊ "
-Illumos = " "
-Linux = " "
-Macos = " "
-Manjaro = " "
-Mariner = " "
-MidnightBSD = " "
-Mint = " "
-NetBSD = " "
-NixOS = " "
-OpenBSD = " "
-openSUSE = " "
-OracleLinux = " "
-Pop = " "
-Raspbian = " "
-Redhat = " "
-RedHatEnterprise = " "
-Redox = " "
-Solus = "ﴱ "
-SUSE = " "
-Ubuntu = " "
-Unknown = " "
-Windows = " "
+[nodejs]
+symbol = " "
+format = "[$symbol($version )]($style)"
+
+[package]
+symbol = " "
+# Disable the package module, hiding it from the prompt completely
+disabled = false
 
 [python]
 symbol = " "
@@ -143,3 +99,5 @@ symbol = " "
 
 [spack]
 symbol = "🅢 "
+
+command_timeout = 10000
