@@ -13,7 +13,8 @@ add_newline = true
 success_symbol = "[➜](bold green)" # The "success_symbol" segment is being set to "➜" with the color "bold green"
 
 [aws]
-symbol = "  "
+symbol = " "
+format = '[$symbol($profile )(\($region\) )(\[$duration\] )]($style)'
 
 [buf]
 symbol = " "
@@ -41,7 +42,7 @@ symbol = " "
 
 [git_branch]
 symbol = " "
-format = "[$symbol$branch(:$remote_branch)]($style)"
+format = "[$symbol$branch (:$remote_branch)]($style)"
 
 [golang]
 symbol = " "
@@ -54,6 +55,7 @@ symbol = " "
 
 [java]
 symbol = " "
+format = '[${symbol}(${version} )]($style)'
 
 [julia]
 symbol = " "
@@ -80,7 +82,8 @@ format = "[$symbol($version )]($style)"
 [package]
 symbol = " "
 # Disable the package module, hiding it from the prompt completely
-disabled = false
+disabled = true
+format = 'is [$symbol$version]($style) '
 
 [python]
 symbol = " "
