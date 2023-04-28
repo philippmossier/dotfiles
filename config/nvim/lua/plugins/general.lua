@@ -1,3 +1,4 @@
+-- if true then return {} end
 return {
   { "windwp/nvim-ts-autotag" },
   { "jose-elias-alvarez/typescript.nvim" },
