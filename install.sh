@@ -15,11 +15,11 @@ echo "##################################################"
 echo "############# creating dir tree ##################"
 echo "##################################################"
 echo ""
-mkdir -p ~/.local/bin # all custom binaries
-mkdir -p ~/.local/repos # github repos (binaries, and other utils related to the binaries)
-mkdir -p ~/.config # nvim, starship, neofetch etc.
+mkdir -p ~/.local/bin           # all custom binaries
+mkdir -p ~/.local/repos         # github repos (binaries, and other utils related to the binaries)
+mkdir -p ~/.config              # nvim, starship, neofetch etc.
 mkdir -p ~/.zsh/custom-settings # mostly zsh sourced files, custom zsh settings
-mkdir -p ~/.local/packages # for installations from source and other packages
+mkdir -p ~/.local/packages      # for installations from source and other packages
 
 echo ""
 echo "##################################################"
@@ -36,7 +36,7 @@ ln -s ~/dotfiles/zsh/custom-settings/history.zsh ~/.zsh/custom-settings/history.
 ln -s ~/dotfiles/zsh/custom-settings/nvm.zsh ~/.zsh/custom-settings/nvm.zsh
 
 ln -s ~/dotfiles/config/nvim ~/.config/nvim
-ln -s ~/dotfiles/config/custom/astronvim_config ~/dotfiles/config/nvim/lua/user # do not touch astronvim default github repo, use symlink to our custom astro user realted settings
+# ln -s ~/dotfiles/config/custom/astronvim_config ~/dotfiles/config/nvim/lua/user # do not touch astronvim default github repo, use symlink to our custom astro user realted settings
 ln -s ~/dotfiles/gitconfig ~/.gitconfig
 ln -s ~/dotfiles/nvmhook.sh ~/.nvmhook.sh
 ln -s ~/dotfiles/config/starship.toml ~/.config/starship.toml
@@ -57,9 +57,9 @@ echo "################# nvm & node #####################"
 echo "##################################################"
 echo ""
 export NVM_DIR="$HOME/.nvm" && (
-  git clone https://github.com/nvm-sh/nvm.git "$NVM_DIR"
-  cd "$NVM_DIR"
-  git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --tags --max-count=1)`
+	git clone https://github.com/nvm-sh/nvm.git "$NVM_DIR"
+	cd "$NVM_DIR"
+	git checkout $(git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --tags --max-count=1))
 ) && \. "$NVM_DIR/nvm.sh"
 nvm install --lts
 
@@ -105,8 +105,8 @@ echo "##################################################"
 echo "################## neovim ########################"
 echo "##################################################"
 echo ""
-curl -LO https://github.com/neovim/neovim/releases/download/v0.8.2/nvim-linux64.tar.gz && \
-tar xf nvim-linux64.tar.gz -C ~/.local/packages
+curl -LO https://github.com/neovim/neovim/releases/download/v0.9.0/nvim-linux64.tar.gz &&
+	tar xf nvim-linux64.tar.gz -C ~/.local/packages
 rm nvim-linux64.tar.gz
 ln -s ~/.local/packages/nvim-linux64/bin/nvim ~/.local/bin/nvim
 # git clone https://github.com/philippmossier/astronvim_config.git ~/.config/nvim/lua/user
@@ -116,8 +116,8 @@ echo "##################################################"
 echo "############## delta (git pager) #################"
 echo "##################################################"
 echo ""
-curl -LO https://github.com/dandavison/delta/releases/download/0.15.0/delta-0.15.0-x86_64-unknown-linux-gnu.tar.gz && \
-tar xf delta-0.15.0-x86_64-unknown-linux-gnu.tar.gz -C ~/.local/packages
+curl -LO https://github.com/dandavison/delta/releases/download/0.15.0/delta-0.15.0-x86_64-unknown-linux-gnu.tar.gz &&
+	tar xf delta-0.15.0-x86_64-unknown-linux-gnu.tar.gz -C ~/.local/packages
 rm delta-0.15.0-x86_64-unknown-linux-gnu.tar.gz
 ln -s ~/.local/packages/delta-0.15.0-x86_64-unknown-linux-gnu/delta ~/.local/bin/delta
 
@@ -192,7 +192,7 @@ echo "##################################################"
 echo "####### add zsh binary to known shells ###########"
 echo "##################################################"
 echo ""
-echo `which zsh` | sudo tee -a /etc/shells
+echo $(which zsh) | sudo tee -a /etc/shells
 
 echo ""
 echo "##################################################"
