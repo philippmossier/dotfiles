@@ -1,19 +1,13 @@
 -- if true then return {} end
 return {
   { "windwp/nvim-ts-autotag" },
+
+  -- multicurso (test usefulness``)
+  { "mg979/vim-visual-multi" },
+  -- { "YacineDo/mc.nvim" },
+
   { "jose-elias-alvarez/typescript.nvim" },
   { "mfussenegger/nvim-jdtls" },
-  {
-    "nvim-treesitter/nvim-treesitter",
-    opts = function(_, opts)
-      opts.autotag = {
-        enable = true,
-      }
-      if type(opts.ensure_installed) == "table" then
-        vim.list_extend(opts.ensure_installed, { "typescript", "tsx" })
-      end
-    end,
-  },
   {
     "jose-elias-alvarez/null-ls.nvim",
     opts = function(_, opts)
@@ -32,12 +26,21 @@ return {
     "christoomey/vim-tmux-navigator",
     lazy = false,
   },
+  -- add nvim-ufo
   {
-    "phaazon/hop.nvim",
-    branch = "v2", -- optional but strongly recommended
-    config = function()
-      -- you can configure Hop the way you like here; see :h hop-config
-      require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
+    "kevinhwang91/nvim-ufo",
+    dependencies = "kevinhwang91/promise-async",
+    event = "BufReadPost",
+    opts = {},
+
+    init = function()
+      -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
+      vim.keymap.set("n", "zR", function()
+        require("ufo").openAllFolds()
+      end)
+      vim.keymap.set("n", "zM", function()
+        require("ufo").closeAllFolds()
+      end)
     end,
   },
 }

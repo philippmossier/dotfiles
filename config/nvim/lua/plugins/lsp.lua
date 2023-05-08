@@ -1,17 +1,148 @@
 -- if true then return {} end
 return {
+  -- inlay hints
+  {
+    "lvimuser/lsp-inlayhints.nvim",
+    event = "LspAttach",
+    opts = {},
+    config = function(_, opts)
+      require("lsp-inlayhints").setup(opts)
+      vim.api.nvim_create_autocmd("LspAttach", {
+        group = vim.api.nvim_create_augroup("LspAttach_inlayhints", {}),
+        callback = function(args)
+          if not (args.data and args.data.client_id) then
+            return
+          end
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
+          require("lsp-inlayhints").on_attach(client, args.buf)
+        end,
+      })
+    end,
+  },
   {
     "neovim/nvim-lspconfig",
     dependencies = { "jose-elias-alvarez/typescript.nvim", "mfussenegger/nvim-jdtls" },
+    -- add folding range to capabilities
     opts = {
+      capabilities = {
+        textDocument = {
+          foldingRange = {
+            dynamicRegistration = false,
+            lineFoldingOnly = true,
+          },
+        },
+      },
       -- make sure mason installs the server
       servers = {
+        astro = {},
+        bashls = {},
+        clangd = {},
+        -- denols = {},
+        marksman = {},
+        cssls = {},
+        dockerls = {},
+        ruff_lsp = {},
+        svelte = {},
+        html = {},
+        gopls = {},
+        pyright = {},
+        rust_analyzer = {
+          settings = {
+            ["rust-analyzer"] = {
+              procMacro = { enable = true },
+              cargo = { allFeatures = true },
+              checkOnSave = {
+                command = "clippy",
+                extraArgs = { "--no-deps" },
+              },
+            },
+          },
+        },
+        yamlls = {
+          settings = {
+            yaml = {
+              keyOrdering = false,
+            },
+          },
+        },
+        lua_ls = {
+          -- enabled = false,
+          single_file_support = true,
+          settings = {
+            Lua = {
+              workspace = {
+                checkThirdParty = false,
+              },
+              completion = {
+                workspaceWord = true,
+                callSnippet = "Both",
+              },
+              misc = {
+                parameters = {
+                  "--log-level=trace",
+                },
+              },
+              diagnostics = {
+                -- enable = false,
+                groupSeverity = {
+                  strong = "Warning",
+                  strict = "Warning",
+                },
+                groupFileStatus = {
+                  ["ambiguity"] = "Opened",
+                  ["await"] = "Opened",
+                  ["codestyle"] = "None",
+                  ["duplicate"] = "Opened",
+                  ["global"] = "Opened",
+                  ["luadoc"] = "Opened",
+                  ["redefined"] = "Opened",
+                  ["strict"] = "Opened",
+                  ["strong"] = "Opened",
+                  ["type-check"] = "Opened",
+                  ["unbalanced"] = "Opened",
+                  ["unused"] = "Opened",
+                },
+                unusedLocalExclude = { "_*" },
+              },
+              format = {
+                enable = false,
+                defaultConfig = {
+                  indent_style = "space",
+                  indent_size = "2",
+                  continuation_indent_size = "2",
+                },
+              },
+            },
+          },
+        },
         -- ======= TS ========
         ---@type lspconfig.options.tsserver
         tsserver = {
           settings = {
             completions = {
               completeFunctionCalls = true,
+            },
+            typescript = {
+              inlayHints = {
+                includeInlayParameterNameHints = "literal",
+                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                includeInlayFunctionParameterTypeHints = false,
+                includeInlayVariableTypeHints = false,
+                includeInlayPropertyDeclarationTypeHints = false,
+                includeInlayFunctionLikeReturnTypeHints = true,
+                includeInlayEnumMemberValueHints = true,
+              },
+            },
+            javascript = {
+              inlayHints = {
+                includeInlayParameterNameHints = "all",
+                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                includeInlayFunctionParameterTypeHints = true,
+                includeInlayVariableTypeHints = true,
+                includeInlayPropertyDeclarationTypeHints = true,
+                includeInlayFunctionLikeReturnTypeHints = true,
+                includeInlayEnumMemberValueHints = true,
+              },
             },
           },
         },
