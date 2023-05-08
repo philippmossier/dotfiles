@@ -15,7 +15,8 @@ end
 
 map("i", "jj", "<esc>", { desc = "enter normal mode" })
 map("v", "p", '"_dP', { desc = "viewmode-paste without clipboard overwrite" }) --  // description at 11:46 (https://www.youtube.com/watch?v=435-amtVYJ8&list=PLhoH5vyxr6Qq41NFL4GvhFp-WLd5xzIzZ&index=3)
-
+map("n", "<leader>upd", ":Copilot disable<cr>", { desc = "copilot disable" })
+map("n", "<leader>upe", ":Copilot enable<cr>", { desc = "copilot enable" })
 -- ###################################################################
 -- ### Current default from lazyvim project (28.04.2023)           ###
 -- ### This file is automatically loaded by lazyvim.plugins.config ###

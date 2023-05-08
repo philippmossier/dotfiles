@@ -22,7 +22,7 @@ return {
   },
   {
     "gbprod/yanky.nvim",
-    enabled = false,
+    enabled = true,
     event = "BufReadPost",
     config = function()
       -- vim.g.clipboard = {
@@ -43,7 +43,7 @@ return {
           timer = 150,
         },
         ring = {
-          storage = jit.os:find("Windows") and "shada" or "sqlite",
+          storage = jit.os:find("Windows") and "shada" or "sqlite", -- use shada on windows or use sqlite instead
         },
       })
 
