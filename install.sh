@@ -20,6 +20,7 @@ mkdir -p ~/.local/repos         # github repos (binaries, and other utils relate
 mkdir -p ~/.config              # nvim, starship, neofetch etc.
 mkdir -p ~/.zsh/custom-settings # mostly zsh sourced files, custom zsh settings
 mkdir -p ~/.local/packages      # for installations from source and other packages
+mkdir -p ~/.config/tmux
 
 echo ""
 echo "##################################################"
@@ -27,7 +28,17 @@ echo "######## add symlinks to homedirectory ###########"
 echo "##################################################"
 echo ""
 cd ~
+
 ln -s ~/dotfiles/zshrc ~/.zshrc
+
+# tmux
+ln -s ~/dotfiles/config/tmux ~/.config/tmux
+# ln -s ~/dotfiles/config/tmux/macos.conf ~/.config/tmux/macos.conf
+# ln -s ~/dotfiles/config/tmux/README.md ~/.config/tmux/README.md
+# ln -s ~/dotfiles/config/tmux/statusline.conf ~/.config/tmux/statusline.conf
+# ln -s ~/dotfiles/config/tmux/tmux.conf ~/.config/tmux/tmux.conf
+# ln -s ~/dotfiles/config/tmux/utility.conf ~/.config/tmux/utility.conf
+
 # ln -s ~/dotfiles/zprofile ~/.zprofile # moved to dotfiles/zsh/custom-settings/gen-gh-ssh-key-inside-wsl.zsh
 ln -s ~/dotfiles/zsh/custom-settings/completion.zsh ~/.zsh/custom-settings/completion.zsh
 ln -s ~/dotfiles/zsh/custom-settings/fzf.zsh ~/.zsh/custom-settings/fzf.zsh

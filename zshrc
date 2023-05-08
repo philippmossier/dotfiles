@@ -73,7 +73,7 @@ eval "$(starship init zsh)"
 # +-------------+
 
 # Load nvm and setup nvm hook (hook is disabled at default)
-[ -f ~/.zsh/custom-settings/nvm.zsh ] && source ~/.zsh/custom-settings/nvm.zsh
+# [ -f ~/.zsh/custom-settings/nvm.zsh ] && source ~/.zsh/custom-settings/nvm.zsh # use fnm instead of nvm
 # Load and setup fzf functions
 [ -f ~/.zsh/custom-settings/fzf.zsh ] && source ~/.zsh/custom-settings/fzf.zsh
 # ZSH history settings
@@ -82,3 +82,30 @@ eval "$(starship init zsh)"
 [ -f ~/.zsh/custom-settings/gen-gh-ssh-key-inside-wsl.zsh ] && source ~/.zsh/custom-settings/gen-gh-ssh-key-inside-wsl.zsh
 # ZSH completions and suggestions
 [ -f ~/.zsh/custom-settings/completion.zsh ] && source ~/.zsh/custom-settings/completion.zsh
+
+# +-------------+
+# |    PNPM     |
+# +-------------+
+
+# export PNPM_HOME="/home/phil/.local/share/pnpm"
+# case ":$PATH:" in
+#   *":$PNPM_HOME:"*) ;;
+#   *) export PATH="$PNPM_HOME:$PATH" ;;
+# esac
+# pnpm end
+
+# +-------------+
+# |    JAVA     |
+# +-------------+
+export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
+
+# +-------------+
+# |   NVM FNM   |
+# +-------------+
+
+# Load nvm and setup nvm hook (hook is disabled at default)
+# [ -f ~/.zsh/custom-settings/nvm.zsh ] && source ~/.zsh/custom-settings/nvm.zsh
+[ -d $HOME/.local/share/fnm ] && path+=('/home/phil/.local/share/fnm')
+eval "`fnm env`" # use  eval "`fnm env --use-on-cd`" when you want using the nvmhook
+
+export PATH=$PATH:/usr/local/go/bin
