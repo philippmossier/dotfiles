@@ -2,6 +2,9 @@
 # |   Aliases   |
 # +-------------+
 
+alias npm='pnpm'
+alias npx='pnpx'
+
 alias ls='exa'
 alias lsa='exa --all --long'
 

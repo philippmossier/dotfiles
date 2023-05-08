@@ -46,6 +46,7 @@ return {
         html = {},
         gopls = {},
         pyright = {},
+        prismals = {},
         rust_analyzer = {
           settings = {
             ["rust-analyzer"] = {

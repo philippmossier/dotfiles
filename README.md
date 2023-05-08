@@ -16,16 +16,24 @@ Basic install (stable for all fresh ubuntu22 distros, does not symlink dotfiles)
 ./install-ubuntu22-base-utils
 ```
 
-Full install (symlinking zshrc gitconfig and alot other config files from this dotfiles repo)
+Full install (symlinking zshrc, gitconfig, nvin, tmux and alot of other config files from this dotfiles repo)
 
 ```bash
 cd ~
-git clone https://github.com/philippmossier/dotfiles.git --recursive
 ./dotfiles/install.sh
 ```
 
-Note: `--recursive` option is needed to also get the astonvim repo cloned (which is a submodule inside config/nvim)
-if you forgot the --recursive flag you can do `git submodule update --init`
+## how to update config
+
+after using the install script never modify your dotfiles from your homefoder directly because we use the symlinks from the dotfile repo. Always modify dotfiles/<configfile>
+
+# tmux
+
+before running tmux
+
+- make sure tmux 3.3a (3.2a should also work) or up is installed
+- run `git clone https://github.com/tmux-plugins/tpm ~/tmuxplugins/plugins/tpm` first
+- then run `<tmux-prefix>I` for installing the plugins
 
 ---
 
