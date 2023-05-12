@@ -1,9 +1,12 @@
-# On first use you have to symlink github repo dotfiles with local dofiles
+                        # On first use you have to symlink github repo dotfiles with local dofiles
 # ln -s ~/dotfiles/mac/zshrc ~/.zshrc
 
 # +-------------+
 # |  ALIASES    |
 # +-------------+
+
+alias npm='pnpm'
+alias npx='pnpx'
 
 alias ls='exa'
 alias lsa='exa --all --long --header --git --icons'
@@ -36,13 +39,21 @@ alias delete_node_modules='find . -name "node_modules" -type d -prune -print -ex
 alias update_nvim_nightly='rm -rf .cache/nvim && rm -rf .local/share/nvim && rm -rf .local/bin/nvim-macos && curl -LO https://github.com/neovim/neovim/releases/download/nightly/nvim-macos.tar.gz && tar xzf nvim-macos.tar.gz && mv nvim-macos .local/bin/nvim-macos && rm -rf nvim-macos && rm nvim-macos.tar.gz'
 alias update_nvim_stable='rm -rf .cache/nvim && rm -rf .local/share/nvim && rm -rf .local/bin/nvim-macos && curl -LO https://github.com/neovim/neovim/releases/download/v0.8.0/nvim-macos.tar.gz && tar xzf nvim-macos.tar.gz && mv nvim-macos .local/bin/nvim-macos && rm -rf nvim-macos && rm nvim-macos.tar.gz'
 # alias nvim='~/.local/bin/nvim-macos/bin/nvim'
-alias remove_nvim_cache_share='rm -rf .cache/nvim && rm -rf .local/share/nvim'
+alias remove_nvim_cache_share_state='rm -rf ~/.cache/nvim && rm -rf ~/.local/share/nvim && rm -rf ~/.local/state/nvim'
 # alias vim='~/.local/bin/nvim-macos/bin/nvim'
 # alias nvim='~/nvim-macos/bin/nvim'
 # alias vim='~/nvim-macos/bin/nvim'
 
+alias purge_nvim='rm -rf ~/.config/nvim ~/.local/share/nvim ~/.local/state/nvim ~/.cache/nvim'
+alias purge_and_reinstall_lazyvim='rm -rf ~/.config/nvim ~/.local/share/nvim ~/.local/state/nvim ~/.cache/nvim && git clone https://github.com/LazyVim/starter ~/.config/nvim'
+
+
 alias lvim='~/.local/bin/lvim'
 alias astronvim_config='nvim ~/.config/nvim/lua/user/init.lua'
+
+alias jvm8='switch_to_java8'
+alias jvm11='switch_to_java11'
+alias jvm17='switch_to_java17'
 
 # alias vim='/opt/homebrew/bin/nvim'g
 
@@ -62,10 +73,10 @@ DEFAULT_USER=`whoami`
 # +-------------+
 
 ## ================================= Default NVM loading ============================================
-export NVM_DIR="$HOME/.nvm"
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion (also work for zsh)
-
+# export NVM_DIR="$HOME/.nvm"
+#   [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+#   [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion (also work for zsh)
+#
 ## ================================= NVM lazy loading ============================================
 ## nvm lazy loading:(fast shell loading but doesnt work wirh nvm hook)
 ## Defer initialization of nvm until nvm, node or a node-dependent command is
@@ -351,6 +362,22 @@ fzf_git_log_pickaxe() {
      fi
  }
 
+# +---------------------------+
+# |    java version manager   |
+# +---------------------------+
+
+function switch_to_java8(){
+    source ~/bin/switch_java_to.sh 8
+}
+
+function switch_to_java11(){
+    source ~/bin/switch_java_to.sh 11
+}
+
+function switch_to_java17(){
+    source ~/bin/switch_java_to.sh 17
+}
+
 # +-------------+
 # | CARGO (RUST)|
 # +-------------+
@@ -489,9 +516,25 @@ zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f
 
 
 # Go
-export GOPATH=/Users/phil/p/go
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
 
 # pnpm
 export PNPM_HOME="/Users/phil/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 # pnpm end
+
+# java
+
+# Pyenv initialization
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+# java
+# export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-8.jdk/Contents/Home/jre
+
+# export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+# export JAVA_HOME=`/usr/libexec/java_home -v 11`
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+export PATH="$JAVA_HOME:$PATH"
+eval "$(fnm env --use-on-cd)"
