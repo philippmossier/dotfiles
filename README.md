@@ -57,6 +57,12 @@ before running tmux
 - If the nvim folder gets deleted for some reason, maybe the symlink to our personal astronvim config has to be renewed with `ln -s ~/dotfiles/config/nvim/lua/user ~/dotfiles/config/custom/astronvim_config`
 - If TS/JS formating does not work, install `npm i -g @fsouza/prettierd` and `npm i -g eslint_d` or run `:LspRestart` or kill/restart `eslint_d` `prettierd` process
 
+## Tailwind in neovim:
+
+- tailwind docs related to lazyvim: `https://www.lazyvim.org/plugins/extras/lang.tailwind`
+- it seems that tailwind autocomplete only works at the end of the tw string
+- it does not work in some monorepo setups where the tailwindconfig is shared globally at the root of the monorepo
+
 🕮 _How the shell gets configurated?_
 
 All dotfiles get automaticly symlinked into your homedirectory with the right file endings (you dont have to copy them manually into your home-folder (the repository representates your homedirectory dotfiles)
@@ -238,65 +244,4 @@ example
 //wsl$/ubuntu-main/home/johndoe/
 ```
 
-🐞 **WSL2 always ROOT user Bug solution (needed for multiple `wsl --import` distros):**
-
-- UPDATE 08.2021: You can also try this json commandline setting instead of changing registry
-
-```windows terminal setting.json
-{
-    "commandline": "wsl.exe ~ -d ubuntu-main -u phil",
-    "guid": "{distroID}",
-    "hidden": false,
-    "name": "ubuntu-main",
-    "source": "Windows.Terminal.Wsl"
-},
-```
-
-- Update 08.2021: You may still need seting `DefaultUid` to Decimal: `1000` in registry because of always root user bug in vscode.
-  the ubunutu shell start with right user because of "commandline": "wsl.exe ~ -d ubuntu-main -u phil", but the code . command sometimes results in always root user in integrated vscode terminal, in that case we still need to change the registry value of `DefaultUid` to Decimal: `1000`
-
-WSL2 starts always with root user at start of a new wsl-session which results in no access to the imported files (distro-backups.tar).
-
-This solution gives you back your standard user at login.
-I needed to modify the windows registry to use my standard user in all my disto copies.
-
-🛠️ Windows Registry Key path:
-
-`HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Lxss\{your_Distro_ID}`
-
-Change `DefaultUid` to Decimal: `1000`
-Do that for all your installed distro copies.
-
-Now you get your default username at start of a new wsl session.
-Now you can run different distro copies in only one Windows Terminal (one tab for each distro).
-Dont forget to use the right settings.json for windows terminal (found in the DOCS folder).
-
-Usefull link:
-
-https://superuser.com/questions/1506304/setting-default-user-in-linux-wsl-in-sideloaded-distro
-
-https://docs.microsoft.com/en-us/windows/wsl/reference
-
-https://docs.microsoft.com/en-us/windows/wsl/wsl-config
-
-🐞 **WSL2 always ROOT user Bug solution (needed for multiple `wsl --import` distros):**
-
-WSL2 starts always with root user at start of a new wsl-session which results in no access to the imported files (distro-backups.tar).
-
-This solution gives you back your standard user at login.
-I needed to modify the windows registry to use my standard user in all my disto copies.
-
-🛠️ Windows Registry Key path:
-
-`HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Lxss\{your_Distro_ID}`
-
-Change `DefaultUid` to Decimal: `1000`
-Do that for all your installed distro copies.
-
-Now you get your default username at start of a new wsl session.
-Now you can run different distro copies in only one Windows Terminal (one tab for each distro).
-Dont forget to use the right settings.json for windows terminal (found in the DOCS folder).
-
-Usefull link:
-
-https://superuser.com/questions/1506304/setting-default-user-in-linux-wsl-in-sideloaded-distro
+🐞 \*\*WSL2 always ROOT user Bu
