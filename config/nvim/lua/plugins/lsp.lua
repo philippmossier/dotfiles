@@ -47,6 +47,20 @@ return {
         gopls = {},
         pyright = {},
         prismals = {},
+        -- tailwindcss = {
+        --   settings = {
+        --     tailwindCss = {
+        --       experimental = {
+        --         -- configFile = vim.fn.stdpath("config") .. "/tailwind/index.ts",
+        --         -- configFile = "packages/config/tailwind/index.ts",
+        --         -- configFile = "/tailwind/index.ts",
+        --         -- configFile = "/Users/phil/twurbonpm/packages/config/tailwind/index.ts"
+        --         configFile = "/Users/phil/twtest/tailwind.config.ts"
+        --       },
+        --     }
+        --   },
+        --   default_config = { root_dir = "/Users/phil/twtest/tailwind.config.ts" }
+        -- },
         rust_analyzer = {
           settings = {
             ["rust-analyzer"] = {
@@ -233,7 +247,8 @@ return {
 
               local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
               -- vim.lsp.set_log_level('DEBUG')
-              local workspace_dir = "/Users/phil/.local/share/nvim/jdtls_lsp_workspaces/" .. project_name -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
+              local workspace_dir = "/Users/phil/.local/share/nvim/jdtls_lsp_workspaces/" ..
+                  project_name -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
               local config = {
                 -- The command that starts the language server
                 -- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line

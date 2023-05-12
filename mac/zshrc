@@ -5,8 +5,8 @@
 # |  ALIASES    |
 # +-------------+
 
-alias npm='pnpm'
-alias npx='pnpx'
+# alias npm='pnpm'
+# alias npx='pnpx'
 
 alias ls='exa'
 alias lsa='exa --all --long --header --git --icons'
