@@ -1,5 +1,9 @@
--- if true then return {} end
+-- if true then
+--   return {}
+-- end -- disable for now
+
 return {
+
   {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
@@ -9,6 +13,7 @@ return {
       panel = { enabled = false },
     },
   },
+
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
@@ -37,6 +42,7 @@ return {
       })
     end,
   },
+
   {
     "zbirenbaum/copilot-cmp",
     dependencies = "copilot.lua",

@@ -1,5 +1,6 @@
 -- if true then return {} end
 return {
+
   -- inlay hints
   {
     "lvimuser/lsp-inlayhints.nvim",
@@ -19,6 +20,7 @@ return {
       })
     end,
   },
+
   {
     "neovim/nvim-lspconfig",
     dependencies = { "jose-elias-alvarez/typescript.nvim", "mfussenegger/nvim-jdtls" },
@@ -247,8 +249,7 @@ return {
 
               local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
               -- vim.lsp.set_log_level('DEBUG')
-              local workspace_dir = "/Users/phil/.local/share/nvim/jdtls_lsp_workspaces/" ..
-                  project_name -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
+              local workspace_dir = "/Users/phil/.local/share/nvim/jdtls_lsp_workspaces/" .. project_name -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
               local config = {
                 -- The command that starts the language server
                 -- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line

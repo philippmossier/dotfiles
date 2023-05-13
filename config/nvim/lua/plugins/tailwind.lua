@@ -1,13 +1,14 @@
 local util = require("lspconfig.util")
 
 return {
+
   {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
         tailwindcss = {
           -- default values can be found at https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tailwindcss
-          root_dir = util.root_pattern('.git'), -- use this line only for monorepos like t3turbo
+          root_dir = util.root_pattern(".git"), -- use this line only for monorepos like t3turbo
           settings = {
             tailwindCSS = {
               experimental = {
@@ -29,6 +30,7 @@ return {
       },
     },
   },
+
   {
     "NvChad/nvim-colorizer.lua",
     opts = {
@@ -37,6 +39,7 @@ return {
       },
     },
   },
+
   {
     "hrsh7th/nvim-cmp",
     dependencies = {

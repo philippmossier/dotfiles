@@ -20,6 +20,7 @@ return {
     --   return require("lazyvim.util").has("yanky.nvim") and not jit.os:find("Windows")
     -- end,
   },
+
   {
     "gbprod/yanky.nvim",
     enabled = true,

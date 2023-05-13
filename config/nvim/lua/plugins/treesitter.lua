@@ -1,5 +1,6 @@
 return {
   -- { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
+  --
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
@@ -15,6 +16,7 @@ return {
       end
     end,
   },
+
   {
     "mfussenegger/nvim-treehopper",
     keys = { { "m", mode = { "o", "x" } } },
@@ -25,6 +27,7 @@ return {
       ]])
     end,
   },
+
   {
     "nvim-treesitter/nvim-treesitter-context",
     event = "BufReadPre",

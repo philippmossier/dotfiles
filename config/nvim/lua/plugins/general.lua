@@ -1,5 +1,6 @@
 -- if true then return {} end
 return {
+
   { "windwp/nvim-ts-autotag" },
 
   -- multicurso (test usefulness``)
@@ -7,7 +8,9 @@ return {
   -- { "YacineDo/mc.nvim" },
 
   { "jose-elias-alvarez/typescript.nvim" },
+
   { "mfussenegger/nvim-jdtls" },
+
   {
     "jose-elias-alvarez/null-ls.nvim",
     opts = function(_, opts)
@@ -16,16 +19,19 @@ return {
       table.insert(opts.sources, require("typescript.extensions.null-ls.code-actions"))
     end,
   },
+
   {
     "williamboman/mason.nvim",
     opts = function(_, opts)
       table.insert(opts.ensure_installed, "prettierd")
     end,
   },
+
   {
     "christoomey/vim-tmux-navigator",
     lazy = false,
   },
+
   -- add nvim-ufo
   {
     "kevinhwang91/nvim-ufo",
