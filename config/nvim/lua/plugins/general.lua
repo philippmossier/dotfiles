@@ -4,7 +4,7 @@ return {
   { "windwp/nvim-ts-autotag" },
 
   -- multicurso (test usefulness``)
-  { "mg979/vim-visual-multi" },
+  -- { "mg979/vim-visual-multi" }, -- cannot be used atm because <C-down> is reserved for window size changes
   -- { "YacineDo/mc.nvim" },
 
   { "jose-elias-alvarez/typescript.nvim" },
