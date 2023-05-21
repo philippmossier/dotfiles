@@ -5,10 +5,19 @@ return {
   -- for splitting/joining blocks of code like arrays, statements, objects with the J key
   {
     "Wansmer/treesj",
+    enabled = false,
     keys = {
       { "J", "<cmd>TSJToggle<cr>", desc = "Join Toggle" },
     },
     opts = { use_default_keymaps = false, max_join_length = 150 },
+  },
+  -- use this instead of treesj
+  {
+    "echasnovski/mini.splitjoin",
+    opts = { mappings = { toggle = "J" } },
+    keys = {
+      { "J", desc = "Split/Join" },
+    },
   },
 
   {

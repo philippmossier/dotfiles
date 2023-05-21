@@ -49,6 +49,7 @@ return {
   {
     "petertriho/nvim-scrollbar",
     event = "BufReadPost",
+    enabled = false,
     config = function()
       local scrollbar = require("scrollbar")
       local colors = require("tokyonight.colors").setup()
@@ -66,7 +67,7 @@ return {
       })
     end,
   },
-
+  { "lewis6991/satellite.nvim", opts = {}, event = "VeryLazy", enabled = true },
   -- style windows with different colorschemes
   {
     "folke/styler.nvim",

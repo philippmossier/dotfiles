@@ -1,3 +1,75 @@
+# tips for usage
+
+## replace multicursor with native vim cmds
+
+blogpost: https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db
+
+```
+const a = 3;
+const b = 3;
+const c = 3;
+
+to:
+
+let a = 3;
+let b = 3;
+let c = 3;
+
+with: /const <enter> <cgn> <esc> <..>
+```
+
+```
+import HTML.Lazy as L
+
+lazy2 lorem impsum
+lazy3 lorem impsum
+lazy4 lorem impsum
+
+to:
+
+import HTML.Lazy as L
+
+L.lazy2 lorem impsum
+L.lazy3 lorem impsum
+L.lazy4 lorem impsum
+
+with: /laz <enter> <C-v> <jj> <L.> <esc>
+```
+
+## leap.nvim
+
+s leap forwarward example: sow (searches for word with letters ow)
+
+S leap backwards
+
+## mini surround:
+
+```
+# most important
+add = "gza", -- Add surrounding in Normal and Visual modes (example gzaiw" or gza$")
+delete = "gzd", -- Delete surrounding
+replace = "gzr", -- Replace surrounding
+
+# I duno what they do yet
+find = "gzf", -- Find surrounding (to the right)
+find_left = "gzF", -- Find surrounding (to the left)
+highlight = "gzh", -- Highlight surrounding
+update_n_lines = "gzn", -- Update `n_lines`
+
+example1:
+
+blogpost: https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db
+
+surround the link above with "https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db"
+
+go to first letter h and then gza$"
+
+example2: replace "" surroundings of the link with ``
+gzr"`
+```
+
+gw = highlight word
+
 # lazyvim incl custom settings
 
 ## differences between wsl and mac:
@@ -15,7 +87,7 @@ Change some paths accordingly to your machine:
 
 maybe you have to relogin into copilot via `:Copilot` and then select the action.
 
-## nvim surround
+## n"vim surround
 
     Old text                    Command         New text
 

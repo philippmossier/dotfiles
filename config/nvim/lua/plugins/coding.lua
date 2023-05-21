@@ -1,80 +1,35 @@
 return {
 
-  -- easy surroung text
-  {
-    "kylechui/nvim-surround",
-    version = "*", -- Use for stability; omit to use `main` branch for the latest features
-    event = "VeryLazy",
-    config = function()
-      require("nvim-surround").setup({
-        -- Configuration here, or leave empty to use defaults
-      })
-    end,
-  },
-
-  -- better yank/paste
-  {
-    "kkharji/sqlite.lua",
-    -- commented out for now (because lazyvim.util cannot be found on first install lazyvim)
-    -- enabled = function()
-    --   return require("lazyvim.util").has("yanky.nvim") and not jit.os:find("Windows")
-    -- end,
-  },
-
   {
     "gbprod/yanky.nvim",
     enabled = true,
-    event = "BufReadPost",
-    config = function()
-      -- vim.g.clipboard = {
-      --   name = "xsel_override",
-      --   copy = {
-      --     ["+"] = "xsel --input --clipboard",
-      --     ["*"] = "xsel --input --primary",
-      --   },
-      --   paste = {
-      --     ["+"] = "xsel --output --clipboard",
-      --     ["*"] = "xsel --output --primary",
-      --   },
-      --   cache_enabled = 1,
-      -- }
-
-      require("yanky").setup({
-        highlight = {
-          timer = 150,
-        },
-        ring = {
-          storage = jit.os:find("Windows") and "shada" or "sqlite", -- use shada on windows or use sqlite instead
-        },
-      })
-
-      vim.keymap.set({ "n", "x" }, "y", "<Plug>(YankyYank)")
-
-      vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
-      vim.keymap.set({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")
-      vim.keymap.set({ "n", "x" }, "gp", "<Plug>(YankyGPutAfter)")
-      vim.keymap.set({ "n", "x" }, "gP", "<Plug>(YankyGPutBefore)")
-
-      vim.keymap.set("n", "<c-n>", "<Plug>(YankyCycleForward)")
-      vim.keymap.set("n", "<c-p>", "<Plug>(YankyCycleBackward)")
-
-      vim.keymap.set("n", "]p", "<Plug>(YankyPutIndentAfterLinewise)")
-      vim.keymap.set("n", "[p", "<Plug>(YankyPutIndentBeforeLinewise)")
-      vim.keymap.set("n", "]P", "<Plug>(YankyPutIndentAfterLinewise)")
-      vim.keymap.set("n", "[P", "<Plug>(YankyPutIndentBeforeLinewise)")
-
-      vim.keymap.set("n", ">p", "<Plug>(YankyPutIndentAfterShiftRight)")
-      vim.keymap.set("n", "<p", "<Plug>(YankyPutIndentAfterShiftLeft)")
-      vim.keymap.set("n", ">P", "<Plug>(YankyPutIndentBeforeShiftRight)")
-      vim.keymap.set("n", "<P", "<Plug>(YankyPutIndentBeforeShiftLeft)")
-
-      vim.keymap.set("n", "=p", "<Plug>(YankyPutAfterFilter)")
-      vim.keymap.set("n", "=P", "<Plug>(YankyPutBeforeFilter)")
-
-      vim.keymap.set("n", "<leader>P", function()
-        require("telescope").extensions.yank_history.yank_history({})
-      end, { desc = "Paste from Yanky" })
-    end,
+    event = "VeryLazy",
+    dependencies = { { "kkharji/sqlite.lua", enabled = not jit.os:find("Windows") } },
+    opts = {
+      highlight = { timer = 150 },
+      ring = { storage = jit.os:find("Windows") and "shada" or "sqlite" },
+    },
+    keys = {
+      -- stylua: ignore
+      { "<leader>P", function() require("telescope").extensions.yank_history.yank_history({ }) end, desc = "Paste from Yanky" },
+      -- { "y", "<Plug>(YankyYank)", mode = { "n", "x" } },
+      -- { "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" } },
+      -- { "P", "<Plug>(YankyPutBefore)", mode = { "n", "x" } },
+      -- { "gp", "<Plug>(YankyGPutAfter)", mode = { "n", "x" } },
+      -- { "gP", "<Plug>(YankyGPutBefore)", mode = { "n", "x" } },
+      -- { "[y", "<Plug>(YankyCycleForward)" },
+      -- { "]y", "<Plug>(YankyCycleBackward)" },
+      -- { "]p", "<Plug>(YankyPutIndentAfterLinewise)" },
+      -- { "[p", "<Plug>(YankyPutIndentBeforeLinewise)" },
+      -- { "]P", "<Plug>(YankyPutIndentAfterLinewise)" },
+      -- { "[P", "<Plug>(YankyPutIndentBeforeLinewise)" },
+      -- { ">p", "<Plug>(YankyPutIndentAfterShiftRight)" },
+      -- { "<p", "<Plug>(YankyPutIndentAfterShiftLeft)" },
+      -- { ">P", "<Plug>(YankyPutIndentBeforeShiftRight)" },
+      -- { "<P", "<Plug>(YankyPutIndentBeforeShiftLeft)" },
+      -- { "=p", "<Plug>(YankyPutAfterFilter)" },
+      -- { "=P", "<Plug>(YankyPutBeforeFilter)" },
+    },
   },
 
   -- better text objects
