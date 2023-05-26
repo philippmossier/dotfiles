@@ -26,6 +26,26 @@ return {
     dependencies = { "jose-elias-alvarez/typescript.nvim", "mfussenegger/nvim-jdtls" },
     -- add folding range to capabilities
     opts = {
+      diagnostics = {
+        underline = true,
+        update_in_insert = false,
+        severity_sort = true,
+
+        -- DISABLE inline diagnostics:
+        -- you can show line diagnostics with <leader>cd (while hovering)
+        -- or use <leader>xx to show a list of file diagnostics in a seperate window (you can close the window with <leader>xx aswell)
+        virtual_text = false,
+
+        -- DEFAULT lazyvim config:
+        -- virtual_text = {
+        --   spacing = 4,
+        --   source = "if_many",
+        --   prefix = "●",
+        --   -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
+        --   -- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
+        --   -- prefix = "icons",
+        -- },
+      },
       capabilities = {
         textDocument = {
           foldingRange = {

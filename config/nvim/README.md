@@ -70,6 +70,24 @@ gzr"`
 
 gw = highlight word
 
+## diagnostics
+
+- current diagnostics setup in lsp.lua:
+
+```
+  opts = {
+  diagnostics = {
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
+
+  -- DISABLE inline diagnostics:
+  -- you can show line diagnostics with <leader>cd (while hovering)
+  -- or use <leader>xx to show a list of file diagnostics in a seperate window (you can close the window with <leader>xx aswell)
+  virtual_text = false,
+  ...
+```
+
 # lazyvim incl custom settings
 
 ## differences between wsl and mac:

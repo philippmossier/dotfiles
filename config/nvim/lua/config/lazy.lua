@@ -25,6 +25,16 @@ require("lazy").setup({
 
     { import = "lazyvim.plugins.extras.lang.tailwind" },
 
+    --  new extras (testing):
+
+    { import = "lazyvim.plugins.extras.lang.go" },
+
+    { import = "lazyvim.plugins.extras.dap.core" },
+
+    { import = "lazyvim.plugins.extras.util.project" },
+
+    { import = "lazyvim.plugins.extras.vscode" },
+
     -- { import = "lazyvim.plugins.extras.ui.mini-animate" }, -- fancy but slow
     -- { import = "lazyvim.plugins.extras.dap.core" }, -- todo fully integratr nvim dap
 
