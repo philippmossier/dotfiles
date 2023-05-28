@@ -1,6 +1,7 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here:
+local util = require("util")
 
 local function map(mode, lhs, rhs, opts)
   local keys = require("lazy.core.handler").handlers.keys
@@ -17,6 +18,10 @@ map("i", "jj", "<esc>", { desc = "enter normal mode" })
 map("v", "p", '"_dP', { desc = "viewmode-paste without clipboard overwrite" }) --  // description at 11:46 (https://www.youtube.com/watch?v=435-amtVYJ8&list=PLhoH5vyxr6Qq41NFL4GvhFp-WLd5xzIzZ&index=3)
 map("n", "<leader>upd", ":Copilot disable<cr>", { desc = "copilot disable" })
 map("n", "<leader>upe", ":Copilot enable<cr>", { desc = "copilot enable" })
+
+-- overwrite default lazyvim diagnostics toggler:
+map("n", "<leader>ud", util.toggle_diagnostics, { desc = "Toggle Diagnostics" })
+
 -- ###################################################################
 -- ### Current default from lazyvim project (28.04.2023)           ###
 -- ### This file is automatically loaded by lazyvim.plugins.config ###

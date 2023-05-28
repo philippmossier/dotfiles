@@ -34,7 +34,7 @@ return {
         -- DISABLE inline diagnostics:
         -- you can show line diagnostics with <leader>cd (while hovering)
         -- or use <leader>xx to show a list of file diagnostics in a seperate window (you can close the window with <leader>xx aswell)
-        virtual_text = false,
+        virtual_text = true,
 
         -- DEFAULT lazyvim config:
         -- virtual_text = {
