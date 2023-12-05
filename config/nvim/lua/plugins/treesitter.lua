@@ -11,7 +11,7 @@ return {
         vim.list_extend(
           opts.ensure_installed,
           -- extends from: https://github.com/LazyVim/LazyVim/blob/25d37a2cdd6202f1d767595454a7f84f77bbd83e/lua/lazyvim/plugins/treesitter.lua#L38
-          { "go", "astro", "gitignore", "sql", "graphql", "yaml", "rust", "prisma" }
+          { "go", "astro", "gitignore", "sql", "graphql", "yaml", "rust", "prisma", "dockerfile" }
         )
       end
     end,

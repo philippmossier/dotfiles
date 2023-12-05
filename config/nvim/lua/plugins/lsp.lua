@@ -23,7 +23,7 @@ return {
 
   {
     "neovim/nvim-lspconfig",
-    dependencies = { "jose-elias-alvarez/typescript.nvim", "mfussenegger/nvim-jdtls" },
+    dependencies = { "jose-elias-alvarez/typescript.nvim", "mfussenegger/nvim-jdtls", "b0o/SchemaStore.nvim" },
     -- add folding range to capabilities
     opts = {
       diagnostics = {
@@ -68,13 +68,14 @@ return {
         -- denols = {},
         marksman = {},
         cssls = {},
-        dockerls = {},
         ruff_lsp = {},
         svelte = {},
         html = {},
         gopls = {},
         pyright = {},
         prismals = {},
+        dockerls = {},
+        docker_compose_language_service = {},
         -- tailwindcss = {
         --   settings = {
         --     tailwindCss = {
@@ -102,9 +103,26 @@ return {
           },
         },
         yamlls = {
+          -- lazy-load schemastore when needed
+          on_new_config = function(new_config)
+            new_config.settings.yaml.schemas = new_config.settings.yaml.schemas or {}
+            vim.list_extend(new_config.settings.yaml.schemas, require("schemastore").yaml.schemas())
+          end,
           settings = {
+            redhat = { telemetry = { enabled = false } },
             yaml = {
               keyOrdering = false,
+              format = {
+                enable = true,
+              },
+              validate = { enable = true },
+              schemaStore = {
+                -- Must disable built-in schemaStore support to use
+                -- schemas from SchemaStore.nvim plugin
+                enable = false,
+                -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+                url = "",
+              },
             },
           },
         },
@@ -200,7 +218,7 @@ return {
       setup = {
         -- ======= TS ========
         tsserver = function(_, opts)
-          require("lazyvim.util").on_attach(function(client, buffer)
+          require("lazyvim.util").lsp.on_attach(function(client, buffer)
             if client.name == "tsserver" then
               -- stylua: ignore
               vim.keymap.set("n", "<leader>co", "<cmd>TypescriptOrganizeImports<CR>",
@@ -228,7 +246,7 @@ return {
           vim.api.nvim_create_autocmd("FileType", {
             pattern = "java",
             callback = function()
-              require("lazyvim.util").on_attach(function(_, buffer)
+              require("lazyvim.util").lsp.on_attach(function(_, buffer)
                 vim.keymap.set(
                   "n",
                   "<leader>di",
@@ -275,7 +293,8 @@ return {
 
               local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
               -- vim.lsp.set_log_level('DEBUG')
-              local workspace_dir = "/Users/phil/.local/share/nvim/jdtls_lsp_workspaces/" .. project_name -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
+              local workspace_dir = "/Users/phil/.local/share/nvim/jdtls_lsp_workspaces/" ..
+                  project_name -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
               local config = {
                 -- The command that starts the language server
                 -- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line

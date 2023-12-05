@@ -12,11 +12,45 @@ return {
   { "mfussenegger/nvim-jdtls" },
 
   {
-    "jose-elias-alvarez/null-ls.nvim",
+    "nvimtools/none-ls.nvim",
+    event = "LazyFile",
+    dependencies = { "mason.nvim" },
+
+    init = function()
+      local Util = require("lazyvim.util")
+      Util.on_very_lazy(function()
+        -- register the formatter with LazyVim
+        require("lazyvim.util").format.register({
+          name = "none-ls.nvim",
+          priority = 200, -- set higher than conform, the builtin formatter
+          primary = true,
+          format = function(buf)
+            return Util.lsp.format({
+              bufnr = buf,
+              filter = function(client)
+                return client.name == "null-ls"
+              end,
+            })
+          end,
+          sources = function(buf)
+            local ret = require("null-ls.sources").get_available(vim.bo[buf].filetype, "NULL_LS_FORMATTING") or {}
+            return vim.tbl_map(function(source)
+              return source.name
+            end, ret)
+          end,
+        })
+      end)
+    end,
     opts = function(_, opts)
       local nls = require("null-ls")
-      table.insert(opts.sources, nls.builtins.formatting.prettierd)
-      table.insert(opts.sources, require("typescript.extensions.null-ls.code-actions"))
+      opts.root_dir = opts.root_dir
+          or require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", "Makefile", ".git")
+      opts.sources = vim.list_extend(opts.sources or {}, {
+        nls.builtins.formatting.fish_indent,
+        nls.builtins.diagnostics.fish,
+        nls.builtins.formatting.stylua,
+        nls.builtins.formatting.shfmt,
+      })
     end,
   },
 
@@ -24,6 +58,7 @@ return {
     "williamboman/mason.nvim",
     opts = function(_, opts)
       table.insert(opts.ensure_installed, "prettierd")
+      table.insert(opts.ensure_installed, "hadolint")
     end,
   },
 
@@ -33,22 +68,22 @@ return {
   },
 
   -- add nvim-ufo
-  {
-    "kevinhwang91/nvim-ufo",
-    dependencies = "kevinhwang91/promise-async",
-    event = "BufReadPost",
-    opts = {},
+  -- {
+  --   "kevinhwang91/nvim-ufo",
+  --   dependencies = "kevinhwang91/promise-async",
+  --   event = "BufReadPost",
+  --   opts = {},
 
-    init = function()
-      -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
-      vim.keymap.set("n", "zR", function()
-        require("ufo").openAllFolds()
-      end)
-      vim.keymap.set("n", "zM", function()
-        require("ufo").closeAllFolds()
-      end)
-    end,
-  },
+  --   init = function()
+  --     -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
+  --     vim.keymap.set("n", "zR", function()
+  --       require("ufo").openAllFolds()
+  --     end)
+  --     vim.keymap.set("n", "zM", function()
+  --       require("ufo").closeAllFolds()
+  --     end)
+  --   end,
+  -- },
 
   {
     "folke/which-key.nvim",

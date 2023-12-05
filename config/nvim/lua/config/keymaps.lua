@@ -10,11 +10,15 @@ local function map(mode, lhs, rhs, opts)
   if not keys.active[keys.parse({ lhs, mode = mode }).id] then
     opts = opts or {}
     opts.silent = opts.silent ~= false
+    if opts.remap and not vim.g.vscode then
+      opts.remap = nil
+    end
     vim.keymap.set(mode, lhs, rhs, opts)
   end
 end
 
-map("i", "jj", "<esc>", { desc = "enter normal mode" })
+
+map("i", "jj", "<esc>", { desc = "enter normal mode", remap = true })          -- why does remap not work for neovim vscode extension ?
 map("v", "p", '"_dP', { desc = "viewmode-paste without clipboard overwrite" }) --  // description at 11:46 (https://www.youtube.com/watch?v=435-amtVYJ8&list=PLhoH5vyxr6Qq41NFL4GvhFp-WLd5xzIzZ&index=3)
 map("n", "<leader>upd", ":Copilot disable<cr>", { desc = "copilot disable" })
 map("n", "<leader>upe", ":Copilot enable<cr>", { desc = "copilot enable" })
