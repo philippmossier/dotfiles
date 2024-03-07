@@ -65,7 +65,7 @@
     "list": [
       {
         // main since 20.08.2021
-        "colorScheme": "OneDark",
+        "colorScheme": "MaterialOcean", // MaterialDesignColors
         "commandline": "wsl.exe ~ -d ubuntu_main -u phil",
         "experimental.retroTerminalEffect": false,
         "fontFace": "Hack NF" // SauceCodePro NF, Hack NF, RobotoMono NF
@@ -571,6 +571,52 @@
       "selectionBackground": "#FFFFFF",
       "white": "#C0C0C0",
       "yellow": "#808000"
+    },
+    {
+      "name": "MaterialDesignColors",
+      "black": "#435b67",
+      "red": "#fc3841",
+      "green": "#5cf19e",
+      "yellow": "#fed032",
+      "blue": "#37b6ff",
+      "purple": "#fc226e",
+      "cyan": "#59ffd1",
+      "white": "#ffffff",
+      "brightBlack": "#a1b0b8",
+      "brightRed": "#fc746d",
+      "brightGreen": "#adf7be",
+      "brightYellow": "#fee16c",
+      "brightBlue": "#70cfff",
+      "brightPurple": "#fc669b",
+      "brightCyan": "#9affe6",
+      "brightWhite": "#ffffff",
+      "background": "#1d262a",
+      "foreground": "#e7ebed",
+      "selectionBackground": "#4e6a78",
+      "cursorColor": "#eaeaea"
+    },
+    {
+      "name": "MaterialOcean",
+      "black": "#546e7a",
+      "red": "#ff5370",
+      "green": "#c3e88d",
+      "yellow": "#ffcb6b",
+      "blue": "#82aaff",
+      "purple": "#c792ea",
+      "cyan": "#89ddff",
+      "white": "#ffffff",
+      "brightBlack": "#546e7a",
+      "brightRed": "#ff5370",
+      "brightGreen": "#c3e88d",
+      "brightYellow": "#ffcb6b",
+      "brightBlue": "#82aaff",
+      "brightPurple": "#c792ea",
+      "brightCyan": "#89ddff",
+      "brightWhite": "#ffffff",
+      "background": "#0f111a",
+      "foreground": "#8f93a2",
+      "selectionBackground": "#1f2233",
+      "cursorColor": "#ffcc00"
     }
   ],
   "tabWidthMode": "titleLength"
