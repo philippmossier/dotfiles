@@ -63,6 +63,8 @@
       "useAcrylic": false
     },
     "list": [
+      // For powershell make sure that you use powershell core (Version 7.x ) instead of Windows powershell (5.x)
+      // Check for powershell version via  $PSVersionTable
       {
         // main since 20.08.2021
         "colorScheme": "MaterialOcean", // MaterialDesignColors
