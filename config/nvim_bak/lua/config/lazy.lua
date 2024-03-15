@@ -10,13 +10,43 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins
-    { "LazyVim/LazyVim",                                import = "lazyvim.plugins" },
+    { "LazyVim/LazyVim",                                    import = "lazyvim.plugins" },
+    { import = "plugins" },
+
     -- import any extras modules here
     { import = "lazyvim.plugins.extras.lang.typescript" },
-    -- { import = "lazyvim.plugins.extras.lang.json" },
-    -- { import = "lazyvim.plugins.extras.ui.mini-animate" },
-    -- import/override with your plugins
-    { import = "plugins" },
+
+    { import = "lazyvim.plugins.extras.formatting.prettier" },
+
+    -- { import = "lazyvim.plugins.extras.coding.copilot" },
+
+    { import = "lazyvim.plugins.extras.linting.eslint" },
+
+    { import = "lazyvim.plugins.extras.lang.json" },
+
+    { import = "lazyvim.plugins.extras.lang.tailwind" },
+
+    { import = "lazyvim.plugins.extras.lang.yaml" },
+    { import = "lazyvim.plugins.extras.lang.docker" },
+
+    --  new extras (testing):
+
+    { import = "lazyvim.plugins.extras.lang.go" },
+
+    -- { import = "lazyvim.plugins.extras.dap.core" },
+
+    { import = "lazyvim.plugins.extras.util.project" },
+
+    { import = "lazyvim.plugins.extras.vscode" },
+
+    -- { import = "lazyvim.plugins.extras.test.core" },
+
+    -- { import = "lazyvim.plugins.extras.ui.mini-animate" }, -- fancy but slow
+    -- { import = "lazyvim.plugins.extras.dap.core" }, -- todo fully integratr nvim dap
+
+    { import = "lazyvim.plugins.extras.lsp.none-ls" },
+
+
   },
   defaults = {
     -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
@@ -39,7 +69,7 @@ require("lazy").setup({
         -- "netrwPlugin",
         "tarPlugin",
         "tohtml",
-        "tutor",
+        -- "tutor",
         "zipPlugin",
       },
     },

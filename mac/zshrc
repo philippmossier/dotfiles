@@ -538,3 +538,7 @@ fi
 export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 export PATH="$JAVA_HOME:$PATH"
 eval "$(fnm env --use-on-cd)"
+
+
+export PATH="/Applications/Xcode.app/Contents/Developer/usr/bin:$PATH"
+
