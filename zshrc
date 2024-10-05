@@ -111,4 +111,4 @@ export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
 [ -d $HOME/.local/share/fnm ] && path+=('/home/phil/.local/share/fnm')
 eval "`fnm env`" # use  eval "`fnm env --use-on-cd`" when you want using the nvmhook
 
-export PATH=$PATH:/usr/local/go/bin
+# export PATH=$PATH:/usr/local/go/bin

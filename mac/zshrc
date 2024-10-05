@@ -8,8 +8,8 @@
 # alias npm='pnpm'
 # alias npx='pnpx'
 
-alias ls='exa'
-alias lsa='exa --all --long --header --git --icons'
+alias ls='eza'
+alias lsa='eza --all --long --header --git --icons'
 alias cat='bat'
 
 alias pw1='tree -L 1 -C'
@@ -516,8 +516,8 @@ zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f
 
 
 # Go
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
+# export GOPATH=$HOME/go
+# export PATH=$PATH:$GOPATH/bin
 
 # pnpm
 export PNPM_HOME="/Users/phil/Library/pnpm"

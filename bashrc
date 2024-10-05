@@ -156,7 +156,7 @@ eval "$(starship init bash)"
 if [[ ! "$PATH" == *$HOME/.local/repos/.fzf/bin* ]]; then
   PATH="${PATH:+${PATH}:}$HOME/.local/repos/.fzf/bin" # loads fzf
   [ -f ~/.local/repos/.fzf/shell/completion.zsh ] && source ~/.local/repos/.fzf/shell/completion.bash # loads completion
-  [ -f ~/.local/repos/.fzf/shell/key-bindings.zsh ] && source ~/.local/repos/.fzf/shell/key-bindings.bash # loads key-bindings	
+  [ -f ~/.local/repos/.fzf/shell/key-bindings.zsh ] && source ~/.local/repos/.fzf/shell/key-bindings.bash # loads key-bindings
 fi
 
 export FZF_DEFAULT_COMMAND='fd --type f --color=never'
