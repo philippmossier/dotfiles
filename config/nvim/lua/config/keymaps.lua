@@ -1,7 +1,9 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
-if vim.g.vscode then return end
+if vim.g.vscode then
+  return
+end
 local utilities = require("utilities")
 
 -- If neovim runs inside vscode:
@@ -148,4 +150,17 @@ else
   map("n", "ci{", '"_ci{', { desc = "Change inside word without affecting the clipboard" })
   map("n", "ci}", '"_ci}', { desc = "Change inside word without affecting the clipboard" })
   -- map("n", "diw", '"_diw', { desc = "Delete inside word without affecting the clipboard" })
+
+  map("n", "<C-j>", function()
+    local originalWin = vim.fn.winnr() -- Store the current window number in `originalWin`
+    vim.cmd("wincmd j") -- Attempt to move to the window below
+
+    -- Check if the window number is the same as before
+    -- If `originalWin` is equal to the current window number, there was no movement,
+    -- meaning there is no window below, and we can proceed with the fallback action.
+    if originalWin == vim.fn.winnr() then
+      -- If no change in window, send C-j to Tmux to move down
+      vim.fn.system("tmux select-pane -D")
+    end
+  end, { desc = "Go to Lower Window or Tmux Pane" })
 end
