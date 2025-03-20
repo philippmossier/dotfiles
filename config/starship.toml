@@ -15,6 +15,7 @@ success_symbol = "[➜](bold green)" # The "success_symbol" segment is being set
 [aws]
 symbol = " "
 format = '[$symbol($profile )(\($region\) )(\[$duration\] )]($style)'
+disabled = true
 
 [buf]
 symbol = " "
@@ -75,6 +76,11 @@ symbol = " "
 [nix_shell]
 symbol = " "
 
+[odin]
+format = 'via [󰹩 ($version )]($style)'
+show_commit = true
+disabled = true
+
 [nodejs]
 symbol = " "
 format = "[$symbol($version )]($style)"
@@ -87,6 +93,7 @@ format = 'is [$symbol$version]($style) '
 
 [python]
 symbol = " "
+disabled = true
 
 [rlang]
 symbol = "ﳒ "

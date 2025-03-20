@@ -1,9 +1,9 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
--- if vim.g.vscode then
---   return
--- end
+if vim.g.vscode then
+  return
+end
 local utilities = require("utilities")
 
 -- If neovim runs inside vscode:
@@ -33,14 +33,8 @@ if vim.g.vscode then
     "<Cmd>lua require('vscode-neovim').call('actions.find')<CR>",
     { noremap = true, silent = true }
   )
-  -- Undo in VSCode
-  vim.keymap.set("n", "u", "<Cmd>call VSCodeNotify('undo')<CR>", { noremap = true, silent = true })
-  -- Redo in VSCode
-  vim.keymap.set("n", "<C-r>", "<Cmd>call VSCodeNotify('redo')<CR>", { noremap = true, silent = true })
-  -- other undo redo version:
-  -- vim.keymap.set("n", "u", "<Cmd>lua require('vscode-neovim').call('undo')<CR>", { noremap = true, silent = true })
-  -- vim.keymap.set("n", "<C-r>", "<Cmd>lua require('vscode-neovim').call('redo')<CR>", { noremap = true, silent = true })
-
+  vim.keymap.set("n", "u", "<Cmd>lua require('vscode-neovim').call('undo')<CR>", { noremap = true, silent = true })
+  vim.keymap.set("n", "<C-r>", "<Cmd>lua require('vscode-neovim').call('redo')<CR>", { noremap = true, silent = true })
   vim.keymap.set("n", "<C-a>", "gg<S-v>G", { noremap = true, silent = true })
 
   vim.keymap.set("n", "<C-d>", "<C-d>zz", { noremap = true, silent = true })
@@ -48,7 +42,7 @@ if vim.g.vscode then
   vim.keymap.set("n", "n", "nzzzv", { noremap = true, silent = true })
   vim.keymap.set("n", "N", "Nzzzv", { noremap = true, silent = true })
 
-  vim.keymap.set("v", "p", '"_dP', {  noremap= true, silent = true })
+  vim.keymap.set("v", "p", '"_dP', { noremap = true, silent = true })
   vim.keymap.set("n", "ciw", '"_ciw', { noremap = true, silent = true })
   vim.keymap.set("n", "ci[", '"_ci[', { noremap = true, silent = true })
   vim.keymap.set("n", "ci]", '"_ci]', { noremap = true, silent = true })
