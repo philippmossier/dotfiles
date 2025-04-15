@@ -112,3 +112,5 @@ export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
 eval "`fnm env`" # use  eval "`fnm env --use-on-cd`" when you want using the nvmhook
 
 # export PATH=$PATH:/usr/local/go/bin
+export PATH="$PATH:$(go env GOPATH)/bin"
+
