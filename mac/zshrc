@@ -7,10 +7,117 @@
 
 # alias npm='pnpm'
 # alias npx='pnpx'
+alias mobile-port-forward="adb reverse tcp:3000 tcp:3000"
+
+alias pnpm_upgrade="corepack prepare pnpm@latest --activate"
+
+restart_mysql_quarkus() {
+    # Stop container if running
+    if podman ps --format '{{.Names}}' | grep -q '^mysql-quarkus$'; then
+        podman stop mysql-quarkus
+    fi
+
+    # Remove container if it exists (running or not)
+    if podman ps -a --format '{{.Names}}' | grep -q '^mysql-quarkus$'; then
+        podman rm mysql-quarkus
+    fi
+
+    # Run new container
+    podman run -d \
+        --name mysql-quarkus \
+        -e MYSQL_ROOT_PASSWORD=quarkus \
+        -e MYSQL_DATABASE=test \
+        -e MYSQL_USER=quarkus \
+        -e MYSQL_PASSWORD=quarkus \
+        -p 3306:3306 \
+        docker.io/library/mysql:8.4
+}
+
+
+start_dev_with_mysql() {
+    echo "Restarting MySQL container..."
+    restart_mysql_quarkus
+
+    echo "Waiting for MySQL to become ready..."
+    until podman exec mysql-quarkus mysqladmin ping -h "127.0.0.1" --silent; do
+        printf "."
+        sleep 1
+    done
+    echo ""
+    echo "MySQL is ready!"
+
+    # Save current directory
+    local ORIGINAL_DIR
+    ORIGINAL_DIR="$(pwd)"
+
+    # Switch to project directory
+    cd /Users/phil/w/steuerungstool-backend || {
+        echo "ERROR: Could not cd into project directory!"
+        return 1
+    }
+
+    # echo "Running mvn clean package..."
+    # mvn clean package || { 
+    #     echo "Build failed! Returning to previous directory."
+    #     cd "$ORIGINAL_DIR"
+    #     return 1
+    # }
+
+    echo "Starting Quarkus dev mode..."
+    mvn quarkus:dev
+
+    # Return after Quarkus dev mode is stopped
+    cd "$ORIGINAL_DIR"
+}
+
+
+# Function to switch default editor for common file types
+switch_editor() {
+  local editor=$1
+
+  if [[ "$editor" == "vscode" ]]; then
+    local bundle_id="com.microsoft.VSCode"
+  elif [[ "$editor" == "zed" ]]; then
+    local bundle_id="dev.zed.Zed"
+  else
+    echo "Usage: switch_editor [vscode|zed]"
+    return 1
+  fi
+
+  local exts=(js ts json txt tsx yml yaml md jsx sh css)
+
+  for ext in "${exts[@]}"; do
+    duti -s "$bundle_id" "$ext" all
+  done
+
+  echo "✅ Default editor for code files switched to: $editor"
+}
+
+# Make `podman compose`` behave like `podman-compose` (at default `podman compose` uses docker and `podman-compose` uses podman-compose)
+podman() {
+    if [[ "$1" == "compose" ]]; then
+        shift
+        podman-compose "$@"
+    else
+        command podman "$@"
+    fi
+}
+
+alias start_mysql_quarkus="podman run -d --name mysql-quarkus -e MYSQL_ROOT_PASSWORD=quarkus -e MYSQL_DATABASE=test -e MYSQL_USER=quarkus -e MYSQL_PASSWORD=quarkus -p 3306:3306 docker.io/library/mysql:8.4"
+
+acr_podman_login() {
+  local REGISTRY="$1"
+  local TOKEN
+  TOKEN=$(az acr login --name "$REGISTRY" --expose-token --output tsv --query accessToken)
+  podman login "$REGISTRY.azurecr.io" \
+    -u 00000000-0000-0000-0000-000000000000 \
+    -p "$TOKEN"
+}
+
 
 alias ls='eza'
 alias lsa='eza --all --long --header --git --icons'
-alias cat='bat'
+# alias cat='bat'
 
 alias pw1='tree -L 1 -C'
 alias pw2='tree -L 2 -C'
@@ -378,6 +485,23 @@ function switch_to_java17(){
     source ~/bin/switch_java_to.sh 17
 }
 
+# Quick fix for buggy MS Teams (kill, clear cache, restart)
+fixteams() {
+  echo "Killing Microsoft Teams..."
+  pkill -f "Microsoft Teams" 2>/dev/null
+
+  echo "Clearing Teams cache..."
+  rm -rf ~/Library/Application\ Support/Microsoft/Teams
+  rm -rf ~/Library/Caches/com.microsoft.teams2
+  rm -rf ~/Library/Logs/Microsoft\ Teams
+  rm -rf ~/Library/Cookies/com.microsoft.teams2.binarycookies
+  rm -rf ~/Library/Preferences/com.microsoft.teams2.plist
+
+  echo "Restarting Teams..."
+  open -a "Microsoft Teams"
+}
+
+
 # +-------------+
 # | CARGO (RUST)|
 # +-------------+
@@ -519,30 +643,80 @@ zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f
 # export GOPATH=$HOME/go
 # export PATH=$PATH:$GOPATH/bin
 
-# pnpm
-export PNPM_HOME="/Users/phil/Library/pnpm"
-export PATH="$PNPM_HOME:$PATH"
-# pnpm end
-
-# java
-
 # Pyenv initialization
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
+
+
+# ======= OLD ==================
 # java
 # export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-8.jdk/Contents/Home/jre
 
 # export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 # export JAVA_HOME=`/usr/libexec/java_home -v 11`
-export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
-export PATH="$JAVA_HOME:$PATH"
+# export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+# # export PATH="$JAVA_HOME:$PATH"
+# export PATH="$JAVA_HOME/bin:$PATH" # new
+
+# eval "$(fnm env --use-on-cd)"
+
+
+# export PATH="/Applications/Xcode.app/Contents/Developer/usr/bin:$PATH"
+# # export PATH="$HOME/.local/zig-macos-aarch64-0.14.0:$PATH"
+# # export PATH="$HOME/.zvm/self:$PATH"
+# # /Users/phil/.zvm/self//zvm
+
+# export PATH="$PATH:$(go env GOPATH)/bin"
+# export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+# export PATH="$HOME/.local/bin:$PATH"
+# =============================
+
+# --- User paths first (highest priority) ---
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
+export PNPM_HOME="/Users/phil/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+
+# --- Java ---
+alias java8='export JAVA_HOME=$(/usr/libexec/java_home -v 1.8) && export PATH="$JAVA_HOME/bin:$PATH" && echo "Switched to Java 8"'
+alias java17='export JAVA_HOME=$(/usr/libexec/java_home -v 17) && export PATH="$JAVA_HOME/bin:$PATH" && echo "Switched to Java 17"'
+alias java21='export JAVA_HOME=$(/usr/libexec/java_home -v 21) && export PATH="$JAVA_HOME/bin:$PATH" && echo "Switched to Java 21"'
+# Default to Java 21
+export JAVA_HOME=$(/usr/libexec/java_home -v 21)
+export PATH="$JAVA_HOME/bin:$PATH"
+
+# --- Package managers / languages ---
 eval "$(fnm env --use-on-cd)"
+export PATH="$(go env GOPATH)/bin:$PATH"
 
-
+# --- System toolchains ---
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 export PATH="/Applications/Xcode.app/Contents/Developer/usr/bin:$PATH"
-# export PATH="$HOME/.local/zig-macos-aarch64-0.14.0:$PATH"
-# export PATH="$HOME/.zvm/self:$PATH"
-# /Users/phil/.zvm/self//zvm
 
-export PATH="$PATH:$(go env GOPATH)/bin"
+export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
+
+# Ensure Claude Code binary exists
+if [[ ! -x "$HOME/.local/bin/claude" ]]; then
+  echo "Installing Claude Code..."
+  curl -L -o "$HOME/.local/bin/claude"
+    https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/1.0.107/darwin-arm64/claude
+  chmod +x "$HOME/.local/bin/claude"
+
+  echo "Check for updates..."
+  claude update
+fi
+
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/phil/.lmstudio/bin"
+# End of LM Studio CLI section
+
+
+
+# tell claude code to run through LiteLLM: 
+# export ANTHROPIC_AUTH_TOKEN="sk-onetwothreefourfive12345"  # Matches your LiteLLM key
+# export ANTHROPIC_BASE_URL="http://localhost:4000"
+# export ANTHROPIC_MODEL="openai/qwen3-coder-30b"
+# export ANTHROPIC_SMALL_FAST_MODEL="openai/qwen3-coder-30b"
+
