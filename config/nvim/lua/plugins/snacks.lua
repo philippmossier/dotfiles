@@ -3,6 +3,9 @@ return {
     "folke/snacks.nvim",
     ---@type snacks.Config
     opts = {
+      win = {
+        spell = { enabled = false },
+      },
       explorer = {
         -- your explorer configuration comes here
         -- or leave it empty to use the default settings
