@@ -20,10 +20,8 @@ return {
             -- auto_close = true,
             -- follow_file = true,
             -- auto_close = true,
-
-            -- uncomment to not autohide files when explorer opened (unhide with H inside explorer)
-            -- ignored = false,  -- Disable ignoring .gitignore files
-            -- hidden = true,    -- Show hidden files
+            ignored = true,  -- Disable ignoring .gitignore files
+            hidden = true,    -- Show hidden files
           },
         },
       },

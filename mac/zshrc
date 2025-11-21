@@ -57,7 +57,7 @@ start_dev_with_mysql() {
     }
 
     # echo "Running mvn clean package..."
-    # mvn clean package || { 
+    # mvn clean package || {
     #     echo "Build failed! Returning to previous directory."
     #     cd "$ORIGINAL_DIR"
     #     return 1
@@ -501,13 +501,6 @@ fixteams() {
   open -a "Microsoft Teams"
 }
 
-
-# +-------------+
-# | CARGO (RUST)|
-# +-------------+
-
-export PATH="${PATH:+${PATH}:}$HOME/.cargo/bin"
-
 # +-------------+
 # | Cursor FIX  |
 # +-------------+
@@ -672,27 +665,48 @@ fi
 # export PATH="$HOME/.local/bin:$PATH"
 # =============================
 
-# --- User paths first (highest priority) ---
+###############################################
+# PATH SETUP (clean & safe)
+###############################################
+
+# --- User tools (highest priority) ---
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
-export PNPM_HOME="/Users/phil/Library/pnpm"
+
+# pnpm
+export PNPM_HOME="$HOME/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 
-# --- Java ---
+# Go binaries
+export PATH="$(go env GOPATH)/bin:$PATH"
+
+# fnm (Node)
+eval "$(fnm env --use-on-cd)"
+
+# --- Toolchains ---
+# Homebrew LLVM (ensure this stays BEFORE system compilers)
+# export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+
+# # PostgreSQL client
+# export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
+# Xcode toolchain (kept low priority)
+export PATH="/Applications/Xcode.app/Contents/Developer/usr/bin:$PATH"
+
+# LMStudio CLI
+export PATH="$PATH:$HOME/.lmstudio/bin"
+
+###############################################
+# Java version switching
+###############################################
 alias java8='export JAVA_HOME=$(/usr/libexec/java_home -v 1.8) && export PATH="$JAVA_HOME/bin:$PATH" && echo "Switched to Java 8"'
 alias java17='export JAVA_HOME=$(/usr/libexec/java_home -v 17) && export PATH="$JAVA_HOME/bin:$PATH" && echo "Switched to Java 17"'
 alias java21='export JAVA_HOME=$(/usr/libexec/java_home -v 21) && export PATH="$JAVA_HOME/bin:$PATH" && echo "Switched to Java 21"'
+
 # Default to Java 21
 export JAVA_HOME=$(/usr/libexec/java_home -v 21)
 export PATH="$JAVA_HOME/bin:$PATH"
 
-# --- Package managers / languages ---
-eval "$(fnm env --use-on-cd)"
-export PATH="$(go env GOPATH)/bin:$PATH"
-
-# --- System toolchains ---
-export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
-export PATH="/Applications/Xcode.app/Contents/Developer/usr/bin:$PATH"
 
 export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
 
@@ -708,15 +722,16 @@ if [[ ! -x "$HOME/.local/bin/claude" ]]; then
 fi
 
 
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/phil/.lmstudio/bin"
+
 # End of LM Studio CLI section
 
 
 
-# tell claude code to run through LiteLLM: 
+# tell claude code to run through LiteLLM:
 # export ANTHROPIC_AUTH_TOKEN="sk-onetwothreefourfive12345"  # Matches your LiteLLM key
 # export ANTHROPIC_BASE_URL="http://localhost:4000"
 # export ANTHROPIC_MODEL="openai/qwen3-coder-30b"
 # export ANTHROPIC_SMALL_FAST_MODEL="openai/qwen3-coder-30b"
 
+
+# bindkey -r '^H'

@@ -3,7 +3,7 @@
 
 # separates the prompt into two lines
 [line_break]
-disabled = true
+disabled = false
 
 # Inserts a blank line between shell prompts
 add_newline = false
