@@ -56,12 +56,12 @@ start_dev_with_mysql() {
         return 1
     }
 
-    # echo "Running mvn clean package..."
-    # mvn clean package || {
-    #     echo "Build failed! Returning to previous directory."
-    #     cd "$ORIGINAL_DIR"
-    #     return 1
-    # }
+    echo "Running mvn clean package..."
+    mvn clean package || {
+        echo "Build failed! Returning to previous directory."
+        cd "$ORIGINAL_DIR"
+        return 1
+    }
 
     echo "Starting Quarkus dev mode..."
     mvn quarkus:dev
@@ -709,6 +709,7 @@ export PATH="$JAVA_HOME/bin:$PATH"
 
 
 export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
+export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 
 # Ensure Claude Code binary exists
 if [[ ! -x "$HOME/.local/bin/claude" ]]; then
