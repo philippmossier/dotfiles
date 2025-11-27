@@ -8,4 +8,4 @@
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
 
 -- we disabled spellcheck in plugins/snacks.lua via `spell = { enabled = false }` but we also have to remove the following autocmd to make the spellcheck disable work
-vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell") -- remove the autocmd that enables it anyway when you enter any "text" scope (https://www.reddit.com/r/neovim/comments/1gl5uaz/snacksnvim_a_collection_of_small_qol_plugins_for/)
+-- vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell") -- remove the autocmd that enables it anyway when you enter any "text" scope (https://www.reddit.com/r/neovim/comments/1gl5uaz/snacksnvim_a_collection_of_small_qol_plugins_for/)

@@ -709,7 +709,6 @@ export PATH="$JAVA_HOME/bin:$PATH"
 
 
 export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
-export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 
 # Ensure Claude Code binary exists
 if [[ ! -x "$HOME/.local/bin/claude" ]]; then
