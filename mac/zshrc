@@ -7,6 +7,9 @@
 
 # alias npm='pnpm'
 # alias npx='pnpx'
+# alias nvim="nvim --listen /tmp/nvim_devtools_socket"
+
+
 alias mobile-port-forward="adb reverse tcp:3000 tcp:3000"
 
 alias pnpm_upgrade="corepack prepare pnpm@latest --activate"
@@ -168,6 +171,7 @@ alias jvm17='switch_to_java17'
 # |  VARIABLES  |
 # +-------------+
 
+# export EDITOR="nvim"
 PrimaryEDITOR=code
 SecondaryEDITOR=vim # only used for 'tf' (ripgrep search)
 ShellTheme=starship  # Select agnoster, spaceship, starship
@@ -735,3 +739,8 @@ fi
 
 
 # bindkey -r '^H'
+
+# export NVR_SOCKET_TMPDIR="$TMPDIR"
+
+# export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
+
