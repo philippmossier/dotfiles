@@ -44,6 +44,15 @@ map("n", "<leader>fN", function()
   require("snacks").scratch()
 end, { desc = "New Snacks Scratch Buffer" })
 
+
+-- copy file path relative to cwd (project root) to clipboard
+map("n", "<leader>fy", function()
+  local rel = vim.fn.expand("%:.")
+  vim.fn.setreg("+", rel)
+  -- optionally, give feedback via echo or notify:
+  vim.notify("Copied to clipboard: " .. rel, vim.log.levels.INFO)
+end, { desc = "Copy relative file path to clipboard" })
+
 -- Diagnostics toggle
 map("n", "<leader>ud", utilities.toggle_diagnostics)
 
