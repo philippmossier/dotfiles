@@ -1,3 +1,4 @@
+-- Default lazyvim keybindings: https://raw.githubusercontent.com/LazyVim/LazyVim/refs/heads/main/lua/lazyvim/config/keymaps.lua
 local map = vim.keymap.set
 
 ---------------------------------------------------------------------
@@ -38,6 +39,10 @@ end
 ---------------------------------------------------------------------
 
 local utilities = require("utilities")
+
+map("n", "<leader>fN", function()
+  require("snacks").scratch()
+end, { desc = "New Snacks Scratch Buffer" })
 
 -- Diagnostics toggle
 map("n", "<leader>ud", utilities.toggle_diagnostics)
