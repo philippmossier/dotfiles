@@ -29,4 +29,4 @@ vim.o.foldlevel = 99  -- open everything by default
 ---------------------------------------------------------------------------
 
 -- Disable ESLint auto-format (we use prettierd via Conform instead)
-vim.g.lazyvim_eslint_auto_format = false
+vim.g.lazyvim_eslint_auto_format = false -- read https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/extras/linting/eslint.lua

@@ -80,3 +80,5 @@ map("n", "<C-j>", function()
     vim.fn.system("tmux select-pane -D")
   end
 end, { desc = "Go to lower window or tmux pane" })
+
+-- TS extra: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/extras/lang/typescript.lua
