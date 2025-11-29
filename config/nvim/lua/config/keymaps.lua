@@ -38,7 +38,10 @@ end
 -- 🟩 NATIVE NEOVIM CONFIG (Terminal Neovim only)
 ---------------------------------------------------------------------
 
-local utilities = require("utilities")
+local toggle_diagnostics = require("utilities.diagnostics").toggle_diagnostics
+
+-- Diagnostics toggle
+map("n", "<leader>ud", toggle_diagnostics)
 
 map("n", "<leader>fN", function()
   require("snacks").scratch()
@@ -52,9 +55,6 @@ map("n", "<leader>fy", function()
   -- optionally, give feedback via echo or notify:
   vim.notify("Copied to clipboard: " .. rel, vim.log.levels.INFO)
 end, { desc = "Copy relative file path to clipboard" })
-
--- Diagnostics toggle
-map("n", "<leader>ud", utilities.toggle_diagnostics)
 
 -- Select all
 map("n", "<C-a>", "gg<S-v>G")
